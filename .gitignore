@@ -375,3 +375,4 @@ yarn-error.log*
 # Custom
 
 design.md
+.vscode

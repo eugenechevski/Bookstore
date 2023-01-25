@@ -1,11 +1,12 @@
 import AfterCreation from './AfterCreation';
 import CreateAccountForm from './CreateAccountForm';
 import HelloPage from './HelloPage';
+import SignInForm from './SignInForm';
 
 const LandingPage = () => {
     return (
         <div className='flex items-center justify-center h-full w-full'>
-            <AfterCreation></AfterCreation>
+            <SignInForm></SignInForm>
         </div>
     )
 };
