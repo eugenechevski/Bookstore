@@ -4,7 +4,7 @@ import CategoryDisplay from './CategoryDisplay';
 
 const Home = () => {
     return (
-        <div>
+        <div className='w-full h-full'>
             <NavBar></NavBar>
         </div>
     );
