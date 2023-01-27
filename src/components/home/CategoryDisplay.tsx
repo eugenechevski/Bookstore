@@ -1,7 +1,13 @@
+import BookCard from "./BookCard";
+
 const CategoryDisplay = () => {
     return (
-        <div>
-            Category Display
+        <div className="flex gap-3">
+            <BookCard></BookCard>
+            <BookCard></BookCard>
+            <BookCard></BookCard>
+            <BookCard></BookCard>
+            <BookCard></BookCard>
         </div>
     )
 };
