@@ -15,13 +15,14 @@ module.exports = {
         lg: '0 8px 16px var(--tw-shadow-color)',
       },
       fontFamily: {
-        'Lato': ['Lato', 'sans-serif'], 
+        'Lato': ['Lato', 'sans-serif'],
       },
     },
   },
   plugins: [
     require("daisyui"),
-    plugin(function ( { matchUtilities, theme} ) {
+    require('tw-elements/dist/plugin'),
+    plugin(function ({ matchUtilities, theme }) {
       matchUtilities(
         {
           'text-shadow': (value) => ({
@@ -30,6 +31,25 @@ module.exports = {
         },
         { values: theme('textShadow') }
       )
+    }),
+    plugin(({ addBase, theme }) => {
+      addBase({
+        '.scrollbar::-webkit-scrollbar': {
+          height: '10px',
+          width: '10px',
+        },
+        '.scrollbar::-webkit-scrollbar-thumb': {
+          backgroundColor: '#5c7f67',
+          borderRadius: '100vh',
+        },
+        '.scrollbar::-webkit-scrollbar-thumb:hover': {
+          backgroundColor: '#5c7f67',
+          borderRadius: '100vh',
+        },
+        '.scrollbar::-webkit-scrollbar-track-piece': {
+          backgroundColor: '#ecf4e7',
+        },
+      });
     }),
   ],
   daisyui: {
