@@ -7,7 +7,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 document.querySelector('body').classList.add('font-Lato', 'h-max');
-document.querySelector('#root').classList.add('w-full', 'h-full');
 root.render(
   <App />
 );

@@ -4,10 +4,10 @@ import OffCanvas from './OffCanvas';
 
 const Home = () => {
     return (
-        <div className='w-full h-full p-2 flex flex-col'>
+        <div className='p-2 flex flex-col'>
             <NavBar></NavBar>
             <OffCanvas></OffCanvas>
-            <div className='flex flex-col p-12'>
+            <div className='flex flex-col items-center sm:p-12'>
                 <CategoryDisplay></CategoryDisplay>
                 <CategoryDisplay></CategoryDisplay>
                 <CategoryDisplay></CategoryDisplay>

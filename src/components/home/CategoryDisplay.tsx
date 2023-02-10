@@ -2,9 +2,17 @@ import BookCard from "./BookCard";
 
 const CategoryDisplay = () => {
     return (
-        <div className="flex flex-col gap-3">
-            <div className="h-1 text-2xl">Combined Print & E-Book Fiction</div>
-            <div className="carousel rounded-box gap-3 p-12">
+        <div className="p-6
+                        gap-12 
+                        flex 
+                        flex-col 
+                        justify-center 
+                        items-center 
+                        sm:gap-3 
+                        sm:mb-0 
+                        sm:h-full">
+            <div className="text-xl font-bold w-full sm:text-2xl">Combined Print & E-Book Fiction</div>
+            <div className="carousel w-64 sm:p-12 sm:w-full">
                 <BookCard></BookCard>
                 <BookCard></BookCard>
                 <BookCard></BookCard>

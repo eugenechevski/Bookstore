@@ -9,7 +9,7 @@ const NavBar = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     return (
-        <div className="navbar h-[8.33%] bg-primary text-base-100 rounded-xl shadow-lg">
+        <div className="navbar h-12 bg-primary text-base-100 rounded-xl shadow-lg">
             <div className="navbar-start w-1/6 sm:w-1/4">
                 <a onClick={() => setOffCanvasToggleIcon(offCanvasToggleIcon === 'bars' ? 'xmark' : 'bars')} 
                    data-bs-toggle="offcanvas" 
@@ -50,13 +50,14 @@ const NavBar = () => {
                              bg-primary 
                              gap-3 
                              w-1/6 
-                             sm:w-1/4 
-                             sm:bg-inherit 
-                             sm:flex-row 
                              transition-all 
                              duration-300 
                              ease-in 
                              rounded-xl 
+                             z-50
+                             sm:w-1/4 
+                             sm:bg-inherit 
+                             sm:flex-row 
                              ${navbarToolsIcon === 'xmark' ? 'mt-5 translate-y-28 p-2 shadow-md' : ''}`
             }>
                 {
