@@ -6,7 +6,9 @@ import 'tw-elements';
 
 function App() {
   return (
-    <div className="bg-secondary w-full h-full">
+    <div className="bg-secondary 
+                    w-full 
+                    h-full">
       <Home></Home>
     </div>
   );

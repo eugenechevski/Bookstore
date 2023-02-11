@@ -11,7 +11,9 @@ const BookCard = () => {
                         w-full 
                         mr-1 
                         sm:w-1/5">
-            <div className="relative sm:shadow-2xl sm:drop-shadow-2xl">
+            <div className="relative 
+                            sm:shadow-2xl 
+                            sm:drop-shadow-2xl">
                 <div className="absolute 
                                 top-0 
                                 left-0 
@@ -22,9 +24,14 @@ const BookCard = () => {
                                 p-2 
                                 rounded-xl 
                                 shadow-lg">#1</div>
-                <img src={image} alt="book"/>
+                <img src={image} alt="book" />
             </div>
-            <div className="text-center text-2xl">1984</div>
+            <div className="text-center 
+                            text-secondary-content 
+                            font-bold 
+                            text-shadow-lg 
+                            drop-shadow-lg 
+                            text-2xl">1984</div>
         </div>
     )
 };

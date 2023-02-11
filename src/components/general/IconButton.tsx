@@ -24,7 +24,10 @@ const possibleIcons = {
 const IconButton = ({ iconName }) => {
 
     return (
-        <div className="btn bg-transparent border-none hover:bg-primary-focus">
+        <div className="btn 
+                        bg-transparent 
+                        border-none 
+                        hover:bg-primary-focus">
           <FontAwesomeIcon className="text-lg" icon={possibleIcons[iconName]}/>
         </div>
     )
