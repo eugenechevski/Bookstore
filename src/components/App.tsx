@@ -8,7 +8,7 @@ import 'tw-elements';
 function App() {
   return (
     <div>
-      <Home></Home>
+      <Book></Book>
     </div>
   );
 }

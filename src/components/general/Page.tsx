@@ -17,6 +17,7 @@ const Page = ({ content }) => {
             <OffCanvas></OffCanvas>
             <div className='min-h-screen
                             max-h-max
+                            h-full 
                             w-full
                             flex
                             justify-center
