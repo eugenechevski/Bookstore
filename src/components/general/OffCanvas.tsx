@@ -3,7 +3,7 @@ const OffCanvas = () => {
         <div className='scrollbar 
                         overflow-scroll 
                         h-[91%] 
-                        w-[97%]
+                        w-full
                         offcanvas 
                         offcanvas-start 
                         flex flex-col 
@@ -16,12 +16,12 @@ const OffCanvas = () => {
                         duration-500 
                         ease-in 
                         text-base-content 
-                        border-none  
-                        rounded-lg
-                        absolute
-                        bottom-0
+                        border-none 
+                        rounded-lg 
+                        fixed 
+                        bottom-0 
+                        left-0
                         sm:w-1/4 
-                        sm:h-[92%]
                         '
             id='offcanvas'
             tabIndex={-1}>

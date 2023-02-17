@@ -10,11 +10,14 @@ const NavBar = () => {
 
     return (
         <div className="navbar 
+                        fixed 
                         h-12 
                         bg-primary 
                         text-base-100 
                         rounded-xl 
-                        shadow-lg">
+                        shadow-lg
+                        z-50
+                        w-[99%]">
             {/* Navbar start */}
             <div className="navbar-start 
                             w-1/6 

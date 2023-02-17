@@ -1,15 +1,12 @@
-import NavBar from './NavBar';
+import Page from 'components/general/Page';
 import CategoryDisplay from './CategoryDisplay';
-import OffCanvas from './OffCanvas';
 
 const Home = () => {
     return (
-        <div className='p-2 
-                        flex 
-                        flex-col'>
-            <NavBar></NavBar>
-            <OffCanvas></OffCanvas>
-            <div className='flex 
+        <Page content={(
+            <div className='w-full
+                            h-full
+                            flex 
                             flex-col 
                             items-center 
                             sm:p-12'>
@@ -17,7 +14,7 @@ const Home = () => {
                 <CategoryDisplay></CategoryDisplay>
                 <CategoryDisplay></CategoryDisplay>
             </div>
-        </div>
+        )}></Page>
     );
 }
 
