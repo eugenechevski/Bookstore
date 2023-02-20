@@ -21,14 +21,16 @@ const possibleIcons = {
   'ellipsis': faEllipsis,
 }
 
-const IconButton = ({ iconName }) => {
+const IconButton = ({ iconName, classes, onClickListener }) => {
 
     return (
-        <div className="btn 
-                        bg-transparent 
-                        border-none 
-                        hover:bg-primary-focus">
-          <FontAwesomeIcon className="text-lg" icon={possibleIcons[iconName]}/>
+        <div onChange={() => onClickListener()} className={`${classes}
+                         btn 
+                         bg-transparent 
+                         border-none 
+                         text-lg 
+                         hover:bg-primary-focus`}>
+          <FontAwesomeIcon icon={possibleIcons[iconName]}/>
         </div>
     )
 };

@@ -3,22 +3,17 @@ import OffCanvas from 'src/components/general/OffCanvas';
 
 const Page = ({ content }) => {
     return (
-        <div className='min-h-[99vh]
-                        max-h-max
-                        w-screen
-                        p-2 
-                        flex 
+        <div className='flex 
                         flex-col
                         items-center
                         bg-secondary
                         relative
-                        sm:w-[99vw]'>
+                        overflow-hidden'>
             <NavBar></NavBar>
             <OffCanvas></OffCanvas>
             <div className='min-h-screen
                             max-h-max
-                            h-full 
-                            w-full
+                            w-screen
                             flex
                             justify-center
                             items-center'>

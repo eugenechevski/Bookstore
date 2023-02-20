@@ -10,7 +10,11 @@ const Book = () => {
                             flex 
                             flex-col
                             items-center
-                            gap-12">
+                            text-secondary-content 
+                            gap-5
+                            mt-12
+                            sm:mt-0
+                            sm:gap-12">
                 <BookDescription></BookDescription>
                 <Providers></Providers>
             </div>

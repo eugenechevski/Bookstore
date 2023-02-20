@@ -4,6 +4,9 @@ import { useState } from 'react';
 
 
 const NavBar = () => {
+    const textBtnClasses = 'bg-transparent ' +
+                           'hover:bg-primary-focus';
+
     const [offCanvasToggleIcon, setOffCanvasToggleIcon] = useState('bars');
     const [navbarToolsIcon, setNavbarToolsIcon] = useState('ellipsis');
     const [searchTerm, setSearchTerm] = useState('');
@@ -17,7 +20,8 @@ const NavBar = () => {
                         rounded-xl 
                         shadow-lg
                         z-50
-                        w-[99%]">
+                        w-[99%]
+                        mt-2">
             {/* Navbar start */}
             <div className="navbar-start 
                             w-1/6 
@@ -28,7 +32,7 @@ const NavBar = () => {
                    href={"#offcanvas"} 
                    role="button" 
                    aria-controls="offcanvas">
-                    <IconButton iconName={offCanvasToggleIcon}></IconButton>
+                    <IconButton onClickListener={() => null} classes={''} iconName={offCanvasToggleIcon}></IconButton>
                 </a>
                 {/* Title */}
                 <div className="ml-2 
@@ -59,7 +63,7 @@ const NavBar = () => {
                 {/* Search icon */}
                 <div className='hidden 
                                 sm:block'>
-                    <IconButton iconName={'search'}></IconButton>
+                    <IconButton onClickListener={() => null} classes={''} iconName={'search'}></IconButton>
                 </div>
                 {/* Search results */}
                 {
@@ -108,7 +112,7 @@ const NavBar = () => {
                 {
                     window.screen.width < 640 &&
                     <div onClick={() => setNavbarToolsIcon(navbarToolsIcon === 'xmark' ? 'ellipsis' : 'xmark')}>
-                        <IconButton iconName={navbarToolsIcon}></IconButton>
+                        <IconButton onClickListener={() => null} classes={''} iconName={navbarToolsIcon}></IconButton>
                     </div>
                 }
                 {/* Tools elememts*/}
@@ -123,9 +127,9 @@ const NavBar = () => {
                             <label tabIndex={0}>
                                 {
                                     window.screen.width > 640 ? (
-                                        <TextButton classes={''} textContent={'Wishlist'}></TextButton>
+                                        <TextButton onClickListener={() => null} classes={textBtnClasses} textContent={'Wishlist'}></TextButton>
                                     ) : (
-                                        <IconButton iconName={'heart'}></IconButton>
+                                        <IconButton onClickListener={() => null} classes={''} iconName={'heart'}></IconButton>
                                     )
                                 }
                             </label>
@@ -149,9 +153,9 @@ const NavBar = () => {
                             <label tabIndex={0}>
                                 {
                                     window.screen.width > 640 ? (
-                                        <TextButton classes={''} textContent={'Cart'}></TextButton>
+                                        <TextButton onClickListener={() => null} classes={textBtnClasses} textContent={'Cart'}></TextButton>
                                     ) : (
-                                        <IconButton iconName={'cart'}></IconButton>
+                                        <IconButton onClickListener={() => null} classes={''} iconName={'cart'}></IconButton>
                                     )
                                 }
                             </label>
@@ -173,7 +177,7 @@ const NavBar = () => {
                                         sm:dropdown-bottom">
                             {/* User information toggle */}
                             <label tabIndex={0}>
-                                <IconButton iconName={'user'}></IconButton>
+                                <IconButton onClickListener={() => null} classes={''} iconName={'user'}></IconButton>
                             </label>
                             {/* User information dropdown content */}
                             <div tabIndex={0} className="dropdown-content 
@@ -187,7 +191,7 @@ const NavBar = () => {
                         </div>
                         {/* Sign-in/sign-out button */}
                         <div>
-                            <IconButton iconName={'sign-out'}></IconButton>
+                            <IconButton onClickListener={() => null} classes={''} iconName={'sign-out'}></IconButton>
                         </div>
                     </>
                 }

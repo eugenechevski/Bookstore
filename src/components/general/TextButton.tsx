@@ -1,12 +1,9 @@
-const TextButton = ({ textContent, classes }) => {
+const TextButton = ({ textContent, classes, onClickListener }) => {
     return (
-        <div className={`btn 
-                         bg-transparent 
+        <div onClick={() => onClickListener()} className={`${classes as string} 
+                         btn 
                          border-none 
-                         text-shadow 
-                         hover:bg-primary-focus 
-                         shadow-gray-600 
-                         ${classes as string}`}>
+                         text-shadow-lg`}>
             {textContent}
         </div>
     )
