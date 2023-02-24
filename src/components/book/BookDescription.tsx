@@ -32,7 +32,7 @@ const BookDescription = () => {
                             flex-col 
                             gap-3">
                 {/* Bookcover */}
-                <div className="w-48
+                <div className="w-36
                                 shadow-2xl
                                 drop-shadow-2xl 
                                 sm:w-64">

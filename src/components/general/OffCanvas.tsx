@@ -2,7 +2,7 @@ const OffCanvas = () => {
     return (
         <div className='scrollbar 
                         overflow-scroll 
-                        h-[91%] 
+                        h-[90%] 
                         w-full
                         offcanvas 
                         offcanvas-start 
@@ -21,7 +21,8 @@ const OffCanvas = () => {
                         fixed 
                         bottom-0 
                         left-0
-                        sm:w-1/4 
+                        sm:w-1/4
+                        sm:h-[91%] 
                         '
             id='offcanvas'
             tabIndex={-1}>
