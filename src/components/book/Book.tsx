@@ -18,7 +18,7 @@ const Book = () => {
                 <BookDescription></BookDescription>
                 <Providers></Providers>
             </div>
-        )}></Page>
+        )} blank={false}></Page>
     );
 };
 

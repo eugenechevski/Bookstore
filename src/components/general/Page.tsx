@@ -1,7 +1,7 @@
 import NavBar from 'src/components/general/NavBar';
 import OffCanvas from 'src/components/general/OffCanvas';
 
-const Page = ({ content }) => {
+const Page = ({ content, blank }) => {
     return (
         <div className='flex 
                         flex-col
@@ -9,8 +9,12 @@ const Page = ({ content }) => {
                         bg-secondary
                         relative
                         overflow-hidden'>
-            <NavBar></NavBar>
-            <OffCanvas></OffCanvas>
+            { !blank &&
+                <>
+                    <NavBar></NavBar>
+                    <OffCanvas></OffCanvas>
+                </>
+            }
             <div className='min-h-screen
                             max-h-max
                             w-screen

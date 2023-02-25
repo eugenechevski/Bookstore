@@ -11,7 +11,7 @@ const LandingPage = () => {
                             w-full'>
                 <HelloPage></HelloPage>
             </div>
-        }></Page>
+        } blank={true}></Page>
     )
 };
 

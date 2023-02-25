@@ -14,7 +14,7 @@ const Home = () => {
                 <CategoryDisplay></CategoryDisplay>
                 <CategoryDisplay></CategoryDisplay>
             </div>
-        )}></Page>
+        )} blank={false}></Page>
     );
 }
 

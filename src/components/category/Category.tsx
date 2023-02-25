@@ -26,10 +26,28 @@ const Category = () => {
                     {[0, 1, 2, 3, 4].map(i => <BookEntry key={i} 
                                                          rank={i + 1} 
                                                          bookCover={image} 
-                                                         description={'Separated from his crew, an astronaut embarks on a quest to stay alive on Mars. The basis of the movie The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie.The basis of the movie..'} />)}
+                                                         description={`Separated from his crew, an astronaut embarks on a quest to stay alive on Mars. 
+                                                                       The basis of the movie The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie.
+                                                                       The basis of the movie.The basis of the movie. 
+                                                                       The basis of the movie.The basis of the movie.`} />)}
                 </div>
             </div>
-        }></Page>
+        } blank={false}></Page>
     )
 }
 
