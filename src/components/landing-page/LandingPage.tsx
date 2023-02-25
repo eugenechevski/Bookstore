@@ -1,7 +1,4 @@
-import AfterCreation from './AfterCreation';
-import CreateAccountForm from './CreateAccountForm';
 import HelloPage from './HelloPage';
-import SignInForm from './SignInForm';
 import Page from 'components/general/Page';
 
 const LandingPage = () => {
@@ -12,7 +9,7 @@ const LandingPage = () => {
                             justify-center 
                             h-full 
                             w-full'>
-                <AfterCreation></AfterCreation>
+                <HelloPage></HelloPage>
             </div>
         }></Page>
     )
