@@ -7,7 +7,7 @@ const HelloPage = () => {
                         h-full 
                         w-full 
                         gap-5'>
-            <div className='text-3xl 
+            <div className='text-2xl 
                             text-secondary-content 
                             mb-5 
                             sm:text-5xl'>Welcome to Garden of Books</div>

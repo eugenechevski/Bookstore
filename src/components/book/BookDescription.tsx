@@ -67,7 +67,8 @@ const BookDescription = () => {
                             items-start
                             gap-3">
                 {/* Title */}
-                <div className="text-5xl 
+                <div className="text-3xl
+                                sm:text-5xl 
                                 font-bold 
                                 w-full 
                                 text-shadow-lg 
@@ -88,7 +89,7 @@ const BookDescription = () => {
                     by George Orwell
                 </div>
                 {/* Synopsis */}
-                <div className={`${expandedDescription ? 'h-full' : 'h-32 sm:h-80'} 
+                <div className={`${expandedDescription ? 'h-full' : 'h-16 sm:h-80'} 
                                 text-justify
                                 whitespace-normal 
                                 text-shadow-lg 

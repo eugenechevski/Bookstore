@@ -22,7 +22,7 @@ const Category = () => {
                 {/* Cateogry content */}
                 <div className="flex 
                                 flex-col 
-                                sm:gap-5">
+                                gap-12">
                     {[0, 1, 2, 3, 4].map(i => <BookEntry key={i} 
                                                          rank={i + 1} 
                                                          bookCover={image} 

@@ -9,6 +9,8 @@ const Home = () => {
                             flex 
                             flex-col 
                             items-center 
+                            mt-20
+                            sm:mt-12
                             sm:p-12'>
                 <CategoryDisplay></CategoryDisplay>
                 <CategoryDisplay></CategoryDisplay>

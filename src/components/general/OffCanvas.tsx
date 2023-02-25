@@ -2,7 +2,7 @@ const OffCanvas = () => {
     return (
         <div className='scrollbar 
                         overflow-scroll 
-                        h-[90%] 
+                        h-[89%] 
                         w-full
                         offcanvas 
                         offcanvas-start 

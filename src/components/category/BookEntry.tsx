@@ -31,7 +31,7 @@ const BookEntry = ({ rank, bookCover, description }) => {
                     <img src={bookCover} alt="bookcover" />
                 </div>
             </div>
-            <div className="h-1/3 
+            <div className="h-1/6 
                             w-3/4 
                             text-justify 
                             whitespace-normal 
