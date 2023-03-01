@@ -34,10 +34,10 @@ const CreateAccountForm = () => {
                                                 rounded-lg 
                                                 input-bordered" />
                     <button className="btn-primary 
-                                    rounded-full 
-                                    w-1/2 
-                                    self-center 
-                                    mt-12">Create</button>
+                                       rounded-full 
+                                       w-1/2 
+                                       self-center 
+                                       mt-12">Create</button>
                 </div>
             </div>
         } blank={true}></Page>

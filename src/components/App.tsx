@@ -6,6 +6,8 @@ import Category from 'components/category/Category';
 import AfterCreation from 'components/forms/AfterCreation';
 import CreateAccountForm from 'components/forms/CreateAccountForm';
 import SignInForm from 'components/forms/SignInForm';
+import CheckoutForm from 'components/forms/CheckoutForm';
+import AfterCheckout from 'components/forms/AfterCheckout';
 import 'styles/App.css';
 import 'tw-elements';
 import uniqid from 'uniqid';
@@ -18,6 +20,8 @@ const pages = {
   'after-creation': <AfterCreation></AfterCreation>,
   'create-account': <CreateAccountForm></CreateAccountForm>,
   'sign-in': <SignInForm></SignInForm>,
+  'checkout': <CheckoutForm></CheckoutForm>,
+  'after-checkout': <AfterCheckout></AfterCheckout>
 }
 
 function App() {
