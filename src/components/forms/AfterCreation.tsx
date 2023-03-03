@@ -1,4 +1,5 @@
 import Page from "components/general/Page";
+import { Link } from "react-router-dom";
 
 const AfterCreation = () => {
     return (
@@ -18,10 +19,11 @@ const AfterCreation = () => {
                     <div className="font-bold 
                                     text-center 
                                     mt-6">The account has been created.</div>
-                    <div className="btn-primary 
-                                    rounded-full 
-                                    w-3/4 
-                                    text-center">Procceed</div>
+                    
+                    <Link to={"/home"} className="btn-primary 
+                                                  rounded-full 
+                                                  w-3/4 
+                                                  text-center">Procceed</Link>
                 </div>
             </div>
         } blank={true}></Page>

@@ -1,3 +1,18 @@
+import { Link } from "react-router-dom";
+import uniqid from "uniqid";
+
+const categories = [
+    "Fiction",
+    "History",
+    "Romance",
+    "Science Fiction",
+    "Biography",
+    "Novels",
+    "Fairy Tales",
+    "Self-help",
+    "Business",
+];
+
 const OffCanvas = () => {
     return (
         <div className='scrollbar 
@@ -28,26 +43,14 @@ const OffCanvas = () => {
             tabIndex={-1}>
             <div className='offcanvas-body'>
                 <ul className='menu' tabIndex={0}>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 1</a></li>
+                    { categories.map(category => ( <li key={uniqid()}>
+                                                     <Link to={"/category"}>
+                                                         {category}
+                                                     </Link>
+                                                   </li>
+                                                 ) 
+                                    )
+                    }
                 </ul>
             </div>
         </div>

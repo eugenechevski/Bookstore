@@ -1,4 +1,5 @@
 import Page from "components/general/Page";
+import { Link } from "react-router-dom";
 
 const CreateAccountForm = () => {
     return (
@@ -33,11 +34,12 @@ const CreateAccountForm = () => {
                     <input type="text" className="input-sm 
                                                 rounded-lg 
                                                 input-bordered" />
-                    <button className="btn-primary 
-                                       rounded-full 
-                                       w-1/2 
-                                       self-center 
-                                       mt-12">Create</button>
+                    <Link to={"/after-creation"} className="btn-primary 
+                                                            rounded-full 
+                                                            w-1/2 
+                                                            self-center 
+                                                            mt-12
+                                                            text-center">Create</Link>
                 </div>
             </div>
         } blank={true}></Page>

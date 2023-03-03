@@ -1,4 +1,5 @@
 import Page from "components/general/Page";
+import { Link } from "react-router-dom";
 
 const SignInForm = () => {
     return (
@@ -23,11 +24,12 @@ const SignInForm = () => {
                     <input type="text" className="input-sm 
                                                 rounded-lg 
                                                 input-bordered" />
-                    <button className="btn-primary 
-                                    rounded-full 
-                                    w-1/2 
-                                    self-center 
-                                    mt-6">Sign-in</button>
+                    <Link to={"/home"} className="btn-primary 
+                                                  rounded-full 
+                                                  w-1/2 
+                                                  self-center 
+                                                  mt-6
+                                                  text-center">Sign-in</Link>
                 </div>
             </div>
         } blank={true}></Page>

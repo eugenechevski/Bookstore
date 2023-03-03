@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const HelloPage = () => {
     return (
         <div className='flex 
@@ -11,16 +13,22 @@ const HelloPage = () => {
                             text-secondary-content 
                             mb-5 
                             sm:text-5xl'>Welcome to Garden of Books</div>
-            <div className='btn 
-                            btn-primary 
-                            rounded-full 
-                            text-xl'>Create account</div>
-            <div className='text-xs 
-                            font-bold 
-                            cursor-pointer'>Returning user?</div>
-            <div className='text-xs 
-                            font-bold 
-                            cursor-pointer'>Procceed as Guest</div>
+            <Link to={"/create-account"}>
+                <div className='btn 
+                                btn-primary 
+                                rounded-full 
+                                text-xl'>Create account</div>
+            </Link>
+            <Link to={"/sign-in"}>
+                <div className='text-xs 
+                                font-bold 
+                                cursor-pointer'>Returning user?</div>
+            </Link>
+            <Link to="/home">
+                <div className='text-xs 
+                                font-bold 
+                                cursor-pointer'>Procceed as Guest</div>
+            </Link>
             <div className='italic'>Powered by New York Times</div>
         </div>
     )

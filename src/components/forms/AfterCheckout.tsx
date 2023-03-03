@@ -1,4 +1,5 @@
 import Page from "components/general/Page";
+import { Link } from "react-router-dom";
 
 const AfterCheckout = () => {
     return (
@@ -17,10 +18,13 @@ const AfterCheckout = () => {
                                 text-center
                                 h-12
                                 mt-12">You checked-out successfully.</div>
-                <button className="btn-primary 
-                                   rounded-full 
-                                   w-1/2 
-                                   self-center">Continue</button>
+                <Link className="btn-primary 
+                                 rounded-full
+                                 self-center
+                                 w-1/2
+                                 text-center" to={"/home"}>
+                    Continue
+                </Link>
             </div>
         } blank={true}></Page>
     )
