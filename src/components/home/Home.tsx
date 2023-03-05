@@ -1,7 +1,8 @@
 import Page from 'components/general/Page';
 import CategoryDisplay from './CategoryDisplay';
+import uniqid from 'uniqid';
 
-const Home = () => {
+const Home = ({ categories }: { categories: Category[] }) => {
     return (
         <Page content={(
             <div className='w-full
@@ -12,9 +13,11 @@ const Home = () => {
                             mt-20
                             sm:mt-12
                             sm:p-12'>
-                <CategoryDisplay></CategoryDisplay>
-                <CategoryDisplay></CategoryDisplay>
-                <CategoryDisplay></CategoryDisplay>
+                { 
+                    categories.map((category) => <CategoryDisplay key={uniqid()} 
+                                                                  category={category}></CategoryDisplay> 
+                                  )
+                }
             </div>
         )} blank={false}></Page>
     );

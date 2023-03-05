@@ -1,6 +1,7 @@
 import BookCard from "./BookCard";
+import uniqid from "uniqid";
 
-const CategoryDisplay = () => {
+const CategoryDisplay = ({ category }: { category: Category }) => {
     return (
         <div className="p-6
                         gap-12 
@@ -17,16 +18,16 @@ const CategoryDisplay = () => {
                             text-shadow-lg 
                             drop-shadow-lg 
                             w-full 
-                            sm:text-2xl">Combined Print & E-Book Fiction</div>
+                            sm:text-2xl">{category.getName()}</div>
             <div className="carousel 
                             w-64 
                             sm:p-12 
                             sm:w-full">
-                <BookCard></BookCard>
-                <BookCard></BookCard>
-                <BookCard></BookCard>
-                <BookCard></BookCard>
-                <BookCard></BookCard>
+                {
+                    category.getBooks().map((book) => <BookCard key={uniqid()} 
+                                                                book={book}></BookCard>
+                             )
+                }
             </div>
         </div>
     )

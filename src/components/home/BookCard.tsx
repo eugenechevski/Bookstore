@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 
-const BookCard = () => {
-    const image = require('src/assets/images/bookcover.png');
-
+const BookCard = ({ book }: { book: Book }) => {
     return (
         <div className="carousel-item 
                         flex 
@@ -27,8 +25,8 @@ const BookCard = () => {
                                     bg-primary 
                                     p-2 
                                     rounded-xl 
-                                    shadow-lg">#1</div>
-                    <img src={image} alt="book" />
+                                    shadow-lg">{book.getRank()}</div>
+                    <img src={book.getCover()} alt="book" />
                 </div>
             </Link>
             <div className="text-center 
@@ -36,7 +34,7 @@ const BookCard = () => {
                             font-bold 
                             text-shadow-lg 
                             drop-shadow-lg 
-                            text-2xl">1984</div>
+                            text-2xl">{book.getTitle()}</div>
         </div>
     )
 };
