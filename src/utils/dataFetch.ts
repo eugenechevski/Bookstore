@@ -47,7 +47,7 @@ const categories = [
     ]),
 ];
 
-export default function dataFetch() {
+export default (function() {
     function getCategories() {
         return categories;
     }
@@ -55,4 +55,4 @@ export default function dataFetch() {
     return {
         getCategories,
     }
-}
+})()

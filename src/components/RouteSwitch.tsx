@@ -10,14 +10,13 @@ import SignInForm from "src/components/forms/SignInForm";
 import App from "./App";
 import dataFetch from "src/utils/dataFetch";
 
-const DataFetch = dataFetch();
 
 const RouteSwitch = () => {
     return (
         <HashRouter>
             <Routes>
                 <Route path="/" element={<App/>}/>
-                <Route path="/home" element={<Home categories={DataFetch.getCategories()}/>}></Route>
+                <Route path="/home" element={<Home categories={dataFetch.getCategories()}/>}></Route>
                 <Route path="/book" element={<Book/>}></Route>
                 <Route path="/category" element={<Category/>}></Route>
                 <Route path="/checkout" element={<CheckoutForm/>}></Route>

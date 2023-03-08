@@ -26,7 +26,7 @@ const BookCard = ({ book }: { book: Book }) => {
                                     p-2 
                                     rounded-xl 
                                     shadow-lg">{book.getRank()}</div>
-                    <img src={book.getCover()} alt="book" />
+                    <img src={book.getCover()} alt={book.getTitle() + " image"} />
                 </div>
             </Link>
             <div className="text-center 
