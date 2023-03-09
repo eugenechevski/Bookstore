@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import RouteSwitch from 'components/RouteSwitch';
+import App from 'components/App';
 import './index.css';
 
 const root = ReactDOM.createRoot(
@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
 document.querySelector('body').classList.add('font-Lato', 'h-max');
 root.render(
   <React.StrictMode>
-    <RouteSwitch></RouteSwitch>
+    <App></App>
   </React.StrictMode>
 );
 

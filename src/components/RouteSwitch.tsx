@@ -7,15 +7,14 @@ import AfterCreation from "src/components/forms/AfterCreation";
 import CheckoutForm from "src/components/forms/CheckoutForm";
 import CreateAccountForm from "src/components/forms/CreateAccountForm";
 import SignInForm from "src/components/forms/SignInForm";
-import App from "./App";
 import dataFetch from "src/utils/dataFetch";
-
+import LandingPage from "./landing-page/LandingPage";
 
 const RouteSwitch = () => {
     return (
         <HashRouter>
             <Routes>
-                <Route path="/" element={<App/>}/>
+                <Route path="/" element={<LandingPage></LandingPage>}/>
                 <Route path="/home" element={<Home categories={dataFetch.getCategories()}/>}></Route>
                 <Route path="/book" element={<Book/>}></Route>
                 <Route path="/category" element={<Category/>}></Route>

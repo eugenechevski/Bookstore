@@ -1,15 +1,11 @@
 import React from 'react';
-import LandingPage from 'components/landing-page/LandingPage';
+import RouteSwitch from './RouteSwitch';
 import 'styles/App.css';
 import 'tw-elements';
-import uniqid from 'uniqid';
-
 
 function App() {
   return (
-    <div>
-      <LandingPage></LandingPage>
-    </div>
+    <RouteSwitch></RouteSwitch>
   );
 }
 
