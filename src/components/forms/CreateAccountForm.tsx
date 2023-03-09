@@ -15,17 +15,22 @@ const CreateAccountForm = () => {
                                 h-full 
                                 justify-center">
                     <label className="label 
-                                    font-bold">Create username</label>
+                                    font-bold">First Name</label>
                     <input type="text" className="input-sm 
                                                 rounded-lg 
                                                 input-bordered" />
                     <label className="label 
-                                    font-bold">Email</label>
+                                    font-bold">Last Name</label>
                     <input type="text" className="input-sm 
                                                 rounded-lg 
                                                 input-bordered" />
                     <label className="label 
-                                    font-bold">Create password</label>
+                                    font-bold">E-mail</label>
+                    <input type="text" className="input-sm 
+                                                rounded-lg 
+                                                input-bordered" />
+                    <label className="label 
+                                    font-bold">Password</label>
                     <input type="text" className="input-sm 
                                                 rounded-lg 
                                                 input-bordered" />

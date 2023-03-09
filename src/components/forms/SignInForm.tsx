@@ -15,7 +15,7 @@ const SignInForm = () => {
                                 h-full 
                                 justify-center">
                     <label className="label 
-                                    font-bold">Username/email</label>
+                                    font-bold">E-mail</label>
                     <input type="text" className="input-sm 
                                                 rounded-lg 
                                                 input-bordered" />

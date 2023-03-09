@@ -48,7 +48,7 @@ const categories = [
 ];
 
 export default (function() {
-    function getCategories() {
+    function getCategories(): Category[] {
         return categories;
     }
 
