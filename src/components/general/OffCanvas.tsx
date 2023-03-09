@@ -1,17 +1,8 @@
 import { Link } from "react-router-dom";
 import uniqid from "uniqid";
+import dataFetch from "src/utils/dataFetch";
 
-const categories = [
-    "Fiction",
-    "History",
-    "Romance",
-    "Science Fiction",
-    "Biography",
-    "Novels",
-    "Fairy Tales",
-    "Self-help",
-    "Business",
-];
+const categories = dataFetch.getCategories();
 
 const OffCanvas = () => {
     return (
@@ -45,7 +36,7 @@ const OffCanvas = () => {
                 <ul className='menu' tabIndex={0}>
                     { categories.map(category => ( <li key={uniqid()}>
                                                      <Link to={"/category"}>
-                                                         {category}
+                                                         {category.getName()}
                                                      </Link>
                                                    </li>
                                                  ) 
