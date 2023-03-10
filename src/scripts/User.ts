@@ -1,20 +1,12 @@
-export default function User(firstName: string, 
-                             lastName: string, 
+export default function User(name: string,
                              password: string, 
                              email: string, 
                              wishlist: Set<Book>, 
                              cart: Set<Book>): User {
     
-    function getFirstName(): string {
-        return firstName;
-    }
 
-    function getLastName(): string {
-        return lastName;
-    }
-
-    function getFullName(): string {
-        return firstName + " " + lastName;
+    function getName(): string {
+        return name;
     }
 
     function getPassword(): string {
@@ -33,12 +25,8 @@ export default function User(firstName: string,
         return cart;
     }
 
-    function setFirstName(first: string) {
-        firstName = first;
-    }
-
-    function setLastName(last: string) {
-        lastName = last;
+    function setName(newName: string): void {
+        name = newName;
     }
 
     function setEmail(newEmail: string) {
@@ -66,15 +54,12 @@ export default function User(firstName: string,
     }
 
     return {
-        getFirstName,
-        getLastName,
-        getFullName,
+        getName,
         getPassword,
         getEmail,
         getWishlist,
         getCart,
-        setFirstName,
-        setLastName,
+        setName,
         setEmail,
         setPassword,
         addToWishList,

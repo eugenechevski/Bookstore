@@ -32,10 +32,11 @@ const NavBar = () => {
                             sm:w-1/4">
                 {/* Hamburger */}
                 <a onClick={() => setOffCanvasToggleIcon(offCanvasToggleIcon === 'bars' ? 'xmark' : 'bars')}
-                    data-bs-toggle="offcanvas"
-                    href={"#offcanvas"}
-                    role="button"
-                    aria-controls="offcanvas">
+                   data-bs-toggle="offcanvas"
+                   data-testid="hamburger"
+                   href={"#offcanvas"}
+                   role="button"
+                   aria-controls="offcanvas">
                     <IconButton onClickListener={() => null} classes={''} iconName={offCanvasToggleIcon}></IconButton>
                 </a>
                 {/* Title */}
@@ -66,7 +67,8 @@ const NavBar = () => {
                 </div>
                 {/* Search icon */}
                 <div className='hidden 
-                                sm:block'>
+                                sm:block'
+                     data-testid="search-button">
                     <IconButton onClickListener={() => null} classes={''} iconName={'search'}></IconButton>
                 </div>
                 {/* Search results */}
@@ -115,7 +117,7 @@ const NavBar = () => {
                 {/* Tools-collapse toggle which is displayed for smaller screens */}
                 {
                     window.screen.width < 640 &&
-                    <div onClick={() => setNavbarToolsIcon(navbarToolsIcon === 'xmark' ? 'ellipsis' : 'xmark')}>
+                    <div data-testid="tools-toggle" onClick={() => setNavbarToolsIcon(navbarToolsIcon === 'xmark' ? 'ellipsis' : 'xmark')}>
                         <IconButton onClickListener={() => null} classes={''} iconName={navbarToolsIcon}></IconButton>
                     </div>
                 }
@@ -145,7 +147,7 @@ const NavBar = () => {
                                                         bg-primary 
                                                         rounded-box 
                                                         w-52">
-                                {[...user.getWishlist()].map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
+                                {[...user.getWishlist().values()].map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
                             </ul>
                         </div>
                         {/* Cart dropdown */}
@@ -188,7 +190,7 @@ const NavBar = () => {
                                                          bg-primary 
                                                          rounded-box 
                                                          w-52">
-                                {user.getFirstName() + " " + user.getLastName()}
+                                {user.getName()}
                             </div>
                         </div>
                         {/* Sign-in/sign-out button */}

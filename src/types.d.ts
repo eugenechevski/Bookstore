@@ -11,14 +11,12 @@ declare type Category = {
 };
 
 declare type User = {
-  getFirstName: () => string,
-  getLastName: () => string,
+  getName: () => string,
   getPassword: () => string,
   getEmail: () => string,
   getWishlist: () => Set<Book>,
   getCart: () => Set<Book>,
-  setFirstName: (first: string) => void,
-  setLastName: (last: string) => void,
+  setName(newName: string): void,
   setPassword: (newPassword: string) => void,
   setEmail: (newEmail: string) => void,
   addToWishList: (book: Book) => void,
