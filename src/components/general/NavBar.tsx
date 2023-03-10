@@ -1,15 +1,19 @@
 import IconButton from 'components/general/IconButton';
 import TextButton from 'components/general/TextButton';
-import { useState } from 'react';
+import uniqid from "uniqid";
+import { Link } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { UserContext } from 'src/components/App';
 
 
 const NavBar = () => {
     const textBtnClasses = 'bg-transparent ' +
-                           'hover:bg-primary-focus';
+        'hover:bg-primary-focus';
 
     const [offCanvasToggleIcon, setOffCanvasToggleIcon] = useState('bars');
     const [navbarToolsIcon, setNavbarToolsIcon] = useState('ellipsis');
     const [searchTerm, setSearchTerm] = useState('');
+    const user = useContext(UserContext);
 
     return (
         <div className="navbar 
@@ -27,20 +31,20 @@ const NavBar = () => {
                             w-1/6 
                             sm:w-1/4">
                 {/* Hamburger */}
-                <a onClick={() => setOffCanvasToggleIcon(offCanvasToggleIcon === 'bars' ? 'xmark' : 'bars')} 
-                   data-bs-toggle="offcanvas" 
-                   href={"#offcanvas"} 
-                   role="button" 
-                   aria-controls="offcanvas">
+                <a onClick={() => setOffCanvasToggleIcon(offCanvasToggleIcon === 'bars' ? 'xmark' : 'bars')}
+                    data-bs-toggle="offcanvas"
+                    href={"#offcanvas"}
+                    role="button"
+                    aria-controls="offcanvas">
                     <IconButton onClickListener={() => null} classes={''} iconName={offCanvasToggleIcon}></IconButton>
                 </a>
                 {/* Title */}
-                <div className="ml-2 
+                <Link to={"/home"} className="ml-2 
                                 hidden 
                                 text-shadow-lg 
                                 shadow-gray-600
                                 sm:block 
-                                sm:text-2xl">Garden of Books.</div>
+                                sm:text-2xl">Garden of Books.</Link>
             </div>
             {/* Navbar center */}
             <div className="navbar-center 
@@ -104,9 +108,9 @@ const NavBar = () => {
                              sm:bg-inherit 
                              sm:flex-row 
                              ${navbarToolsIcon === 'xmark' ? 'mt-5 ' +
-                                                             'translate-y-28 ' +
-                                                             'p-2 ' +
-                                                             'shadow-md': ''}`
+                    'translate-y-28 ' +
+                    'p-2 ' +
+                    'shadow-md' : ''}`
             }>
                 {/* Tools-collapse toggle which is displayed for smaller screens */}
                 {
@@ -141,8 +145,7 @@ const NavBar = () => {
                                                         bg-primary 
                                                         rounded-box 
                                                         w-52">
-                                <li><a>Item 1</a></li>
-                                <li><a>Item 2</a></li>
+                                {[...user.getWishlist()].map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
                             </ul>
                         </div>
                         {/* Cart dropdown */}
@@ -167,8 +170,7 @@ const NavBar = () => {
                                                         bg-primary 
                                                         rounded-box 
                                                         w-52">
-                                <li><a>Item 1</a></li>
-                                <li><a>Item 2</a></li>
+                                {[...user.getCart()].map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
                             </ul>
                         </div>
                         {/* User information dropdown */}
@@ -186,7 +188,7 @@ const NavBar = () => {
                                                          bg-primary 
                                                          rounded-box 
                                                          w-52">
-                                User name
+                                {user.getFirstName() + " " + user.getLastName()}
                             </div>
                         </div>
                         {/* Sign-in/sign-out button */}

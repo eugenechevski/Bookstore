@@ -1,7 +1,7 @@
 import NavBar from 'src/components/general/NavBar';
 import OffCanvas from 'src/components/general/OffCanvas';
 
-const Page = ({ content, blank }) => {
+const Page = ({ content, blank }) => { 
     return (
         <div className='flex 
                         flex-col
