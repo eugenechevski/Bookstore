@@ -13,6 +13,10 @@ export default function User(firstName: string,
         return lastName;
     }
 
+    function getFullName(): string {
+        return firstName + " " + lastName;
+    }
+
     function getPassword(): string {
         return password;
     }
@@ -64,6 +68,7 @@ export default function User(firstName: string,
     return {
         getFirstName,
         getLastName,
+        getFullName,
         getPassword,
         getEmail,
         getWishlist,
