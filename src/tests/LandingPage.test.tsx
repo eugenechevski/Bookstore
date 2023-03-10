@@ -1,15 +1,14 @@
-import React from 'react';
-import { getByText, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import App from 'components/App';
+import LandingPage from 'components/landing-page/LandingPage';
 
-describe("App component", () => {
+describe("LandingPage component", () => {
     beforeEach(() => {
         render(
             <MemoryRouter>
-                <App />
+                <LandingPage />
             </MemoryRouter>
         );
     });
