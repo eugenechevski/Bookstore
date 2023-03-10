@@ -147,7 +147,7 @@ const NavBar = () => {
                                                         bg-primary 
                                                         rounded-box 
                                                         w-52">
-                                {[...user.getWishlist().values()].map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
+                                {user.getWishlist().map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
                             </ul>
                         </div>
                         {/* Cart dropdown */}
@@ -172,7 +172,7 @@ const NavBar = () => {
                                                         bg-primary 
                                                         rounded-box 
                                                         w-52">
-                                {[...user.getCart()].map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
+                                {user.getCart().map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
                             </ul>
                         </div>
                         {/* User information dropdown */}

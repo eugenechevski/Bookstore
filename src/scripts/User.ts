@@ -1,9 +1,20 @@
 export default function User(name: string,
                              password: string, 
                              email: string, 
-                             wishlist: Set<Book>, 
-                             cart: Set<Book>): User {
+                             wishlist: Book[], 
+                             cart: Book[]): User {
     
+
+    var wishlistMap = {};
+    var cartMap = {};
+        
+    for (let i = 0; i < wishlist.length; i++) {
+        wishlistMap[wishlistMap[i].getTitle()] = wishlistMap[i];
+    }
+
+    for (let i = 0; i < cart.length; i++) {
+        cartMap[cartMap[i].getTitle()] = cartMap[i];
+    }
 
     function getName(): string {
         return name;
@@ -17,12 +28,12 @@ export default function User(name: string,
         return email;
     }
 
-    function getWishlist(): Set<Book> {
-        return wishlist;
+    function getWishlist(): Book[] {
+        return Object.values(wishlistMap);
     }
 
-    function getCart(): Set<Book> {
-        return cart;
+    function getCart(): Book[] {
+        return Object.values(cartMap);;
     }
 
     function setName(newName: string): void {
@@ -37,20 +48,21 @@ export default function User(name: string,
         password = newPassword;   
     }
 
-    function addToWishList(book: Book) {
-        wishlist.add(book);
+    function addToWishList(book: Book): void {
+        wishlistMap[book.getTitle()] = book;
+        console.log(wishlistMap);
     }
 
-    function addToCart(book: Book) {
-        cart.add(book);
+    function addToCart(book: Book): void {
+        cartMap[book.getTitle()] = book;
     }
 
-    function removeFromCart(book: Book) {
-        cart.delete(book);
+    function removeFromCart(bookTitle: string): void {
+        delete cartMap[bookTitle];
     }
 
-    function removeFromWishlist(book: Book) {
-        wishlist.delete(book);
+    function removeFromWishlist(bookTitle: string): void {
+        delete wishlistMap[bookTitle];
     }
 
     return {
