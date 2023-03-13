@@ -10,7 +10,7 @@ describe("NavBar component", () => {
   beforeEach(() => {
     render(
       <MemoryRouter>
-        <NavBar userProp={User('John Doe', '', '', [Book("1984", "", 1, "")], [Book("1984", "", 1, "")], true)}></NavBar>
+        <NavBar userProp={User('John Doe', '', '', [Book("1984", "", 1, 1, "")], [Book("1984", "", 1, 1, "")], true)}></NavBar>
       </MemoryRouter>
     )
   })

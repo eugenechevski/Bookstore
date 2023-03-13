@@ -1,8 +1,10 @@
 declare type Book = {
   getTitle: () => string,
+  getQuantity: () => number,
   getCover: () => any,
   getRank: () => number,
   getSynopsis: () => string,
+  updateQuantity: (newQuantity: number) => void
 };
 
 declare type Category = {
@@ -15,6 +17,7 @@ declare type User = {
   getPassword: () => string,
   getEmail: () => string,
   getWishlist: () => Book[],
+  getBookFromCart: (bookTitle: string) => Book,
   getCart: () => Book[],
   setName(newName: string): void,
   setPassword: (newPassword: string) => void,
@@ -26,4 +29,5 @@ declare type User = {
   isSignedIn: () => boolean,
   signIn: () => void,
   signOut: () => void
+  emptyCart: () => void,
 }

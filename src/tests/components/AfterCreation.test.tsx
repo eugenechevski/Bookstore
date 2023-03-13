@@ -17,5 +17,5 @@ describe('AfterCreation component', () => {
     expect(screen.getByText(/The account has been created./i)).toBeInTheDocument();
   });
 
-  
+    
 });
