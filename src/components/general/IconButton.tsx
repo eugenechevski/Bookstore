@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { faSign } from "@fortawesome/free-solid-svg-icons";
+import { faSignIn } from "@fortawesome/free-solid-svg-icons";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +13,7 @@ const possibleIcons = {
   'bars': faBars,
   'user': faUser,
   'sign-out': faSignOut,
-  'sign-in': faSign,
+  'sign-in': faSignIn,
   'search': faSearch,
   'heart': faHeart,
   'cart': faShoppingCart,
@@ -22,9 +22,9 @@ const possibleIcons = {
 }
 
 const IconButton = ({ iconName, classes, onClickListener }) => {
-
     return (
-        <div onChange={() => onClickListener()} className={`${classes}
+        <div onChange={() => onClickListener()} 
+             className={`${classes}
                          btn 
                          bg-transparent 
                          border-none 

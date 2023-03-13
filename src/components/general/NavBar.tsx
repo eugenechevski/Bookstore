@@ -1,19 +1,31 @@
 import IconButton from 'components/general/IconButton';
 import TextButton from 'components/general/TextButton';
 import uniqid from "uniqid";
-import { Link } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { Link, useHref } from 'react-router-dom';
+import { useState, useContext, useRef } from 'react';
 import { UserContext } from 'src/components/App';
 
 
-const NavBar = () => {
-    const textBtnClasses = 'bg-transparent ' +
-        'hover:bg-primary-focus';
 
+const NavBar = ({ userProp }: { userProp?: User }) => {
+    const textBtnClasses = 'bg-transparent ' +
+                           'hover:bg-primary-focus';
+
+    const userContext = useContext(UserContext);
+    const user = useRef(userProp === undefined ? userContext : userProp);
     const [offCanvasToggleIcon, setOffCanvasToggleIcon] = useState('bars');
     const [navbarToolsIcon, setNavbarToolsIcon] = useState('ellipsis');
     const [searchTerm, setSearchTerm] = useState('');
-    const user = useContext(UserContext);
+    const [loginButtonIcon, setLoginButtonIcon] = useState(user.current.isSignedIn() ? 'sign-in' : 'sign-out');
+
+    const toggleLoginButton = () => {
+        if (user.current.isSignedIn()) {
+            user.current.signOut();
+        } else {
+            user.current.signIn();
+        }
+        setLoginButtonIcon(!user.current.isSignedIn()? 'sign-in' : 'sign-out');
+    }
 
     return (
         <div className="navbar 
@@ -130,7 +142,7 @@ const NavBar = () => {
                                         dropdown-left 
                                         sm:dropdown-bottom">
                             {/* Wishlist toggle */}
-                            <label tabIndex={0}>
+                            <label data-testid={"wishlist-toggle"} tabIndex={0}>
                                 {
                                     window.screen.width > 640 ? (
                                         <TextButton onClickListener={() => null} classes={textBtnClasses} textContent={'Wishlist'}></TextButton>
@@ -140,14 +152,14 @@ const NavBar = () => {
                                 }
                             </label>
                             {/* Wishlist dropdown */}
-                            <ul tabIndex={0} className="dropdown-content 
-                                                        menu 
-                                                        p-2 
-                                                        shadow 
-                                                        bg-primary 
-                                                        rounded-box 
-                                                        w-52">
-                                {user.getWishlist().map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
+                            <ul data-testid={"wishlist-dropdown"} tabIndex={0} className="dropdown-content
+                                                                                          menu
+                                                                                          p-2 
+                                                                                          shadow 
+                                                                                          bg-primary
+                                                                                          rounded-box
+                                                                                          w-52">
+                                {user.current.getWishlist().map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
                             </ul>
                         </div>
                         {/* Cart dropdown */}
@@ -155,7 +167,7 @@ const NavBar = () => {
                                         dropdown-left 
                                         sm:dropdown-bottom">
                             {/* Cart toggle */}
-                            <label tabIndex={0}>
+                            <label data-testid={"cart-toggle"} tabIndex={0}>
                                 {
                                     window.screen.width > 640 ? (
                                         <TextButton onClickListener={() => null} classes={textBtnClasses} textContent={'Cart'}></TextButton>
@@ -165,14 +177,14 @@ const NavBar = () => {
                                 }
                             </label>
                             {/* Cart dropdown content */}
-                            <ul tabIndex={0} className="dropdown-content 
-                                                        menu 
-                                                        p-2 
-                                                        shadow 
-                                                        bg-primary 
-                                                        rounded-box 
-                                                        w-52">
-                                {user.getCart().map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
+                            <ul data-testid={"cart-dropdown"} tabIndex={0} className="dropdown-content
+                                                                                      menu
+                                                                                      p-2
+                                                                                      shadow
+                                                                                      bg-primary
+                                                                                      rounded-box
+                                                                                      w-52">
+                                {user.current.getCart().map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
                             </ul>
                         </div>
                         {/* User information dropdown */}
@@ -180,7 +192,7 @@ const NavBar = () => {
                                         dropdown-left 
                                         sm:dropdown-bottom">
                             {/* User information toggle */}
-                            <label tabIndex={0}>
+                            <label data-testid={"user-toggle"} tabIndex={0}>
                                 <IconButton onClickListener={() => null} classes={''} iconName={'user'}></IconButton>
                             </label>
                             {/* User information dropdown content */}
@@ -190,12 +202,15 @@ const NavBar = () => {
                                                          bg-primary 
                                                          rounded-box 
                                                          w-52">
-                                {user.getName()}
+                                {user.current.getName()}
                             </div>
                         </div>
                         {/* Sign-in/sign-out button */}
-                        <div>
-                            <IconButton onClickListener={() => null} classes={''} iconName={'sign-out'}></IconButton>
+                        <div onClick={() => toggleLoginButton()} 
+                             data-testid="sign-toggle">
+                            <IconButton onClickListener={() => null} 
+                                        classes={''} 
+                                        iconName={loginButtonIcon}></IconButton>
                         </div>
                     </>
                 }
