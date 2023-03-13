@@ -14,7 +14,7 @@ export default function User(name?: string,
     }
 
     for (let i = 0; i < cart.length; i++) {
-        cartMap[cart[i].getTitle()] = cart[i];
+        cartMap[cart[i].getTitle()] = cart[i];;
     }
 
     function getName(): string {
@@ -37,6 +37,10 @@ export default function User(name?: string,
         return Object.values(cartMap);;
     }
 
+    function getBookFromCart(bookTitle: string): Book {
+        return cartMap[bookTitle];
+    }
+
     function setName(newName: string): void {
         name = newName;
     }
@@ -51,7 +55,6 @@ export default function User(name?: string,
 
     function addToWishList(book: Book): void {
         wishlistMap[book.getTitle()] = book;
-        console.log(wishlistMap);
     }
 
     function addToCart(book: Book): void {
@@ -78,12 +81,17 @@ export default function User(name?: string,
         signedin = false;
     }
 
+    function emptyCart(): void {
+      Object.assign(cartMap, {});
+    };
+
     return {
         getName,
         getPassword,
         getEmail,
         getWishlist,
         getCart,
+        getBookFromCart,
         setName,
         setEmail,
         setPassword,
@@ -93,6 +101,7 @@ export default function User(name?: string,
         removeFromWishlist,
         signIn,
         signOut,
-        isSignedIn
+        isSignedIn,
+        emptyCart,
     }
 }

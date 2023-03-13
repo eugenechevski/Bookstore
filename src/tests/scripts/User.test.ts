@@ -24,6 +24,11 @@ describe("User factory", () => {
     expect(testUser.getCart().length).toEqual(0);
   });
 
+  it("returns a book from the cart", () => {
+    testUser.addToCart(Book('1984', '', 1, 1, ''));
+    expect(testUser.getBookFromCart('1984').getTitle()).toBe('1984');
+  });
+
   it("sets a new name", () => {
     testUser.setName('Jane Doe');
     expect(testUser.getName()).toBe('Jane Doe');
@@ -40,13 +45,13 @@ describe("User factory", () => {
   });
 
   it("adds an item to a wishlist", () => {
-    testUser.addToWishList(Book('Harry Potter', "", 1, ""));
+    testUser.addToWishList(Book('Harry Potter', "", 1, 1, ""));
     expect(testUser.getWishlist().length).toEqual(1);
   });
 
   it("adds an item to a cart", () => {
-    testUser.addToCart(Book('Harry Potter', "", 1, ""));
-    expect(testUser.getCart().length).toEqual(1);
+    testUser.addToCart(Book('Harry Potter', "", 1, 1, ""));
+    expect(testUser.getCart().length).toEqual(2);
   });
 
   it("removes an item from a wishlist", () => {
@@ -56,7 +61,7 @@ describe("User factory", () => {
 
   it("removes an item from a cart", () => {
     testUser.removeFromCart("Harry Potter");
-    expect(testUser.getCart().length).toEqual(0);
+    expect(testUser.getCart().length).toEqual(1);
   });
   
   it("returns the user sign-in status", () => {
@@ -71,5 +76,5 @@ describe("User factory", () => {
   it("signs in the user", () => {
     testUser.signIn();
     expect(testUser.isSignedIn()).toBeTruthy();
-  })
+  });
 });
