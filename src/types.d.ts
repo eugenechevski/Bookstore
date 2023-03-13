@@ -23,4 +23,7 @@ declare type User = {
   addToCart: (book: Book) => void,
   removeFromCart: (bookTitle: string) => void,
   removeFromWishlist: (bookTitle: string) => void,
+  isSignedIn: () => boolean,
+  signIn: () => void,
+  signOut: () => void
 }

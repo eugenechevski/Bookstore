@@ -8,7 +8,7 @@ const UserContext = createContext({} as User);
 
 function App() {
   return (
-    <UserContext.Provider value={User('Guest', '', '', '', new Set(), new Set())}>
+    <UserContext.Provider value={User('Guest', '', '', [], [], false)}>
       <RouteSwitch></RouteSwitch>
     </UserContext.Provider>
   );

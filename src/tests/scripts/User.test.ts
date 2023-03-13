@@ -2,7 +2,7 @@ import Book from "scripts/Book";
 import User from "scripts/User";
 
 describe("User factory", () => {
-  const testUser = User('John Doe', 'password123', 'john@example.com', [], []);
+  const testUser = User('John Doe', 'password123', 'john@example.com', [], [], true);
 
   it("returns the proper name", () => {
     expect(testUser.getName()).toBe('John Doe');
@@ -58,4 +58,18 @@ describe("User factory", () => {
     testUser.removeFromCart("Harry Potter");
     expect(testUser.getCart().length).toEqual(0);
   });
+  
+  it("returns the user sign-in status", () => {
+    expect(testUser.isSignedIn()).toBeTruthy()
+  });
+
+  it("sign-outs the user", () => {
+    testUser.signOut();
+    expect(testUser.isSignedIn()).toBeFalsy();
+  });
+
+  it("signs in the user", () => {
+    testUser.signIn();
+    expect(testUser.isSignedIn()).toBeTruthy();
+  })
 });

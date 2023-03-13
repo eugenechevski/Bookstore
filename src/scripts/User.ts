@@ -1,19 +1,20 @@
-export default function User(name: string,
-                             password: string, 
-                             email: string, 
-                             wishlist: Book[], 
-                             cart: Book[]): User {
+export default function User(name?: string,
+                             password?: string, 
+                             email?: string, 
+                             wishlist?: Book[], 
+                             cart?: Book[],
+                             signedin?: boolean): User {
     
-
+            
     var wishlistMap = {};
     var cartMap = {};
         
     for (let i = 0; i < wishlist.length; i++) {
-        wishlistMap[wishlistMap[i].getTitle()] = wishlistMap[i];
+        wishlistMap[wishlist[i].getTitle()] = wishlist[i];
     }
 
     for (let i = 0; i < cart.length; i++) {
-        cartMap[cartMap[i].getTitle()] = cartMap[i];
+        cartMap[cart[i].getTitle()] = cart[i];
     }
 
     function getName(): string {
@@ -65,6 +66,18 @@ export default function User(name: string,
         delete wishlistMap[bookTitle];
     }
 
+    function isSignedIn(): boolean {
+        return signedin;
+    }
+
+    function signIn(): void {
+        signedin = true;
+    }
+
+    function signOut(): void {
+        signedin = false;
+    }
+
     return {
         getName,
         getPassword,
@@ -78,5 +91,8 @@ export default function User(name: string,
         addToCart,
         removeFromCart,
         removeFromWishlist,
+        signIn,
+        signOut,
+        isSignedIn
     }
 }
