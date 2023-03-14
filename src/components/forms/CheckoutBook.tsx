@@ -1,4 +1,4 @@
-const CheckoutBook = ({bookCover, title, quantity}) => {
+const CheckoutBook = ({ book }: { book: Book }) => {
     return (
         <div className="flex
                         justify-center
@@ -12,7 +12,7 @@ const CheckoutBook = ({bookCover, title, quantity}) => {
             <div className="w-1/3 
                             shadow-lg
                             drop-shadow-lg">
-                <img src={bookCover} alt="bookcover" />
+                <img src={book.getCover()} alt={`${book.getTitle().toLowerCase().split(' ').join('-')}-image`} />
             </div>
             {/* Title */}
             <div className="font-bold 
@@ -21,7 +21,7 @@ const CheckoutBook = ({bookCover, title, quantity}) => {
                             whitespace-normal
                             overflow-hidden
                             text-center
-                            sm:h-12">{title}</div>
+                            sm:h-12">{book.getTitle()}</div>
             {/* Quantity */}
             <div className="flex 
                             flex-col
@@ -29,7 +29,7 @@ const CheckoutBook = ({bookCover, title, quantity}) => {
                             items-center 
                             w-1/3">
                 <div>Q-ty</div>
-                <div>{quantity}x</div>
+                <div>{book.getQuantity()}x</div>
             </div>
         </div>
     )

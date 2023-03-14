@@ -2,10 +2,13 @@ import Page from "components/general/Page";
 import CheckoutBook from "./CheckoutBook";
 import uniqid from "uniqid";
 import { Link } from "react-router-dom";
+import { UserContext } from "components/App";
+import { useContext, useRef } from "react";
 
-const bookCover = require("src/assets/images/bookcover.png");
+const CheckoutForm = ({ cartItemsProp }: { cartItemsProp?: Book[] }) => {
+    const cartItemsContext = useContext(UserContext);
+    const cartItems = useRef(Object.keys(cartItemsContext).length === 0 ? cartItemsProp : cartItemsContext.getCart());
 
-const CheckoutForm = () => {
     return (
         <Page content={
             <div className="p-6 
@@ -27,10 +30,8 @@ const CheckoutForm = () => {
                                     h-[444px]
                                     sm:h-[540px]
                                     overflow-y-scroll">
-                        {[1000, 1000, 1000, 1, 2, 3, 4].map((i) => <CheckoutBook key={uniqid()}
-                                                            bookCover={bookCover}
-                                                            title={'1984 asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdas'}
-                                                            quantity={i} />)}
+                        {cartItems.current.map((book: Book) => <CheckoutBook key={uniqid()}
+                                                                             book={book} />)}
                     </div>
                     {/* Checkout button */}
                     <Link to={"/after-checkout"} className="btn-primary 
