@@ -5,6 +5,7 @@
         "components/*": ["src/components/*"],
         "styles/*": ["src/styles/*"],
         "scripts/*": ["src/scripts/*"],
+        "utils/*": ["src/utils/*"],
     },
     "target": "ES2015",
     "lib": [

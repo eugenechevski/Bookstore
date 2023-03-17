@@ -6,7 +6,8 @@
             "alias": {
                 "components": "src/components",
                 "styles": "src/styles",
-                "scripts": "src/scripts"
+                "scripts": "src/scripts",
+                "utils": "src/utils",
             }
         }]
 		/** Next plugin here */
