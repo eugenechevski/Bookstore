@@ -90,6 +90,7 @@ const CreateAccountForm = () => {
                              id="firstName"
                              type="text"
                              name="firstName"
+                             placeholder="John"
                              value={values.firstName}
                              className="input-sm
                                         rounded-lg
@@ -106,6 +107,7 @@ const CreateAccountForm = () => {
                                            font-bold">Last Name</label>
                       <input onChange={handleChange}
                              name="lastName"
+                             placeholder="Doe"
                              value={values.lastName}
                              id="lastName"
                              type="text"
@@ -125,6 +127,7 @@ const CreateAccountForm = () => {
                       <input onChange={handleChange}
                              name="email"
                              value={values.email}
+                             placeholder="john.doe@example.com"
                              id="email"
                              type="text"
                              className="input-sm
@@ -143,6 +146,7 @@ const CreateAccountForm = () => {
                       <input onChange={handleChange}
                              name="password"
                              value={values.password}
+                             placeholder="password"
                              id="password"
                              type="password" 
                              className="input-sm
@@ -160,6 +164,7 @@ const CreateAccountForm = () => {
                       <input onChange={handleChange}
                              name="confirmPassword"
                              value={values.confirmPassword}
+                             placeholder="confirm password"
                              id="confirmPassword"
                              type="password" 
                              className="input-sm
