@@ -1,5 +1,5 @@
 import Page from "components/general/Page";
-import { useState } from "react";
+import { emailRegex, passwordRegex } from "utils/constants";
 import useForm from "utils/useForm";
 import { useNavigate } from "react-router-dom";
 
@@ -30,14 +30,10 @@ const validate = (values: {
    if (!lastNameRegex.test(values.lastName)) {
      errors.lastName = "Last name must be at least 3 characters";
    }
-   
-   const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 
    if (!emailRegex.test(values.email)) {
      errors.email = "Invalid email address";
    }
-
-   const passwordRegex = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$^#!%*()+-?&])[a-zA-Z\d@$()+-^#!%*?&]{8,}/;
    
    if (!passwordRegex.test(values.password)) {
      errors.password = "Password must be at least 8 characters, include at least one uppercase letter, one lowercase letter, one number and one special character";

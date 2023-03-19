@@ -31,7 +31,7 @@ const useForm = (initialState: any, validate: (values: any) => any, doStuffOnceV
       setErrors(validationErrors);
 
       // If validation was successful, do stuff
-      if (Object.keys(errors).length === 0) {
+      if (Object.keys(validationErrors).length === 0) {
         console.log('All good!');
         doStuffOnceValid();
       }
