@@ -2,13 +2,13 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import SignInForm from 'components/forms/SignInForm';
+import { App } from 'components/App';
 
 describe('SignInForm component', () => {
   beforeEach(() => {
       render(
-        <MemoryRouter>
-          <SignInForm></SignInForm>
+        <MemoryRouter initialEntries={['/sign-in']}>
+          <App></App>
         </MemoryRouter>
       );
     }

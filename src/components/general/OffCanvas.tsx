@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import uniqid from "uniqid";
-import dataFetch from "src/utils/dataFetch";
-
-const categories = dataFetch.getCategories();
+import { DataContext } from "components/App";
+import { useContext } from "react";
 
 const OffCanvas = () => {
+    const dataContext = useContext(DataContext);
+
     return (
         <div className='scrollbar 
                         overflow-scroll 
@@ -34,7 +35,7 @@ const OffCanvas = () => {
             tabIndex={-1}>
             <div className='offcanvas-body'>
                 <ul className='menu' tabIndex={0}>
-                    { categories.map(category => ( <li key={uniqid()}>
+                    { dataContext.getCategories().map(category => ( <li key={uniqid()}>
                                                      <Link to={"/category"}>
                                                          {category.getName()}
                                                      </Link>

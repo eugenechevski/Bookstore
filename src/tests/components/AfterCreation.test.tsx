@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import AfterCreation from 'components/forms/AfterCreation';
 
 describe('AfterCreation component', () => {

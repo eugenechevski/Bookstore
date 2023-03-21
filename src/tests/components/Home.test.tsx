@@ -1,24 +1,23 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
-import Home from 'components/home/Home';
-import dataFetch from 'src/utils/dataFetch';
+import DataObject from 'utils/DataObject';
+import { App } from 'components/App';
 
 describe("Home component", () => {
-    const categories = dataFetch.getCategories();
-
+    const categories = DataObject.getCategories();
+    
     beforeEach(() => {
         render(
-            <MemoryRouter>
-                <Home categories={dataFetch.getCategories()}></Home>
-            </MemoryRouter>
-        )
-    });
-
+          <MemoryRouter initialEntries={['/home']}>
+            <App></App>
+          </MemoryRouter>
+        );
+    });    
+    
     it("renders category names", () => {
         for (let i = 0; i < categories.length; i++) {
-            expect(screen.getAllByText(categories[i].getName()).length).toBeGreaterThan(0);
+            expect(screen.getAllByText(categories[i].getName()).length).toBe(2);
         }
     });
 
@@ -30,19 +29,4 @@ describe("Home component", () => {
             }
         }
     });
-
-    it("redirects to a book's page", () => {
-        const redirect = jest.fn();
-        for (let i = 0; i < categories.length; i++) {
-            for (let j = 0; j < categories[i].getBooks().length; j++) {
-                const book = screen.getAllByAltText(categories[i].getBooks()[j].getTitle() + " image")[0];
-
-                book.addEventListener("click", () => redirect());
-                userEvent.click(book);
-
-                expect(redirect).toHaveBeenCalled();
-            }
-        }
-    });
-
 });

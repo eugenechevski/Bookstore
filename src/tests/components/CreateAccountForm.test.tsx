@@ -2,13 +2,13 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import CreateAccountForm from 'components/forms/CreateAccountForm';
+import { App } from 'components/App';
 
 describe("CreateAccountForm component", () => {
     beforeEach(() => {
         render(
-            <MemoryRouter>
-                <CreateAccountForm></CreateAccountForm>
+            <MemoryRouter initialEntries={['/create-account']}>
+              <App></App>
             </MemoryRouter>
         )
     });
@@ -85,5 +85,4 @@ describe("CreateAccountForm component", () => {
 
       expect(afterSubmit).toHaveBeenCalled();
     });
-    
 });

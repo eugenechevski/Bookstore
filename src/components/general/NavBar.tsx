@@ -2,7 +2,7 @@ import IconButton from 'components/general/IconButton';
 import TextButton from 'components/general/TextButton';
 import uniqid from "uniqid";
 import { Link } from 'react-router-dom';
-import { useState, useContext, useRef } from 'react';
+import { useState, useContext } from 'react';
 import { UserContext } from 'src/components/App';
 
 
@@ -11,20 +11,19 @@ const NavBar = ({ userProp }: { userProp?: User }) => {
     const textBtnClasses = 'bg-transparent ' +
                            'hover:bg-primary-focus';
 
-    const userContext = useContext(UserContext);
-    const user = useRef(userProp === undefined ? userContext : userProp);
+    const user = useContext(UserContext);
     const [offCanvasToggleIcon, setOffCanvasToggleIcon] = useState('bars');
     const [navbarToolsIcon, setNavbarToolsIcon] = useState('ellipsis');
     const [searchTerm, setSearchTerm] = useState('');
-    const [loginButtonIcon, setLoginButtonIcon] = useState(user.current.isSignedIn() ? 'sign-in' : 'sign-out');
+    const [loginButtonIcon, setLoginButtonIcon] = useState(user.isSignedIn() ? 'sign-in' : 'sign-out');
 
     const toggleLoginButton = () => {
-        if (user.current.isSignedIn()) {
-            user.current.signOut();
+        if (user.isSignedIn()) {
+            user.signOut();
         } else {
-            user.current.signIn();
+            user.signIn();
         }
-        setLoginButtonIcon(!user.current.isSignedIn()? 'sign-in' : 'sign-out');
+        setLoginButtonIcon(!user.isSignedIn()? 'sign-in' : 'sign-out');
     }
 
     return (
@@ -159,7 +158,7 @@ const NavBar = ({ userProp }: { userProp?: User }) => {
                                                                                           bg-primary
                                                                                           rounded-box
                                                                                           w-52">
-                                {user.current.getWishlist().map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
+                                {user.getWishlist().map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
                             </ul>
                         </div>
                         {/* Cart dropdown */}
@@ -184,7 +183,7 @@ const NavBar = ({ userProp }: { userProp?: User }) => {
                                                                                       bg-primary
                                                                                       rounded-box
                                                                                       w-52">
-                                {user.current.getCart().map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
+                                {user.getCart().map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
                             </ul>
                         </div>
                         {/* User information dropdown */}
@@ -202,7 +201,7 @@ const NavBar = ({ userProp }: { userProp?: User }) => {
                                                          bg-primary 
                                                          rounded-box 
                                                          w-52">
-                                {user.current.getName()}
+                                {user.getName()}
                             </div>
                         </div>
                         {/* Sign-in/sign-out button */}

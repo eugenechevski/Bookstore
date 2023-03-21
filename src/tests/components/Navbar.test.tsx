@@ -1,16 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
-import User from 'scripts/User';
-import Book from 'scripts/Book';
 import userEvent from '@testing-library/user-event';
-import NavBar from 'components/general/NavBar';
+import { App } from 'components/App';
 
 describe("NavBar component", () => {
   beforeEach(() => {
     render(
-      <MemoryRouter>
-        <NavBar userProp={User('John Doe', '', '', [Book("1984", "", 1, 1, "")], [Book("1984", "", 1, 1, "")], true)}></NavBar>
+      <MemoryRouter initialEntries={['/home']}>
+        <App></App>
       </MemoryRouter>
     )
   })
@@ -76,7 +74,7 @@ describe("NavBar component", () => {
 
   it("it displays the user name", () => {
     userEvent.click(screen.getByTestId('tools-toggle'));
-    expect(screen.getByText("John Doe")).toBeInTheDocument();
+    expect(screen.getByText("Guest")).toBeInTheDocument();
   });
 
   it("it displays the login/logout button", () => {

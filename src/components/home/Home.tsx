@@ -1,8 +1,11 @@
 import Page from 'components/general/Page';
 import CategoryDisplay from './CategoryDisplay';
+import { DataContext } from 'components/App';
+import { useContext } from 'react';
 import uniqid from 'uniqid';
 
-const Home = ({ categories }: { categories: Category[] }) => {
+const Home = () => {
+    const dataContext = useContext(DataContext)
     return (
         <Page content={(
             <div className='w-full
@@ -14,7 +17,7 @@ const Home = ({ categories }: { categories: Category[] }) => {
                             sm:mt-12
                             sm:p-12'>
                 { 
-                    categories.map((category) => <CategoryDisplay key={uniqid()} 
+                    dataContext.getCategories().map((category) => <CategoryDisplay key={uniqid()} 
                                                                   category={category}></CategoryDisplay> 
                                   )
                 }

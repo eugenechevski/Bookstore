@@ -2,13 +2,13 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import LandingPage from 'components/landing-page/LandingPage';
+import { App } from 'components/App';
 
 describe("LandingPage component", () => {
     beforeEach(() => {
         render(
-            <MemoryRouter>
-                <LandingPage />
+            <MemoryRouter initialEntries={['/']}>
+                <App></App>
             </MemoryRouter>
         );
     });
