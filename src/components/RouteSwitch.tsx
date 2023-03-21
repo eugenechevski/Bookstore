@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "src/components/home/Home";
 import Book from "src/components/book/Book";
 import Category from "src/components/category/Category";
@@ -13,20 +13,18 @@ import AfterSignIn from "./forms/AfterSignIn";
 
 const RouteSwitch = () => {
     return (
-        <HashRouter>
-            <Routes>
-                <Route path="/" element={<LandingPage></LandingPage>}/>
-                <Route path="/home" element={<Home categories={dataFetch.getCategories()}/>}></Route>
-                <Route path="/book" element={<Book/>}></Route>
-                <Route path="/category" element={<Category/>}></Route>
-                <Route path="/checkout" element={<CheckoutForm/>}></Route>
-                <Route path="/create-account" element={<CreateAccountForm/>}></Route>
-                <Route path="/sign-in" element={<SignInForm/>}></Route>
-                <Route path="/after-checkout" element={<AfterCheckout/>}></Route>
-                <Route path="/after-sign-in" element={<AfterSignIn/>}></Route>
-                <Route path="/after-creation" element={<AfterCreation/>}></Route>
-            </Routes>
-        </HashRouter>
+        <Routes>
+            <Route path="/" element={<LandingPage></LandingPage>}/>
+            <Route path="/home" element={<Home categories={dataFetch.getCategories()}/>}></Route>
+            <Route path="/book" element={<Book/>}></Route>
+            <Route path="/category" element={<Category/>}></Route>
+            <Route path="/checkout" element={<CheckoutForm/>}></Route>
+            <Route path="/create-account" element={<CreateAccountForm/>}></Route>
+            <Route path="/sign-in" element={<SignInForm/>}></Route>
+            <Route path="/after-checkout" element={<AfterCheckout/>}></Route>
+            <Route path="/after-sign-in" element={<AfterSignIn/>}></Route>
+            <Route path="/after-creation" element={<AfterCreation/>}></Route>
+        </Routes>
     )
 
 }
