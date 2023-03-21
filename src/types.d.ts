@@ -32,6 +32,9 @@ declare type User = {
   emptyCart: () => void,
 }
 
+declare type CategoryMap = { [categoryName: string]: Category }
+
 declare type DataObject = {
   getCategories: () => Category[]
+  getCategoryMap: () => CategoryMap
 };

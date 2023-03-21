@@ -47,13 +47,23 @@ const categories = [
     ]),
 ];
 
+const categoryMap = {};
+for (let i = 0; i < categories.length; i++) {
+  categoryMap[categories[i].getName().toLowerCase().split(' ').join('-')] = categories[i];
+}
+
 const dataObj = (): DataObject => {
     function getCategories(): Category[] {
         return categories;
     }
+
+    function getCategoryMap(): CategoryMap {
+      return categoryMap;
+    }
     
     return {
         getCategories,
+        getCategoryMap,
     }
 }
 

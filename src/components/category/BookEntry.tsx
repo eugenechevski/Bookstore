@@ -1,4 +1,4 @@
-const BookEntry = ({ rank, bookCover, description }) => {
+const BookEntry = ({ book }: { book: Book }) => {
     return (
         <div className="flex 
                         items-center 
@@ -21,14 +21,14 @@ const BookEntry = ({ rank, bookCover, description }) => {
                                 bg-primary
                                 rounded-full 
                                 shadow-lg
-                                drop-shadow-lg"># {rank}</div>
+                                drop-shadow-lg"># {book.getRank()}</div>
                 <div className="w-52
                                 mr-12
                                 drop-shadow-lg 
                                 shadow-lg
                                 sm:w-32 
                                 sm:mr-0">
-                    <img src={bookCover} alt="bookcover" />
+                    <img src={book.getCover()} alt={`${book.getTitle()} cover`} />
                 </div>
             </div>
             <div className="h-1/6 
@@ -39,7 +39,7 @@ const BookEntry = ({ rank, bookCover, description }) => {
                             text-shadow-lg
                             drop-shadow-lg
                             sm:text-start 
-                            sm:h-3/4">{description}</div>
+                            sm:h-3/4">{book.getSynopsis()}</div>
         </div>
     );
 };
