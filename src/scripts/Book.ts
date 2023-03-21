@@ -1,6 +1,12 @@
 export default function Book(title: string, authorName: string, cover: any, rank: number, quanity: number, description: string): Book {
+    const formattedTitle = title.toLowerCase().split(' ').join('-');
+
     function getTitle(): string {
       return title;
+    }
+
+    function getFormattedTitle(): string {
+      return formattedTitle;
     }
 
     function getAuthorName(): string {
@@ -29,6 +35,7 @@ export default function Book(title: string, authorName: string, cover: any, rank
 
     return {
         getTitle,
+        getFormattedTitle,
         getAuthorName,
         getCover,
         getRank,

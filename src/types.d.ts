@@ -1,5 +1,6 @@
 declare type Book = {
   getTitle: () => string,
+  getFormattedTitle: () => string,
   getAuthorName: () => string,
   getQuantity: () => number,
   getCover: () => any,
@@ -35,7 +36,10 @@ declare type User = {
 
 declare type CategoryMap = { [categoryName: string]: Category }
 
+declare type BookMap = { [bookName: string]: Book }
+
 declare type DataObject = {
   getCategories: () => Category[]
   getCategoryMap: () => CategoryMap
+  getBookMap: () => BookMap
 };

@@ -7,6 +7,10 @@ describe("Book factory", () => {
     expect(testBook.getTitle()).toBe("1984");
   });
 
+  it("return the formatted title", () => {
+    expect(testBook.getFormattedTitle()).toBe(testBook.getTitle().toLowerCase().split(' ').join('-'));
+  });
+
   it("return the author", () => {
     expect(testBook.getAuthorName()).toBe("George Orwell");
   });
