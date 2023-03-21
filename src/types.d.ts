@@ -31,3 +31,7 @@ declare type User = {
   signOut: () => void
   emptyCart: () => void,
 }
+
+declare type DataObject = {
+  getCategories: () => Category[]
+};
