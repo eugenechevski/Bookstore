@@ -1,10 +1,14 @@
 import Book from "scripts/Book";
 
 describe("Book factory", () => {
-  const testBook = Book("1984", "cover", 1, 1, "synopsis");
+  const testBook = Book("1984", "George Orwell", "cover", 1, 1, "synopsis");
 
   it("returns the title", () => {
     expect(testBook.getTitle()).toBe("1984");
+  });
+
+  it("return the author", () => {
+    expect(testBook.getAuthorName()).toBe("George Orwell");
   });
 
   it("return the cover", () => {

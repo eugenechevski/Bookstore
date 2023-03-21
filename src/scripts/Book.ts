@@ -1,22 +1,26 @@
-export default function Book(title: string, cover: any, rank: number, quanity: number, description: string) {
+export default function Book(title: string, authorName: string, cover: any, rank: number, quanity: number, description: string): Book {
     function getTitle(): string {
-        return title;
+      return title;
+    }
+
+    function getAuthorName(): string {
+      return authorName;  
     }
 
     function getCover(): any {
-        return cover;
+      return cover;
     }
 
     function getQuantity(): number {
-        return quanity;
+      return quanity;
     }
 
     function getRank(): number {
-        return rank;
+      return rank;
     }
 
     function getSynopsis(): string {
-        return description;
+      return description;
     }
 
     function updateQuantity(newQuantity: number) {
@@ -25,6 +29,7 @@ export default function Book(title: string, cover: any, rank: number, quanity: n
 
     return {
         getTitle,
+        getAuthorName,
         getCover,
         getRank,
         getSynopsis,

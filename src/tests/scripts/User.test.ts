@@ -25,7 +25,7 @@ describe("User factory", () => {
   });
 
   it("returns a book from the cart", () => {
-    testUser.addToCart(Book('1984', '', 1, 1, ''));
+    testUser.addToCart(Book('1984', 'George Orwell', '', 1, 1, ''));
     expect(testUser.getBookFromCart('1984').getTitle()).toBe('1984');
   });
 
@@ -45,12 +45,12 @@ describe("User factory", () => {
   });
 
   it("adds an item to a wishlist", () => {
-    testUser.addToWishList(Book('Harry Potter', "", 1, 1, ""));
+    testUser.addToWishList(Book('Harry Potter', 'K. Rowling', "", 1, 1, ""));
     expect(testUser.getWishlist().length).toEqual(1);
   });
 
   it("adds an item to a cart", () => {
-    testUser.addToCart(Book('Harry Potter', "", 1, 1, ""));
+    testUser.addToCart(Book('Harry Potter', 'K.Rowling', "", 1, 1, ""));
     expect(testUser.getCart().length).toEqual(2);
   });
 
