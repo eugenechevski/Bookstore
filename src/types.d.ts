@@ -2,6 +2,7 @@ declare type Book = {
   getTitle: () => string,
   getFormattedTitle: () => string,
   getCategoryName: () => string,
+  getFormattedCategoryName: () => string,
   getAuthorName: () => string,
   getQuantity: () => number,
   getCover: () => any,
@@ -12,6 +13,7 @@ declare type Book = {
 
 declare type Category = {
  getName: () => string,
+ getFormattedName: () => string,
  getBooks: () => Book[],
 };
 
