@@ -36,7 +36,7 @@ const OffCanvas = () => {
             <div className='offcanvas-body'>
                 <ul className='menu' tabIndex={0}>
                     { dataContext.getCategories().map(category => ( <li key={uniqid()}>
-                                                                      <Link to={`/category/${category.getName().toLowerCase().split(' ').join('-')}`}>
+                                                                      <Link to={`/categories/${category.getFormattedName()}`}>
                                                                         {category.getName()}
                                                                       </Link>
                                                                     </li>

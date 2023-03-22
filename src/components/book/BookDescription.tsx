@@ -2,8 +2,7 @@ import TextButton from "components/general/TextButton";
 import IconButton from "components/general/IconButton";
 import { useState } from "react";
 
-const BookDescription = () => {
-    const image = require('src/assets/images/bookcover.png');
+const BookDescription = ({book}: {book: Book}) => {
     const textButtonClasses = 'btn-accent ' +
                               'btn-sm ' +
                               'rounded-full ' +
@@ -36,7 +35,7 @@ const BookDescription = () => {
                                 shadow-2xl
                                 drop-shadow-2xl 
                                 sm:w-64">
-                    <img src={image} alt="bookcover" />
+                    <img src={book.getCover()} alt={`${book.getTitle()} cover`} />
                 </div>
                 {/* Buttons */}
                 <div className="flex
@@ -76,7 +75,7 @@ const BookDescription = () => {
                                 text-center 
                                 overflow-hidden
                                 sm:text-start">
-                    1984
+                    {book.getTitle()}
                 </div>
                 {/* Author */}
                 <div className="text-center 
@@ -86,7 +85,7 @@ const BookDescription = () => {
                                 drop-shadow-lg 
                                 overflow-hidden
                                 sm:text-start">
-                    by George Orwell
+                    {book.getAuthorName()}
                 </div>
                 {/* Synopsis */}
                 <div className={`${expandedDescription ? 'h-full' : 'h-16 sm:h-80'} 
@@ -95,11 +94,7 @@ const BookDescription = () => {
                                 text-shadow-lg 
                                 drop-shadow-lg 
                                 overflow-hidden`}>
-                    1984, published in 1949, is a dystopian and satirical novel. It revolves around Winston Smith, who lives in a nation called Oceania, in a province called Airstrip One, which represents present-day England. This state is controlled by the Party, headed by a mysterious leader who is addressed as Emmanuel Goldstein, also known as the Big Brother. The Party watches every single move that Smith and other citizens make. The nation's language and history is forcefully changed for the benefit of the Party. A new language, Newspeak, is being compulsively implemented to ensure works that have anything to do with political rebellion are omitted. In Oceania, even rebellious thoughts are illegal and are said to be the worst of all crimes. The people are suppressed and any form of individuality is not tolerated, including love and sex. Smith works as a low-ranking member of the Party who alters historical records. He hates the Party and thus buys an illegal diary in which he pens down his thoughts. He meets Julia, 
-                    1984, published in 1949, is a dystopian and satirical novel. It revolves around Winston Smith, who lives in a nation called Oceania, in a province called Airstrip One, which represents present-day England. This state is controlled by the Party, headed by a mysterious leader who is addressed as Emmanuel Goldstein, also known as the Big Brother. The Party watches every single move that Smith and other citizens make. The nation's language and history is forcefully changed for the benefit of the Party. A new language, Newspeak, is being compulsively implemented to ensure works that have anything to do with political rebellion are omitted. In Oceania, even rebellious thoughts are illegal and are said to be the worst of all crimes. The people are suppressed and any form of individuality is not tolerated, including love and sex. Smith works as a low-ranking member of the Party who alters historical records. He hates the Party and thus buys an illegal diary in which he pens down his thoughts. He meets Julia, ...
-                    1984, published in 1949, is a dystopian and satirical novel. It revolves around Winston Smith, who lives in a nation called Oceania, in a province called Airstrip One, which represents present-day England. This state is controlled by the Party, headed by a mysterious leader who is addressed as Emmanuel Goldstein, also known as the Big Brother. The Party watches every single move that Smith and other citizens make. The nation's language and history is forcefully changed for the benefit of the Party. A new language, Newspeak, is being compulsively implemented to ensure works that have anything to do with political rebellion are omitted. In Oceania, even rebellious thoughts are illegal and are said to be the worst of all crimes. The people are suppressed and any form of individuality is not tolerated, including love and sex. Smith works as a low-ranking member of the Party who alters historical records. He hates the Party and thus buys an illegal diary in which he pens down his thoughts. He meets Julia, ...
-                    1984, published in 1949, is a dystopian and satirical novel. It revolves around Winston Smith, who lives in a nation called Oceania, in a province called Airstrip One, which represents present-day England. This state is controlled by the Party, headed by a mysterious leader who is addressed as Emmanuel Goldstein, also known as the Big Brother. The Party watches every single move that Smith and other citizens make. The nation's language and history is forcefully changed for the benefit of the Party. A new language, Newspeak, is being compulsively implemented to ensure works that have anything to do with political rebellion are omitted. In Oceania, even rebellious thoughts are illegal and are said to be the worst of all crimes. The people are suppressed and any form of individuality is not tolerated, including love and sex. Smith works as a low-ranking member of the Party who alters historical records. He hates the Party and thus buys an illegal diary in which he pens down his thoughts. He meets Julia, ...
-                    1984, published in 1949, is a dystopian and satirical novel. It revolves around Winston Smith, who lives in a nation called Oceania, in a province called Airstrip One, which represents present-day England. This state is controlled by the Party, headed by a mysterious leader who is addressed as Emmanuel Goldstein, also known as the Big Brother. The Party watches every single move that Smith and other citizens make. The nation's language and history is forcefully changed for the benefit of the Party. A new language, Newspeak, is being compulsively implemented to ensure works that have anything to do with political rebellion are omitted. In Oceania, even rebellious thoughts are illegal and are said to be the worst of all crimes. The people are suppressed and any form of individuality is not tolerated, including love and sex. Smith works as a low-ranking member of the Party who alters historical records. He hates the Party and thus buys an illegal diary in which he pens down his thoughts. He meets Julia, ...
+                    {book.getSynopsis()}
                 </div>
                 {/* Show more button */}
                 <div onClick={() => setExpandedDescription(!expandedDescription)} className={'btn ' +

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const BookEntry = ({ book }: { book: Book }) => {
     return (
         <div className="flex 
@@ -22,14 +24,16 @@ const BookEntry = ({ book }: { book: Book }) => {
                                 rounded-full 
                                 shadow-lg
                                 drop-shadow-lg"># {book.getRank()}</div>
-                <div className="w-52
-                                mr-12
-                                drop-shadow-lg 
-                                shadow-lg
-                                sm:w-32 
-                                sm:mr-0">
-                    <img src={book.getCover()} alt={`${book.getTitle()} cover`} />
-                </div>
+                <Link to={`/categories/${book.getFormattedCategoryName()}/${book.getFormattedTitle()}`}>
+                    <div className="w-52
+                                    mr-12
+                                    drop-shadow-lg 
+                                    shadow-lg
+                                    sm:w-32 
+                                    sm:mr-0">
+                        <img src={book.getCover()} alt={`${book.getTitle()} cover`} />
+                    </div>
+                </Link>
             </div>
             <div className="h-1/6 
                             w-3/4 

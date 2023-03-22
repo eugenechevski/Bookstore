@@ -18,8 +18,8 @@ const Home = () => {
                             sm:p-12'>
                 { 
                     dataContext.getCategories().map((category) => <CategoryDisplay key={uniqid()} 
-                                                                  category={category}></CategoryDisplay> 
-                                  )
+                                                                                   category={category}></CategoryDisplay> 
+                                                   )
                 }
             </div>
         )} blank={false}></Page>

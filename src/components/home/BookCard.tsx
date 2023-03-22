@@ -11,7 +11,7 @@ const BookCard = ({ book }: { book: Book }) => {
                         w-full 
                         mr-1 
                         sm:w-1/5">
-            <Link to={'/book'}>
+            <Link to={`/categories/${book.getFormattedCategoryName()}/${book.getFormattedTitle()}`}>
                 <div className="relative 
                                 sm:shadow-2xl 
                                 sm:drop-shadow-2xl

@@ -158,7 +158,7 @@ const NavBar = ({ userProp }: { userProp?: User }) => {
                                                                                           bg-primary
                                                                                           rounded-box
                                                                                           w-52">
-                                {user.getWishlist().map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
+                                {user.getWishlist().map(item => <Link key={uniqid()} to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}>{item.getTitle()}</Link>)}
                             </ul>
                         </div>
                         {/* Cart dropdown */}
@@ -183,7 +183,7 @@ const NavBar = ({ userProp }: { userProp?: User }) => {
                                                                                       bg-primary
                                                                                       rounded-box
                                                                                       w-52">
-                                {user.getCart().map(item => <Link key={uniqid()} to={`/book/${item.getTitle().toLowerCase().split(" ").join("-")}`}>{item.getTitle()}</Link>)}
+                                {user.getCart().map(item => <Link key={uniqid()} to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}>{item.getTitle()}</Link>)}
                             </ul>
                         </div>
                         {/* User information dropdown */}
