@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
@@ -16,8 +15,9 @@ describe("OffCanvas component", () => {
         </MemoryRouter>
     )
   })
-
+  
   it("renders category links", () => {
+
     for (let i = 0; i < categories.length; i++) {
       expect(screen.getAllByText(categories[i].getName()).length).toBeGreaterThan(0);
     }
@@ -25,6 +25,7 @@ describe("OffCanvas component", () => {
 
   it("redirects to a category page", () => {
     const redirect = jest.fn();
+
     for (let i = 0; i < categories.length; i++) {
       const link = screen.getAllByText(categories[i].getName())[0];
 

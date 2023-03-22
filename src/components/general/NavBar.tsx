@@ -7,7 +7,7 @@ import { UserContext } from 'src/components/App';
 
 
 
-const NavBar = ({ userProp }: { userProp?: User }) => {
+const NavBar = () => {
     const textBtnClasses = 'bg-transparent ' +
                            'hover:bg-primary-focus';
 

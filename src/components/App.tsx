@@ -12,8 +12,8 @@ const DataContext = createContext({} as DataObject);
 function App() {
   return (
     <DataContext.Provider value={DataObject}>
-      <UserContext.Provider value={User('Guest', '', '', [1, 2, 3, 4, 5].map((i) => Book("1984" + i, 'George Orwell', 'Fiction', require("src/assets/images/bookcover.png"), i, i, "synopsis")), 
-                                                         [1, 2, 3, 4, 5].map((i) => Book("1984" + i, 'George Orwell', 'Fiction', require("src/assets/images/bookcover.png"), i, i, "synopsis")), false)}>
+      <UserContext.Provider value={User('Guest', '', '', [1, 2, 3, 4, 5].map((i) => Book('1984', 'George Orwell', 'Fiction', require('src/assets/images/bookcover.png'), i, i, 'synopsis')), 
+                                                         [1, 2, 3, 4, 5].map((i) => Book('1984', 'George Orwell', 'Fiction', require('src/assets/images/bookcover.png'), i, i, 'synopsis')), false)}>
         <RouteSwitch></RouteSwitch>
       </UserContext.Provider>
     </DataContext.Provider>
