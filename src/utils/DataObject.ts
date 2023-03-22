@@ -11,59 +11,74 @@ const bookCover = require('src/assets/images/bookcover.png');
 
 const categories = [
     Category("Fiction", [
-        Book('1984', 'George Orwell', bookCover, 1, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 2, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 3, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 4, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 5, 1, desc),
+        Book('1984', 'George Orwell', 'Fiction', bookCover, 1, 1, desc),
+        Book('1984', 'George Orwell', 'Fiction', bookCover, 2, 1, desc),
+        Book('1984', 'George Orwell', 'Fiction', bookCover, 3, 1, desc),
+        Book('1984', 'George Orwell', 'Fiction', bookCover, 4, 1, desc),
+        Book('1984', 'George Orwell', 'Fiction', bookCover, 5, 1, desc),
     ]),
     Category("Non-fiction", [
-        Book('1984', 'George Orwell', bookCover, 1, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 2, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 3, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 4, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 5, 1, desc),
+        Book('1984', 'George Orwell', 'Non-fiction', bookCover, 1, 1, desc),
+        Book('1984', 'George Orwell', 'Non-fiction', bookCover, 2, 1, desc),
+        Book('1984', 'George Orwell', 'Non-fiction', bookCover, 3, 1, desc),
+        Book('1984', 'George Orwell', 'Non-fiction', bookCover, 4, 1, desc),
+        Book('1984', 'George Orwell', 'Non-fiction', bookCover, 5, 1, desc),
     ]),
     Category("Storytelling", [
-        Book('1984', 'George Orwell', bookCover, 1, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 2, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 3, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 4, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 5, 1, desc),
+        Book('1984', 'George Orwell', 'Storytelling', bookCover, 1, 1, desc),
+        Book('1984', 'George Orwell', 'Storytelling', bookCover, 2, 1, desc),
+        Book('1984', 'George Orwell', 'Storytelling', bookCover, 3, 1, desc),
+        Book('1984', 'George Orwell', 'Storytelling', bookCover, 4, 1, desc),
+        Book('1984', 'George Orwell', 'Storytelling', bookCover, 5, 1, desc),
     ]),
     Category("History", [
-        Book('1984', 'George Orwell', bookCover, 1, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 2, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 3, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 4, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 5, 1, desc),
+        Book('1984', 'George Orwell', 'History', bookCover, 1, 1, desc),
+        Book('1984', 'George Orwell', 'History', bookCover, 2, 1, desc),
+        Book('1984', 'George Orwell', 'History', bookCover, 3, 1, desc),
+        Book('1984', 'George Orwell', 'History', bookCover, 4, 1, desc),
+        Book('1984', 'George Orwell', 'History', bookCover, 5, 1, desc),
     ]),
     Category("Sci-Fi", [
-        Book('1984', 'George Orwell', bookCover, 1, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 2, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 3, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 4, 1, desc),
-        Book('1984', 'George Orwell', bookCover, 5, 1, desc),
+        Book('1984', 'George Orwell', 'Sci-Fi', bookCover, 1, 1, desc),
+        Book('1984', 'George Orwell', 'Sci-Fi', bookCover, 2, 1, desc),
+        Book('1984', 'George Orwell', 'Sci-Fi', bookCover, 3, 1, desc),
+        Book('1984', 'George Orwell', 'Sci-Fi', bookCover, 4, 1, desc),
+        Book('1984', 'George Orwell', 'Sci-Fi', bookCover, 5, 1, desc),
     ]),
 ];
 
+// Derive other data containers
 const categoryMap = {};
+const bookMap = {};
 for (let i = 0; i < categories.length; i++) {
+  // derive categories
   categoryMap[categories[i].getName().toLowerCase().split(' ').join('-')] = categories[i];
+  
+  // derive books
+  const books = categories[i].getBooks();
+  for (let j = 0; j < books.length; j++) {
+    bookMap[books[j].getTitle().toLowerCase().split(' ').join('-')] = books[j];
+  }
 }
+
 
 const dataObj = (): DataObject => {
     function getCategories(): Category[] {
-        return categories;
+      return categories;
     }
 
     function getCategoryMap(): CategoryMap {
       return categoryMap;
     }
+
+    function getBookMap(): BookMap {
+      return bookMap;
+    }
     
     return {
         getCategories,
         getCategoryMap,
+        getBookMap,
     }
 }
 

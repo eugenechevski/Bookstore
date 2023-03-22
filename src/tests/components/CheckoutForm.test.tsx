@@ -9,7 +9,7 @@ describe("CheckoutForm component", () => {
   beforeEach(() => {
     render(
       <MemoryRouter>
-        <CheckoutForm cartItemsProp={[1, 2, 3, 4, 5].map((i) => Book("Harry Potter" + i, "K. Rowling", require("src/assets/images/bookcover.png"), i, i, "synopsis"))}></CheckoutForm>
+        <CheckoutForm cartItemsProp={[1, 2, 3, 4, 5].map((i) => Book("Harry Potter" + i, "K. Rowling", 'Fantasy', require("src/assets/images/bookcover.png"), i, i, "synopsis"))}></CheckoutForm>
       </MemoryRouter>
     )
   });

@@ -1,6 +1,7 @@
 declare type Book = {
   getTitle: () => string,
   getFormattedTitle: () => string,
+  getCategoryName: () => string,
   getAuthorName: () => string,
   getQuantity: () => number,
   getCover: () => any,
