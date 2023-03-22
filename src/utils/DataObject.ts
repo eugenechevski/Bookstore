@@ -45,15 +45,17 @@ const categories = [
 // Derive other data containers
 const categoryMap = {};
 const bookMap = {};
+const books: Book[] = [];
 for (let i = 0; i < categories.length; i++) {
   // derive categories
-  categoryMap[categories[i].getName().toLowerCase().split(' ').join('-')] = categories[i];
+  categoryMap[categories[i].getFormattedName()] = categories[i];
   
   // derive books
-  const books = categories[i].getBooks();
-  for (let j = 0; j < books.length; j++) {
-    bookMap[books[j].getTitle().toLowerCase().split(' ').join('-')] = books[j];
+  const categoryBooks = categories[i].getBooks();
+  for (let j = 0; j < categoryBooks.length; j++) {
+    bookMap[categoryBooks[j].getFormattedTitle()] = categoryBooks[j];
   }
+  books.concat(categoryBooks);
 }
 
 
@@ -70,10 +72,15 @@ const dataObj = (): DataObject => {
       return bookMap;
     }
     
+    function getBooks(): Book[] {
+      return books;
+    }
+    
     return {
         getCategories,
         getCategoryMap,
         getBookMap,
+        getBooks
     }
 }
 

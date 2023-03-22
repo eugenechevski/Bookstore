@@ -44,5 +44,6 @@ declare type BookMap = { [bookName: string]: Book }
 declare type DataObject = {
   getCategories: () => Category[]
   getCategoryMap: () => CategoryMap
-  getBookMap: () => BookMap
+  getBookMap: () => BookMap,
+  getBooks: () => Books[]
 };
