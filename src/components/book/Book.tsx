@@ -7,7 +7,7 @@ import Providers from "./Providers";
 
 const Book = () => {
     const { bookTitle } = useParams();
-    const book = useContext(DataContext).getBookMap()[bookTitle];
+    const book = useContext(DataContext).data.getBookMap()[bookTitle];
 
     return (
         <Page content={(

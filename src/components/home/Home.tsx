@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import uniqid from 'uniqid';
 
 const Home = () => {
-    const dataContext = useContext(DataContext)
+    const {data} = useContext(DataContext)
     return (
         <Page content={(
             <div className='w-full
@@ -17,7 +17,7 @@ const Home = () => {
                             sm:mt-12
                             sm:p-12'>
                 { 
-                    dataContext.getCategories().map((category) => <CategoryDisplay key={uniqid()} 
+                    data.getCategories().map((category) => <CategoryDisplay key={uniqid()} 
                                                                                    category={category}></CategoryDisplay> 
                                                    )
                 }

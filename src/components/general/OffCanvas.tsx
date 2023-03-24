@@ -4,7 +4,7 @@ import { DataContext } from "components/App";
 import { useContext } from "react";
 
 const OffCanvas = () => {
-    const dataContext = useContext(DataContext);
+    const {data} = useContext(DataContext);
 
     return (
         <div className='scrollbar 
@@ -35,7 +35,7 @@ const OffCanvas = () => {
             tabIndex={-1}>
             <div className='offcanvas-body'>
                 <ul className='menu' tabIndex={0}>
-                    { dataContext.getCategories().map(category => ( <li key={uniqid()}>
+                    { data.getCategories().map(category => ( <li key={uniqid()}>
                                                                       <Link to={`/categories/${category.getFormattedName()}`}>
                                                                         {category.getName()}
                                                                       </Link>

@@ -3,7 +3,7 @@ import TextButton from 'components/general/TextButton';
 import uniqid from "uniqid";
 import { Link } from 'react-router-dom';
 import { useState, useContext } from 'react';
-import { UserContext } from 'src/components/App';
+import { DataContext } from 'src/components/App';
 
 
 
@@ -11,7 +11,7 @@ const NavBar = () => {
     const textBtnClasses = 'bg-transparent ' +
                            'hover:bg-primary-focus';
 
-    const user = useContext(UserContext);
+    const user = useContext(DataContext).user;
     const [offCanvasToggleIcon, setOffCanvasToggleIcon] = useState('bars');
     const [navbarToolsIcon, setNavbarToolsIcon] = useState('ellipsis');
     const [searchTerm, setSearchTerm] = useState('');

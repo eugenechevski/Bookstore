@@ -7,7 +7,7 @@ import BookEntry from "./BookEntry"
 
 const Category = () => {
     const {categoryName} = useParams();
-    const categoryContent = useContext(DataContext).getCategoryMap();
+    const categoryContent = useContext(DataContext).data.getCategoryMap();
     const category = categoryContent[categoryName];
 
     return (

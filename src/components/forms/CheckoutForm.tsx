@@ -2,11 +2,11 @@ import Page from "components/general/Page";
 import CheckoutBook from "./CheckoutBook";
 import uniqid from "uniqid";
 import { Link } from "react-router-dom";
-import { UserContext } from "components/App";
+import { DataContext } from "components/App";
 import { useContext, useRef } from "react";
 
 const CheckoutForm = ({ cartItemsProp }: { cartItemsProp?: Book[] }) => {
-    const cartItemsContext = useContext(UserContext);
+    const cartItemsContext = useContext(DataContext).user;
     const cartItems = useRef(Object.keys(cartItemsContext).length === 0 ? cartItemsProp : cartItemsContext.getCart());
 
     return (

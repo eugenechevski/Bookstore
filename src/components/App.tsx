@@ -6,18 +6,20 @@ import Book from 'scripts/Book';
 import 'styles/App.css';
 import 'tw-elements';
 
-const UserContext = createContext({} as User);
-const DataContext = createContext({} as DataObject);
+const DataContext = createContext({} as {user: User, data: DataObject});
+const user = User('Guest', '', '', [1, 2, 3, 4, 5].map((i) => Book('1984', 'George Orwell', 'Fiction', require('src/assets/images/bookcover.png'), i, i, 'synopsis')), 
+[1, 2, 3, 4, 5].map((i) => Book('1984', 'George Orwell', 'Fiction', require('src/assets/images/bookcover.png'), i, i, 'synopsis')), false);
+const data = DataObject;
 
 function App() {
   return (
-    <DataContext.Provider value={DataObject}>
-      <UserContext.Provider value={User('Guest', '', '', [1, 2, 3, 4, 5].map((i) => Book('1984', 'George Orwell', 'Fiction', require('src/assets/images/bookcover.png'), i, i, 'synopsis')), 
-                                                         [1, 2, 3, 4, 5].map((i) => Book('1984', 'George Orwell', 'Fiction', require('src/assets/images/bookcover.png'), i, i, 'synopsis')), false)}>
+    <DataContext.Provider value={{
+      user,
+      data,
+    }}>
         <RouteSwitch></RouteSwitch>
-      </UserContext.Provider>
     </DataContext.Provider>
   );
 }
 
-export { App, UserContext, DataContext };
+export { App, DataContext };
