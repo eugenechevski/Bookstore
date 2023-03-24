@@ -54,10 +54,9 @@ for (let i = 0; i < categories.length; i++) {
   const categoryBooks = categories[i].getBooks();
   for (let j = 0; j < categoryBooks.length; j++) {
     bookMap[categoryBooks[j].getFormattedTitle()] = categoryBooks[j];
+    books.push(categoryBooks[j]);
   }
-  books.concat(categoryBooks);
 }
-
 
 const dataObj = (): DataObject => {
     function getCategories(): Category[] {

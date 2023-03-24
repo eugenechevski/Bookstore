@@ -38,7 +38,8 @@ const BookDescription = ({book}: {book: Book}) => {
                     <img src={book.getCover()} alt={`${book.getTitle()} cover`} />
                 </div>
                 {/* Buttons */}
-                <div className="flex
+                <div data-testid="add-buttons"
+                     className="flex
                                 flex-row 
                                 items-center 
                                 justify-center 
