@@ -12,7 +12,7 @@ const CheckoutBook = ({ book }: { book: Book }) => {
             <div className="w-1/3 
                             shadow-lg
                             drop-shadow-lg">
-                <img src={book.getCover()} alt={`${book.getTitle().toLowerCase().split(' ').join('-')}-image`} />
+                <img src={book.getCover()} alt={`${book.getTitle()} cover`} />
             </div>
             {/* Title */}
             <div className="font-bold 

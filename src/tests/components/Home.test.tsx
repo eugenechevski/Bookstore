@@ -25,7 +25,7 @@ describe("Home component", () => {
         for (let i = 0; i < categories.length; i++) {
             const books = categories[i].getBooks();
             for (let j = 0; j < books.length; j++) {
-                expect(screen.getAllByAltText(books[j].getTitle() + " image").length).toBeGreaterThan(0);
+                expect(screen.getAllByAltText(books[j].getTitle() + " cover").length).toBeGreaterThan(0);
             }
         }
     });

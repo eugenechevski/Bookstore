@@ -4,12 +4,16 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import Book from 'scripts/Book';
 import CheckoutForm from 'components/forms/CheckoutForm';
+import User from 'scripts/User';
 
 describe("CheckoutForm component", () => {
   beforeEach(() => {
     render(
-      <MemoryRouter>
-        <CheckoutForm cartItemsProp={[1, 2, 3, 4, 5].map((i) => Book("Harry Potter" + i, "K. Rowling", 'Fantasy', require("src/assets/images/bookcover.png"), i, i, "synopsis"))}></CheckoutForm>
+      <MemoryRouter initialEntries={['/checkout']}>
+        <CheckoutForm testUser={
+          User('John Doe', 'pass123', 'example@email.com', [],
+                                                           [1, 2, 3, 4, 5].map(i => Book('Harry Potter' + i, 'K. Rowling', 'Fantasy', '', 1, i, '')), true)
+        }></CheckoutForm>
       </MemoryRouter>
     )
   });
@@ -19,7 +23,7 @@ describe("CheckoutForm component", () => {
   });
 
   it("displays the bookcovers of the cart items", () => {
-    expect(screen.getAllByAltText(/harry-potter\d-image/i).length).toBe(5);
+    expect(screen.getAllByAltText(/Harry Potter\d cover/i).length).toBe(5);
   });
 
   it("displays the titles of the cart items", () => {
@@ -27,7 +31,7 @@ describe("CheckoutForm component", () => {
   });
 
   it("displays the quantity of the cart items", () => {
-    expect(screen.getAllByText("Q-ty")).toHaveLength(5);
+    expect(screen.getAllByText("Q-ty").length).toBe(5);
     expect(screen.getByText("1x")).toBeInTheDocument();
     expect(screen.getByText("2x")).toBeInTheDocument();
     expect(screen.getByText("3x")).toBeInTheDocument();
