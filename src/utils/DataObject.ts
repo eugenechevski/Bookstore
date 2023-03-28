@@ -1,86 +1,123 @@
-import Book from "scripts/Book"
+import Book from "scripts/Book";
 import Category from "scripts/Category";
 
-const desc = `1984, published in 1949, is a dystopian and satirical novel. It revolves around Winston Smith, who lives in a nation called Oceania, in a province called Airstrip One, which represents present-day England. This state is controlled by the Party, headed by a mysterious leader who is addressed as Emmanuel Goldstein, also known as the Big Brother. The Party watches every single move that Smith and other citizens make. The nation's language and history is forcefully changed for the benefit of the Party. A new language, Newspeak, is being compulsively implemented to ensure works that have anything to do with political rebellion are omitted. In Oceania, even rebellious thoughts are illegal and are said to be the worst of all crimes. The people are suppressed and any form of individuality is not tolerated, including love and sex. Smith works as a low-ranking member of the Party who alters historical records. He hates the Party and thus buys an illegal diary in which he pens down his thoughts. He meets Julia`;
-const bookCover = require('src/assets/images/bookcover.png');
+let fetchData;
 
-const categories = [
-    Category("Fiction", [
-        Book('1984', 'George Orwell', 'Fiction', bookCover, 1, 1, desc),
-        Book('1984', 'George Orwell', 'Fiction', bookCover, 2, 1, desc),
-        Book('1984', 'George Orwell', 'Fiction', bookCover, 3, 1, desc),
-        Book('1984', 'George Orwell', 'Fiction', bookCover, 4, 1, desc),
-        Book('1984', 'George Orwell', 'Fiction', bookCover, 5, 1, desc),
-    ]),
-    Category("Non-fiction", [
-        Book('1984', 'George Orwell', 'Non-fiction', bookCover, 1, 1, desc),
-        Book('1984', 'George Orwell', 'Non-fiction', bookCover, 2, 1, desc),
-        Book('1984', 'George Orwell', 'Non-fiction', bookCover, 3, 1, desc),
-        Book('1984', 'George Orwell', 'Non-fiction', bookCover, 4, 1, desc),
-        Book('1984', 'George Orwell', 'Non-fiction', bookCover, 5, 1, desc),
-    ]),
-    Category("Storytelling", [
-        Book('1984', 'George Orwell', 'Storytelling', bookCover, 1, 1, desc),
-        Book('1984', 'George Orwell', 'Storytelling', bookCover, 2, 1, desc),
-        Book('1984', 'George Orwell', 'Storytelling', bookCover, 3, 1, desc),
-        Book('1984', 'George Orwell', 'Storytelling', bookCover, 4, 1, desc),
-        Book('1984', 'George Orwell', 'Storytelling', bookCover, 5, 1, desc),
-    ]),
-    Category("History", [
-        Book('1984', 'George Orwell', 'History', bookCover, 1, 1, desc),
-        Book('1984', 'George Orwell', 'History', bookCover, 2, 1, desc),
-        Book('1984', 'George Orwell', 'History', bookCover, 3, 1, desc),
-        Book('1984', 'George Orwell', 'History', bookCover, 4, 1, desc),
-        Book('1984', 'George Orwell', 'History', bookCover, 5, 1, desc),
-    ]),
-    Category("Sci-Fi", [
-        Book('1984', 'George Orwell', 'Sci-Fi', bookCover, 1, 1, desc),
-        Book('1984', 'George Orwell', 'Sci-Fi', bookCover, 2, 1, desc),
-        Book('1984', 'George Orwell', 'Sci-Fi', bookCover, 3, 1, desc),
-        Book('1984', 'George Orwell', 'Sci-Fi', bookCover, 4, 1, desc),
-        Book('1984', 'George Orwell', 'Sci-Fi', bookCover, 5, 1, desc),
-    ]),
-];
-
-// Derive other data containers
-const categoryMap = {};
-const bookMap = {};
-const books: Book[] = [];
-for (let i = 0; i < categories.length; i++) {
-  // derive categories
-  categoryMap[categories[i].getFormattedName()] = categories[i];
-  
-  // derive books
-  const categoryBooks = categories[i].getBooks();
-  for (let j = 0; j < categoryBooks.length; j++) {
-    bookMap[categoryBooks[j].getFormattedTitle()] = categoryBooks[j];
-    books.push(categoryBooks[j]);
+async function initFetch(): Promise<void> {
+  if (typeof window === undefined) {
+    fetchData = await import("src/utils/fetchDataServer");
+  } else {
+    fetchData = await import("src/utils/fetchDataClient");
   }
+
+  fetchData = fetchData.default;
 }
 
-const dataObj = (): DataObject => {
-    function getCategories(): Category[] {
-      return categories;
-    }
+/**
+ * Fetches and generates the initial data
+ */
+async function initializeData(): Promise<Category[]> {
+  await initFetch();
 
-    function getCategoryMap(): CategoryMap {
-      return categoryMap;
-    }
-
-    function getBookMap(): BookMap {
-      return bookMap;
-    }
-    
-    function getBooks(): Book[] {
-      return books;
-    }
-    
-    return {
-        getCategories,
-        getCategoryMap,
-        getBookMap,
-        getBooks
-    }
+  const rawData = await fetchData();
+  const lists = rawData.results.lists;
+  const categories = generateCategories(lists);
+  return categories;
 }
 
-export default dataObj();
+/**
+ * Generates categories based on the given lists
+ * @param lists An array of lists obtained from the API response
+ */
+function generateCategories(lists: any[]): Category[] {
+  const categories = [];
+  for (const list of lists) {
+    const category = Category(
+      list.list_name,
+      list.books.map(book => Book(
+        book.title,
+        book.author,
+        list.list_name,
+        book.book_image,
+        book.rank,
+        0,
+        book.description
+      ))
+    );
+    categories.push(category);
+  }
+  return categories;
+}
+
+/**
+ * Expands the initial data into more useful containers
+ * @param categories An array of Category objects
+ */
+async function expandData(categories: Category[]): Promise<{ categories, categoryMap, bookMap, books }> {
+  const categoryMap = {};
+  const bookMap = {};
+  const books = [];
+
+  for (const category of categories) {
+    // derive categories
+    categoryMap[category.getFormattedName()] = category;
+
+    // derive books
+    const categoryBooks = category.getBooks();
+    for (const book of categoryBooks) {
+      bookMap[book.getFormattedTitle()] = book;
+      books.push(book);
+    }
+  }
+
+  return { categories, categoryMap, bookMap, books };
+}
+
+/**
+ * Creates a DataObject from the given data containers
+ * @param categories An array of Category objects
+ * @param categoryMap A map of category names to their respective Category objects
+ * @param bookMap A map of book titles to their respective Book objects
+ * @param books An array of all Book objects
+ */
+function createDataObject(categories: Category[], categoryMap: CategoryMap, bookMap: BookMap, books: Book[]): DataObject {
+  function getCategories() {
+    return categories;
+  }
+
+  function getCategoryMap() {
+    return categoryMap;
+  }
+
+  function getBookMap() {
+    return bookMap;
+  }
+
+  function getBooks() {
+    return books;
+  }
+
+  return {
+    getCategories,
+    getCategoryMap,
+    getBookMap,
+    getBooks,
+  };
+}
+
+/**
+ * Generates the complete DataObject
+ */
+async function generateDataObject(): Promise<DataObject> {
+  const categories = await initializeData();
+  const expandedData = await expandData(categories);
+  const dataObject = createDataObject(
+    expandedData.categories,
+    expandedData.categoryMap,
+    expandedData.bookMap,
+    expandedData.books
+  );
+  return dataObject;
+}
+
+export default generateDataObject;

@@ -376,3 +376,4 @@ yarn-error.log*
 
 design.md
 .vscode
+.env
