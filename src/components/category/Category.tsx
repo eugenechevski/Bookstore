@@ -1,14 +1,27 @@
 import Page from "components/general/Page";
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DataContext } from "components/App";
 import uniqid from "uniqid";
 import BookEntry from "./BookEntry"
 
-const Category = () => {
-    const {categoryName} = useParams();
-    const categoryContent = useContext(DataContext).data.getCategoryMap();
-    const category = categoryContent[categoryName];
+const Category = ({ testCategory }: { testCategory?: Category } ) => {
+    const {categoryFormattedName} = useParams();
+    const {categoryMap} = useContext(DataContext);
+    const [categoryName, setCategoryName] = useState<string>("");
+    const [categoryBooks, setCategoryBooks] = useState<Book[]>([]);
+
+    // Load the category data
+    useEffect(() => {
+        if (categoryMap && Object.keys(categoryMap).length > 0) {
+            const category = categoryMap[categoryFormattedName];
+            setCategoryName((category as Category).getName());
+            setCategoryBooks((category as Category).getBooks());
+        } else if (testCategory) {
+            setCategoryName(testCategory.getName());
+            setCategoryBooks(testCategory.getBooks());
+        }
+    }, [categoryMap, categoryFormattedName, testCategory]);
 
     return (
         <Page content={
@@ -23,13 +36,13 @@ const Category = () => {
                 {/* Category name */}
                 <div className="text-lg 
                                 font-bold 
-                                sm:text-3xl">{category.getName()}</div>
+                                sm:text-3xl">{categoryName}</div>
                 {/* Cateogry content */}
                 <div className="flex 
                                 flex-col 
                                 gap-12">
-                    {category.getBooks().map(book => <BookEntry key={uniqid()} 
-                                                                book={book}/>)}
+                    {categoryBooks?.map(book => <BookEntry key={uniqid()} 
+                                                          book={book}/>)}
                 </div>
             </div>
         } blank={false}></Page>

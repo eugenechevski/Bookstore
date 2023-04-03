@@ -1,8 +1,24 @@
 import TextButton from "components/general/TextButton";
 import IconButton from "components/general/IconButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const BookDescription = ({book}: {book: Book}) => {
+const BookDescription = ({ book }: { book: Book | {} }) => {
+    const [bookCoverUrl, setCoverUrl] = useState('');
+    const [bookTitle, setTitle] = useState('');
+    const [bookAuthor, setAuthor] = useState('');
+    const [bookSynopsis, setSynopsis] = useState('');
+
+    // Load the book data
+    useEffect(() => {
+        if (Object.keys(book).length > 0) {
+            setCoverUrl((book as Book).getCoverUrl());
+            setTitle((book as Book).getTitle());
+            setAuthor((book as Book).getAuthorName());
+            setSynopsis((book as Book).getSynopsis());
+        }
+    }, [book]);
+
+
     const textButtonClasses = 'btn-accent ' +
                               'btn-sm ' +
                               'rounded-full ' +
@@ -11,9 +27,6 @@ const BookDescription = ({book}: {book: Book}) => {
                               'w-1/2 ' +
                               'hover:bg-accent-focus';
     const iconButtonCLasses = 'text-secondary-content ';
-    
-                
-
     const [expandedDescription, setExpandedDescription] = useState(false);
 
     return (
@@ -35,11 +48,11 @@ const BookDescription = ({book}: {book: Book}) => {
                                 shadow-2xl
                                 drop-shadow-2xl 
                                 sm:w-64">
-                    <img src={book.getCover()} alt={`${book.getTitle()} cover`} />
+                    <img src={bookCoverUrl} alt={`${bookTitle} cover`} />
                 </div>
                 {/* Buttons */}
                 <div data-testid="add-buttons"
-                     className="flex
+                    className="flex
                                 flex-row 
                                 items-center 
                                 justify-center 
@@ -53,8 +66,8 @@ const BookDescription = ({book}: {book: Book}) => {
                             </>
                         ) : (
                             <>
-                                <IconButton onClickListener={() => null} classes={iconButtonCLasses} iconName={'cart'}></IconButton>     
-                                <IconButton onClickListener={() => null} classes={iconButtonCLasses} iconName={'heart'}></IconButton>     
+                                <IconButton onClickListener={() => null} classes={iconButtonCLasses} iconName={'cart'}></IconButton>
+                                <IconButton onClickListener={() => null} classes={iconButtonCLasses} iconName={'heart'}></IconButton>
                             </>
                         )
                     }
@@ -67,7 +80,8 @@ const BookDescription = ({book}: {book: Book}) => {
                             items-start
                             gap-3">
                 {/* Title */}
-                <div className="text-3xl
+                <div data-testid="title"
+                     className="text-3xl
                                 sm:text-5xl 
                                 font-bold 
                                 w-full 
@@ -76,39 +90,41 @@ const BookDescription = ({book}: {book: Book}) => {
                                 text-center 
                                 overflow-hidden
                                 sm:text-start">
-                    {book.getTitle()}
+                    {bookTitle}
                 </div>
                 {/* Author */}
-                <div className="text-center 
+                <div data-testid="author"
+                     className="text-center 
                                 text-2xl 
                                 w-full
                                 text-shadow-lg-
                                 drop-shadow-lg 
                                 overflow-hidden
                                 sm:text-start">
-                    {book.getAuthorName()}
+                    {bookAuthor}
                 </div>
                 {/* Synopsis */}
-                <div className={`${expandedDescription ? 'h-full' : 'h-16 sm:h-80'} 
+                <div data-testid="synopsis" 
+                     className={`${expandedDescription ? 'h-full' : 'h-16 sm:h-80'} 
                                 text-justify
                                 whitespace-normal 
                                 text-shadow-lg 
                                 drop-shadow-lg 
                                 overflow-hidden`}>
-                    {book.getSynopsis()}
+                    {bookSynopsis}
                 </div>
                 {/* Show more button */}
                 <div onClick={() => setExpandedDescription(!expandedDescription)} className={'btn ' +
-                                                                                             'border-none ' +
-                                                                                             'text-shadow-lg' + 
-                                                                                             'bg-neutral ' +
-                                                                                             'btn-sm ' +
-                                                                                             'rounded-full ' +
-                                                                                             'shadow-lg ' +
-                                                                                             'self-center ' +
-                                                                                             'hover:bg-neutral-focus ' + 
-                                                                                             'sm:self-start'}>
-                        {expandedDescription? 'Show Less' : 'Show More'}
+                    'border-none ' +
+                    'text-shadow-lg' +
+                    'bg-neutral ' +
+                    'btn-sm ' +
+                    'rounded-full ' +
+                    'shadow-lg ' +
+                    'self-center ' +
+                    'hover:bg-neutral-focus ' +
+                    'sm:self-start'}>
+                    {expandedDescription ? 'Show Less' : 'Show More'}
                 </div>
             </div>
         </div>

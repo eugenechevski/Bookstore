@@ -9,12 +9,16 @@ export default function User(name?: string,
     var wishlistMap = {};
     var cartMap = {};
         
-    for (let i = 0; i < wishlist.length; i++) {
-        wishlistMap[wishlist[i].getTitle()] = wishlist[i];
+    if (wishlist !== undefined) {
+        for (let i = 0; i < wishlist.length; i++) {
+            wishlistMap[wishlist[i].getTitle()] = wishlist[i];
+        }
     }
 
-    for (let i = 0; i < cart.length; i++) {
-        cartMap[cart[i].getTitle()] = cart[i];;
+    if (cart !== undefined) {
+        for (let i = 0; i < cart.length; i++) {
+            cartMap[cart[i].getTitle()] = cart[i];;
+        }
     }
 
     function getName(): string {

@@ -1,38 +1,54 @@
-import { render, screen } from '@testing-library/react';
+// This test renders the Book component with a given book as a prop and checks that the component is rendering the correct information.
+// It also checks that the component is rendering the correct buttons and text.
+// The test checks the book's title, author, cover, and summary, as well as the buttons and text that should be present on the page.
+
+import { render, screen, cleanup } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import DataObject from 'utils/DataObject';
-import { App } from 'components/App';
 import userEvent from '@testing-library/user-event';
+import Book from 'components/book/Book';
 
 describe("Book component", () => {
-  
-  beforeEach(() => {
+  it('renders individual book profiles', async () => {
+    const books = (await DataObject()).getBooks();
+    const testedBooks = new Set<string>([books[0].getTitle()]);
+    
     render(
-      <MemoryRouter initialEntries={['/home']}>
-            <App></App>
-          </MemoryRouter>
-        );
-      });
-      
-      it('renders individual book profiles', () => {
-        const books = DataObject.getBooks();
-        for (let i = 0; i < books.length; i++) {
-          const matchingBook = screen.getAllByAltText(books[i].getTitle() + ' cover')[0];
+      <MemoryRouter>
+        <Book testBook={books[0]}/>
+      </MemoryRouter>
+    )
 
-          userEvent.click(matchingBook);
+    expect(screen.getByTestId("add-buttons")).toBeInTheDocument(); // add buttons
+    expect(screen.getByText('Buy at these providers')).toBeInTheDocument();
+    expect(screen.getByText('AMZN')).toBeInTheDocument();
+    expect(screen.getByText('B & N')).toBeInTheDocument();
+    expect(screen.getByText('APPLE')).toBeInTheDocument();
 
-          expect(screen.getByText(books[i].getTitle())).toBeInTheDocument(); // title
-          expect(screen.getByText(books[i].getAuthorName())).toBeInTheDocument(); // author
-          expect(screen.getByAltText(books[i].getTitle() + ' cover')).toBeInTheDocument(); // cover
-          expect(screen.getByText(books[i].getSynopsis())).toBeInTheDocument(); // summary
+    cleanup();
 
-          expect(screen.getByText(/Show More/i)).toBeInTheDocument();
-          expect(screen.getByTestId("add-buttons")).toBeInTheDocument(); // add buttons
-          expect(screen.getByText('Buy at these providers')).toBeInTheDocument();
-          expect(screen.getByText('AMZN')).toBeInTheDocument();
-          expect(screen.getByText('APPLE')).toBeInTheDocument();
-          expect(screen.getByText('B & N')).toBeInTheDocument();
-        }
-    });
+    // Check the book's information
+    for (let i = 0; i < books.length; i++) {
+      if (testedBooks.has(books[i].getTitle())) continue;
+      testedBooks.add(books[i].getTitle());
+
+      render(
+        <MemoryRouter>
+          <Book testBook={books[i]}/>
+        </MemoryRouter>
+      )
+
+      userEvent.click(screen.getByText(/Show More/i));
+
+      expect(screen.getByTestId('title').textContent).toBe(books[i].getTitle()); // title
+      expect(screen.getByTestId('author').textContent).toBe(books[i].getAuthorName()); // author
+      expect(screen.getByAltText(books[i].getTitle() + ' cover')).toBeInTheDocument(); // cover
+      expect(screen.getByTestId('synopsis').textContent).toBe(books[i].getSynopsis()); // synopsis
+
+      userEvent.click(screen.getByText(/Show Less/i));
+
+      cleanup()
+    }
+  });
 });

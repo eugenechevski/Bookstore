@@ -2,13 +2,14 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import { App } from 'components/App';
+import NavBar from 'components/general/NavBar';
+import { dummyUser } from 'utils/constants';
 
 describe("NavBar component", () => {
   beforeEach(() => {
     render(
-      <MemoryRouter initialEntries={['/home']}>
-        <App></App>
+      <MemoryRouter>
+        <NavBar testUser={dummyUser}></NavBar>
       </MemoryRouter>
     )
   })
@@ -67,17 +68,17 @@ describe("NavBar component", () => {
     expect(screen.getAllByText("1984").length).toBeGreaterThan(0);
   });
 
-  it("it displays the user toggle", () => {
+  it("displays the user toggle", () => {
     userEvent.click(screen.getByTestId('tools-toggle'));
     expect(screen.getByTestId("user-toggle")).toBeInTheDocument();
   });
 
-  it("it displays the user name", () => {
+  it("displays the user name", () => {
     userEvent.click(screen.getByTestId('tools-toggle'));
     expect(screen.getByText("Guest")).toBeInTheDocument();
   });
 
-  it("it displays the login/logout button", () => {
+  it("displays the login/logout button", () => {
     userEvent.click(screen.getByTestId('tools-toggle'));
     expect(screen.getByTestId("sign-toggle")).toBeInTheDocument();
   });

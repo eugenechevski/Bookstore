@@ -12,7 +12,7 @@ describe('AfterSignIn component', () => {
     );
   });
 
-  it("it displays a message after an account has been created", () => {
+  it("displays a message after an account has been created", () => {
     expect(screen.getByText(/Signed-in successfully./i)).toBeInTheDocument();
   });
 });

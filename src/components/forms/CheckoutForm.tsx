@@ -3,11 +3,18 @@ import CheckoutBook from "./CheckoutBook";
 import uniqid from "uniqid";
 import { Link } from "react-router-dom";
 import { DataContext } from "components/App";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const CheckoutForm = ({ testUser }: { testUser?: User }) => {
-    const user = testUser !== undefined ? testUser : useContext(DataContext).user;
-    const cartItems = user.getCart();
+    const dataUser = useContext(DataContext).user;
+    const user = testUser !== undefined ? testUser : dataUser;
+    const [cartItems, setCartItems] = useState<Book[]>([]);
+
+    useEffect(() => {
+        if (Object.keys(user).length > 0) {
+            setCartItems((user as User).getCart());
+        }
+    }, [user]);
 
     return (
         <Page content={
@@ -31,7 +38,7 @@ const CheckoutForm = ({ testUser }: { testUser?: User }) => {
                                     sm:h-[540px]
                                     overflow-y-scroll">
                         {cartItems.map((book: Book) => <CheckoutBook key={uniqid()}
-                                                                     book={book} />)}
+                            book={book} />)}
                     </div>
                     {/* Checkout button */}
                     <Link to={"/after-checkout"} className="btn-primary 

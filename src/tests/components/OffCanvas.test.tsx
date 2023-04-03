@@ -1,25 +1,29 @@
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import { App } from 'components/App';
+import OffCanvas from 'components/general/OffCanvas';
 import DataObject from 'utils/DataObject';
 
 describe("OffCanvas component", () => {
-  const categories = DataObject.getCategories();
+  let categories: Category[];
 
-  beforeEach(() => {
+  beforeAll(async () => {
+    categories = (await DataObject()).getCategories();
+  });
+
+  beforeEach(async () => {
+    cleanup();
     render(
-        <MemoryRouter initialEntries={['/home']}>
-          <App></App>            
-        </MemoryRouter>
+      <MemoryRouter>
+        <OffCanvas testCategories={categories}></OffCanvas>
+      </MemoryRouter>
     )
   })
-  
-  it("renders category links", () => {
 
+  it("renders category links", () => {
     for (let i = 0; i < categories.length; i++) {
-      expect(screen.getAllByText(categories[i].getName()).length).toBeGreaterThan(0);
+      expect(screen.getByText(categories[i].getName())).toBeInTheDocument();
     }
   });
 
@@ -27,7 +31,7 @@ describe("OffCanvas component", () => {
     const redirect = jest.fn();
 
     for (let i = 0; i < categories.length; i++) {
-      const link = screen.getAllByText(categories[i].getName())[0];
+      const link = screen.getByText(categories[i].getName());
 
       link.addEventListener("click", () => redirect());
       userEvent.click(link);

@@ -1,4 +1,5 @@
 import fetchData from "src/utils/fetchData";
+import data from 'src/data.json'
 
 const fs = {
   existsSync: (filename) => {
@@ -14,23 +15,7 @@ const fs = {
 
 // Get cached data if it exists and is valid, otherwise fetch new data
 async function getCacheData() {
-  const cacheDuration = 7 * 24 * 60 * 60 * 1000; // 1 week in milliseconds
-  const cacheFile = 'data.json';
-
-    // Check if cache file exists locally
-    if (fs.existsSync(cacheFile)) {
-      const cacheData = JSON.parse(fs.readFileSync(cacheFile));
-      const now = Date.now();
-
-      // Check if cache data is still valid
-      if (now - cacheData.timestamp < cacheDuration) {
-        // Return cached data
-        return cacheData.data;
-      }
-    }
-
-  // If no valid cache data is found, return null
-  return null;
+  return data.data;
 }
 
 // Save data to cache

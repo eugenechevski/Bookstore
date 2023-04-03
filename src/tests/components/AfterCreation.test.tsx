@@ -12,7 +12,7 @@ describe('AfterCreation component', () => {
     );
   });
 
-  it("it displays a message after an account has been created", () => {
+  it("displays a message after an account has been created", () => {
     expect(screen.getByText(/The account has been created./i)).toBeInTheDocument();
   });
 

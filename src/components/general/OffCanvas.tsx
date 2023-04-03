@@ -1,10 +1,19 @@
 import { Link } from "react-router-dom";
 import uniqid from "uniqid";
 import { DataContext } from "components/App";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
-const OffCanvas = () => {
-    const {data} = useContext(DataContext);
+const OffCanvas = ({ testCategories }: { testCategories?: Category[] }) => {
+    const { categories } = useContext(DataContext);
+    const [stateCategories, setStateCategories] = useState<Category[]>(testCategories ? testCategories : categories);
+
+    useEffect(() => {
+      if (categories) {
+        setStateCategories(categories);
+      } else if (testCategories) {
+        setStateCategories(testCategories);
+      }
+    }, [categories, testCategories])
 
     return (
         <div className='scrollbar 
@@ -35,13 +44,13 @@ const OffCanvas = () => {
             tabIndex={-1}>
             <div className='offcanvas-body'>
                 <ul className='menu' tabIndex={0}>
-                    { data.getCategories().map(category => ( <li key={uniqid()}>
-                                                                      <Link to={`/categories/${category.getFormattedName()}`}>
-                                                                        {category.getName()}
-                                                                      </Link>
-                                                                    </li>
-                                                                   )
-                                                     )
+                    {stateCategories?.map(category => (<li key={uniqid()}>
+                        <Link to={`/categories/${category.getFormattedName()}`}>
+                            {category.getName()}
+                        </Link>
+                    </li>
+                    )
+                    )
                     }
                 </ul>
             </div>

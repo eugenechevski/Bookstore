@@ -1,23 +1,28 @@
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import DataObject from 'utils/DataObject';
-import { App } from 'components/App';
+import Home from 'components/home/Home';
 
 describe("Home component", () => {
-    const categories = DataObject.getCategories();
+    let categories: Category[];
     
-    beforeEach(() => {
+    beforeAll(async () => {
+      categories = (await DataObject()).getCategories();
+    });
+
+    beforeEach(async () => {
+        cleanup();
         render(
-          <MemoryRouter initialEntries={['/home']}>
-            <App></App>
+          <MemoryRouter>
+            <Home testCategories={categories}/>
           </MemoryRouter>
         );
-    });    
-    
+    });
+
     it("renders category names", () => {
         for (let i = 0; i < categories.length; i++) {
-            expect(screen.getAllByText(categories[i].getName()).length).toBe(2);
+            expect(screen.getByText(categories[i].getName())).toBeInTheDocument();
         }
     });
 

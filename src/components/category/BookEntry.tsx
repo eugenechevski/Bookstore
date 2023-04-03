@@ -31,11 +31,12 @@ const BookEntry = ({ book }: { book: Book }) => {
                                     shadow-lg
                                     sm:w-32 
                                     sm:mr-0">
-                        <img src={book.getCover()} alt={`${book.getTitle()} cover`} />
+                        <img src={book.getCoverUrl()} alt={`${book.getTitle()} cover`} />
                     </div>
                 </Link>
             </div>
-            <div className="h-1/6 
+            <div data-testid="synopsis"
+                 className="h-1/6 
                             w-3/4 
                             text-justify 
                             whitespace-normal 

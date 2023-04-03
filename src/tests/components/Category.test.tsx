@@ -1,35 +1,32 @@
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import DataObject from 'utils/DataObject';
-import { App } from 'components/App';
-import userEvent from '@testing-library/user-event';
+import Category from 'components/category/Category';
 
 describe("Category component", () => {
-    const categories = DataObject.getCategories();
-    
-    beforeEach(() => {
-        render(
-          <MemoryRouter initialEntries={['/home']}>
-            <App></App>
-          </MemoryRouter>
-        );
-    });
+  it('renders categories', async () => {
+    const categories = (await DataObject()).getCategories();
 
-    it('renders categories', () => {
-      for (let i = 0; i < categories.length; i++) {
-        userEvent.click(screen.getAllByText(categories[i].getName())[0]);
-        
-        // Checking the category name
-        expect(screen.getAllByText(categories[i].getName()).length).toBeGreaterThanOrEqual(2);
+    for (let i = 0; i < categories.length; i++) {
+      render(
+        <MemoryRouter>
+          <Category testCategory={categories[i]}/>
+        </MemoryRouter>
+      );
 
-        const books = categories[i].getBooks();
-        for (let j = 0; j < books.length; j++) {
-          // Checking the books
-          expect(screen.getAllByAltText(books[j].getTitle() + ' cover').length).toBe(books.length);
-          expect(screen.getByText('# ' + books[j].getRank())).toBeInTheDocument();
-          expect(screen.getAllByText(books[j].getSynopsis()).length).toBe(books.length);
-        }
+      // Checking the category name
+      expect(screen.getByText(categories[i].getName())).toBeInTheDocument();
+
+      // Checking the books
+      const books = categories[i].getBooks();
+      for (let j = 0; j < books.length; j++) {
+        expect(screen.getByAltText(books[j].getTitle() + ' cover')).toBeInTheDocument();
+        expect(screen.getByText('# ' + books[j].getRank())).toBeInTheDocument();
+        expect(screen.getAllByTestId("synopsis")[j].textContent).toBe(books[j].getSynopsis());
       }
-    });
+
+      cleanup();
+    }
+  });
 });

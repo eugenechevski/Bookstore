@@ -4,7 +4,7 @@ import Category from "scripts/Category";
 let fetchData;
 
 async function initFetch(): Promise<void> {
-  if (typeof window === undefined) {
+  if (window === undefined) {
     fetchData = await import("src/utils/fetchDataServer");
   } else {
     fetchData = await import("src/utils/fetchDataClient");

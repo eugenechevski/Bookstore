@@ -1,21 +1,55 @@
-import { createContext } from 'react';
+import { createContext, useEffect, useState } from 'react';
+import {dummyUser} from 'utils/constants'
 import DataObject from 'utils/DataObject';
 import RouteSwitch from './RouteSwitch';
-import User from 'scripts/User';
-import Book from 'scripts/Book';
 import 'styles/App.css';
 import 'tw-elements';
 
-const DataContext = createContext({} as {user: User, data: DataObject});
-const user = User('Guest', '', '', [1, 2, 3, 4, 5].map((i) => Book('1984', 'George Orwell', 'Fiction', require('src/assets/images/bookcover.png'), i, i, 'synopsis')), 
-[1, 2, 3, 4, 5].map((i) => Book('1984', 'George Orwell', 'Fiction', require('src/assets/images/bookcover.png'), i, i, 'synopsis')), false);
-const data = DataObject;
+// Load the environment variables
+
+// Server-side initialization
+if (window === undefined) {
+  require('dotenv').config();
+  import('utils/initFirebase').then((initFirebase) => initFirebase.default());
+}
+
+// Data
+const DataContext = createContext({} as {user: User | {}, 
+                                         categories: Category[] | [],
+                                         categoryMap: CategoryMap | {},
+                                         books: Book[] | [],
+                                         bookMap: BookMap | {}});
 
 function App() {
+  const [user,] = useState(dummyUser);
+  const [data, setData] = useState({} as DataObject | {});
+  const [categories, setCategories] = useState([] as Category[] | []);
+  const [categoryMap, setCategoryMap] = useState({} as CategoryMap | {});
+  const [books, setBooks] = useState([] as Book[] | []);
+  const [bookMap, setBookMap] = useState({} as BookMap | {});
+
+  // Load the data
+  useEffect(() => {
+    DataObject().then((dataReceived) => setData(dataReceived));
+  }, []);
+
+  // Set the data
+  useEffect(() => {
+    if (Object.keys(data).length > 0) {
+      setCategories((data as DataObject).getCategories());
+      setCategoryMap((data as DataObject).getCategoryMap());
+      setBooks((data as DataObject).getBooks());
+      setBookMap((data as DataObject).getBookMap());
+    }
+  }, [data]);
+  
   return (
     <DataContext.Provider value={{
       user,
-      data,
+      categories,
+      categoryMap,
+      books,
+      bookMap
     }}>
         <RouteSwitch></RouteSwitch>
     </DataContext.Provider>

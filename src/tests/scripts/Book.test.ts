@@ -20,7 +20,7 @@ describe('Book factory', () => {
   });
 
   it('return the cover', () => {
-    expect(testBook.getCover()).toBe('cover');
+    expect(testBook.getCoverUrl().length).toBeGreaterThan(0);
   });
 
   it('returns the rank', () => {

@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 
 const useForm = (initialState: any, validate: (values: any) => any, doStuffOnceValid: () => any): {
   values: any,
@@ -32,7 +32,6 @@ const useForm = (initialState: any, validate: (values: any) => any, doStuffOnceV
 
       // If validation was successful, do stuff
       if (Object.keys(validationErrors).length === 0) {
-        console.log('All good!');
         doStuffOnceValid();
       }
     };

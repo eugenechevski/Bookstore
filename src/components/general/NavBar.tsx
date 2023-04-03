@@ -1,29 +1,41 @@
 import IconButton from 'components/general/IconButton';
 import TextButton from 'components/general/TextButton';
 import uniqid from "uniqid";
+import User from 'scripts/User';
 import { Link } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { DataContext } from 'src/components/App';
 
 
 
-const NavBar = () => {
+const NavBar = ({ testUser }: { testUser?: User }) => {
     const textBtnClasses = 'bg-transparent ' +
-                           'hover:bg-primary-focus';
+        'hover:bg-primary-focus';
 
-    const user = useContext(DataContext).user;
+    const { user } = useContext(DataContext);
+    const [stateUser, setUser] = useState<User>(testUser ? testUser : user as User);
     const [offCanvasToggleIcon, setOffCanvasToggleIcon] = useState('bars');
     const [navbarToolsIcon, setNavbarToolsIcon] = useState('ellipsis');
     const [searchTerm, setSearchTerm] = useState('');
-    const [loginButtonIcon, setLoginButtonIcon] = useState(user.isSignedIn() ? 'sign-in' : 'sign-out');
+    const [loginButtonIcon, setLoginButtonIcon] = useState(stateUser?.isSignedIn() ? 'sign-in' : 'sign-out');
+
+    // Load the user data
+    useEffect(() => {
+        // test if the user object is defined
+        if (user && Object.keys(user).length > 0) {
+            setUser(user as User);
+        } else if (testUser) {
+          setUser(testUser);
+        }
+    }, [user, testUser])
 
     const toggleLoginButton = () => {
-        if (user.isSignedIn()) {
-            user.signOut();
+        if (stateUser?.isSignedIn()) {
+            stateUser?.signOut();
         } else {
-            user.signIn();
+            stateUser?.signIn();
         }
-        setLoginButtonIcon(!user.isSignedIn()? 'sign-in' : 'sign-out');
+        setLoginButtonIcon(!stateUser?.isSignedIn() ? 'sign-in' : 'sign-out');
     }
 
     return (
@@ -43,11 +55,11 @@ const NavBar = () => {
                             sm:w-1/4">
                 {/* Hamburger */}
                 <a onClick={() => setOffCanvasToggleIcon(offCanvasToggleIcon === 'bars' ? 'xmark' : 'bars')}
-                   data-bs-toggle="offcanvas"
-                   data-testid="hamburger"
-                   href={"#offcanvas"}
-                   role="button"
-                   aria-controls="offcanvas">
+                    data-bs-toggle="offcanvas"
+                    data-testid="hamburger"
+                    href={"#offcanvas"}
+                    role="button"
+                    aria-controls="offcanvas">
                     <IconButton onClickListener={() => null} classes={''} iconName={offCanvasToggleIcon}></IconButton>
                 </a>
                 {/* Title */}
@@ -79,7 +91,7 @@ const NavBar = () => {
                 {/* Search icon */}
                 <div className='hidden 
                                 sm:block'
-                     data-testid="search-button">
+                    data-testid="search-button">
                     <IconButton onClickListener={() => null} classes={''} iconName={'search'}></IconButton>
                 </div>
                 {/* Search results */}
@@ -158,7 +170,7 @@ const NavBar = () => {
                                                                                           bg-primary
                                                                                           rounded-box
                                                                                           w-52">
-                                {user.getWishlist().map(item => <Link key={uniqid()} to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}>{item.getTitle()}</Link>)}
+                                {stateUser?.getWishlist().map(item => <Link key={uniqid()} to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}>{item.getTitle()}</Link>)}
                             </ul>
                         </div>
                         {/* Cart dropdown */}
@@ -183,7 +195,7 @@ const NavBar = () => {
                                                                                       bg-primary
                                                                                       rounded-box
                                                                                       w-52">
-                                {user.getCart().map(item => <Link key={uniqid()} to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}>{item.getTitle()}</Link>)}
+                                {stateUser?.getCart().map(item => <Link key={uniqid()} to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}>{item.getTitle()}</Link>)}
                             </ul>
                         </div>
                         {/* User information dropdown */}
@@ -201,15 +213,15 @@ const NavBar = () => {
                                                          bg-primary 
                                                          rounded-box 
                                                          w-52">
-                                {user.getName()}
+                                {stateUser?.getName()}
                             </div>
                         </div>
                         {/* Sign-in/sign-out button */}
-                        <div onClick={() => toggleLoginButton()} 
-                             data-testid="sign-toggle">
-                            <IconButton onClickListener={() => null} 
-                                        classes={''} 
-                                        iconName={loginButtonIcon}></IconButton>
+                        <div onClick={() => toggleLoginButton()}
+                            data-testid="sign-toggle">
+                            <IconButton onClickListener={() => null}
+                                classes={''}
+                                iconName={loginButtonIcon}></IconButton>
                         </div>
                     </>
                 }

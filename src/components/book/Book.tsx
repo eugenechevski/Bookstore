@@ -1,13 +1,21 @@
 import { DataContext } from "components/App";
 import Page from "components/general/Page";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BookDescription from "./BookDescription";
 import Providers from "./Providers";
 
-const Book = () => {
+const Book = ({ testBook }: { testBook?: Book }) => {
     const { bookTitle } = useParams();
-    const book = useContext(DataContext).data.getBookMap()[bookTitle];
+    const {bookMap} = useContext(DataContext);
+    const [book, setBook] = useState<Book | {}>(testBook && testBook || {});
+
+    // Load the book data
+    useEffect(() => {
+        if (bookMap && Object.keys(bookMap).length > 0) {
+            setBook(bookMap[bookTitle]);
+        }
+    }, [bookMap]);
 
     return (
         <Page content={(

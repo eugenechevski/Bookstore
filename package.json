@@ -17,15 +17,19 @@
     "@types/react-dom": "^18.0.10",
     "babel-plugin-macros": "^3.1.0",
     "browserify-fs": "^1.0.0",
+    "browserify-zlib": "^0.2.0",
     "classnames": "^2.3.2",
+    "constants-browserify": "^1.0.0",
     "daisyui": "^2.46.1",
-    "firebase": "^9.19.0",
+    "firebase": "^9.19.1",
     "firebase-admin": "^11.5.0",
     "gh-pages": "^4.0.0",
     "node-fetch": "^3.3.1",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "package": "^1.0.1",
     "package.json": "^2.0.1",
+    "path-browserify": "^1.0.1",
+    "querystring": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.2",
@@ -33,6 +37,7 @@
     "tw-elements": "^1.0.0-alpha13",
     "typescript": "^4.9.4",
     "uniqid": "^5.4.0",
+    "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -62,12 +67,23 @@
     ]
   },
   "devDependencies": {
+    "assert": "^2.0.0",
     "autoprefixer": "^10.4.13",
     "babel-plugin-module-resolver": "^4.1.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
     "customize-cra": "^1.0.0",
     "history": "^5.3.0",
+    "https-browserify": "^1.0.0",
+    "net-browserify": "^0.2.4",
+    "os-browserify": "^0.3.0",
     "postcss": "^8.4.20",
+    "process": "^0.11.10",
     "react-app-rewired": "^2.2.1",
-    "tailwindcss": "^3.2.4"
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "tailwindcss": "^3.2.4",
+    "tls-browserify": "^0.2.2",
+    "url": "^0.11.0"
   }
 }
