@@ -4,7 +4,9 @@ import { DataContext } from 'components/App';
 import { useContext, useEffect, useState } from 'react';
 import uniqid from 'uniqid';
 
+
 const Home = ({ testCategories }: { testCategories?: Category[] }) => {
+    
     const { categories } = useContext(DataContext);
     const [stateCategories, setCategories] = useState<Category[]>(testCategories ? testCategories : categories);
 
@@ -20,10 +22,11 @@ const Home = ({ testCategories }: { testCategories?: Category[] }) => {
                             h-full
                             flex 
                             flex-col 
-                            items-center 
                             mt-20
                             sm:mt-12
-                            sm:p-12'>
+                            sm:p-12
+                            overflow-scroll
+                            scrollbar'>
                 {
                     stateCategories?.map((category: Category) => <CategoryDisplay key={uniqid()}
                         category={category}></CategoryDisplay>

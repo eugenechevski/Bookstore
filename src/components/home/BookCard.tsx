@@ -7,15 +7,20 @@ const BookCard = ({ book }: { book: Book }) => {
                         flex-col 
                         items-center 
                         justify-center 
-                        gap-8 
-                        w-full 
-                        mr-1 
+                        gap-6
+                        w-full
+                        mr-1
                         sm:w-1/5">
             <Link to={`/categories/${book.getFormattedCategoryName()}/${book.getFormattedTitle()}`}>
-                <div className="relative 
+                <div data-testid={book.getTitle() + ' cover'}
+                     style={{ backgroundImage: `url(${book.getCoverUrl()})` }}
+                     className="w-52
+                                h-72
+                                relative 
                                 sm:shadow-2xl 
                                 sm:drop-shadow-2xl
-                                cursor-pointer">
+                                cursor-pointer
+                                bg-contain">
                     <div className="absolute 
                                     top-0 
                                     left-0 
@@ -26,10 +31,10 @@ const BookCard = ({ book }: { book: Book }) => {
                                     p-2 
                                     rounded-xl 
                                     shadow-lg">{book.getRank()}</div>
-                    <img src={book.getCoverUrl()} alt={book.getTitle() + ' cover'} />
                 </div>
             </Link>
-            <div className="text-center 
+            <div className="h-12
+                            text-center 
                             text-secondary-content 
                             font-bold 
                             text-shadow-lg 

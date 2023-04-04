@@ -16,7 +16,7 @@ const OffCanvas = ({ testCategories }: { testCategories?: Category[] }) => {
     }, [categories, testCategories])
 
     return (
-        <div className='scrollbar 
+        <div className='scrollbar
                         overflow-scroll 
                         h-[89%] 
                         w-full

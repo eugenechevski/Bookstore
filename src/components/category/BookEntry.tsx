@@ -15,10 +15,14 @@ const BookEntry = ({ book }: { book: Book }) => {
                         sm:gap-3">
             <div className="flex 
                             gap-3">
-                <div className="font-bold 
+                <div className="flex
+                                justify-center
+                                items-center
+                                font-bold 
                                 text-base-100
-                                w-8
-                                h-8 
+                                text-center
+                                w-10
+                                h-10
                                 p-1
                                 bg-primary
                                 rounded-full 

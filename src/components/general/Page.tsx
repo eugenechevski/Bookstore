@@ -9,7 +9,8 @@ const Page = ({ content, blank }) => {
                         items-center
                         bg-secondary
                         relative
-                        overflow-hidden'>
+                        overflow-scroll
+                        scrollbar'>
             { !blank &&
                 <>
                     <NavBar></NavBar>
@@ -21,7 +22,9 @@ const Page = ({ content, blank }) => {
                             w-screen
                             flex
                             justify-center
-                            items-center'>
+                            items-center
+                            overflow-scroll
+                            scrollbar'>
                 {content}
             </div>
         </div>
