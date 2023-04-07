@@ -1,9 +1,12 @@
+import { Firestore } from "firebase/firestore";
+
 export default function User(name?: string,
                              password?: string, 
                              email?: string, 
                              wishlist?: Book[], 
                              cart?: Book[],
-                             signedin?: boolean): User {
+                             signedin?: boolean,
+                             db?: Firestore): User {
     
             
     var wishlistMap = {};

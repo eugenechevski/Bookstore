@@ -1,5 +1,6 @@
 const { useBabelRc, override, addWebpackPlugin, addWebpackResolve } = require('customize-cra');
 
+const DotenvWebpackPlugin = require('dotenv-webpack');
 const NodePolyfillWebpackPlugin = require('node-polyfill-webpack-plugin');
 const webpack = require('webpack');
 
@@ -49,46 +50,6 @@ module.exports = override(
   addWebpackPlugin(new webpack.NormalModuleReplacementPlugin(/node:/, (resource) => {
     resource.request = resource.request.replace(/^node:/, "");
   })),
-  addWebpackPlugin(new NodePolyfillWebpackPlugin())
-);
-
-
-
-/*
-module.exports = override(
-  useBabelRc(),
-  addWebpackPlugin(new TopLevelAwaitPlugin()),
   addWebpackPlugin(new NodePolyfillWebpackPlugin()),
+  addWebpackPlugin(new DotenvWebpackPlugin())
 );
-  addWebpackResolve({
-    fallback: {
-      fs: false,
-      net: false,
-      tls: false,
-      path: require.resolve('path-browserify'), // fallback for path module
-      crypto: require.resolve('crypto-browserify'), // fallback for crypto module
-      stream: require.resolve('stream-browserify'), // fallback for stream module
-      zlib: require.resolve('browserify-zlib'), // fallback for zlib module
-      http: require.resolve('stream-http'), // fallback for http module
-      https: require.resolve('https-browserify'), // fallback for https module
-      os: require.resolve('os-browserify/browser'), // fallback for os module
-      assert: require.resolve('assert/'), // fallback for assert module
-      buffer: require.resolve('buffer/'), // fallback for buffer module
-      util: require.resolve('util/'), // fallback for util module
-      url: require.resolve('url/'), // fallback for url module
-      querystring: require.resolve('querystring/'), // fallback for querystring module
-      constants: require.resolve('constants-browserify'), // fallback for constants module
-      vm: false,
-      child_process: false,
-      string_decoder: false,
-      events: false,
-      dgram: false,
-      dns: false,
-      readline: false,
-      tty: false,
-    }
-  }),
-  
-  )
-);
-*/

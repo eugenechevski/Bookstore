@@ -8,7 +8,7 @@ describe("Home component", () => {
     let categories: Category[];
     
     beforeAll(async () => {
-      categories = (await DataObject()).getCategories();
+      categories = (await DataObject().then(createDataObject => createDataObject())).getCategories();
     });
 
     beforeEach(async () => {

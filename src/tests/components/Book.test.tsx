@@ -11,7 +11,7 @@ import Book from 'components/book/Book';
 
 describe("Book component", () => {
   it('renders individual book profiles', async () => {
-    const books = (await DataObject()).getBooks();
+    const books = (await DataObject().then(createDataObject => createDataObject())).getBooks();
     const testedBooks = new Set<string>([books[0].getTitle()]);
     
     render(

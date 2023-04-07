@@ -1,45 +1,37 @@
 import fetchData from "src/utils/fetchData";
+import {Firestore, collection, doc, getDoc, updateDoc} from 'firebase/firestore'
 
-const admin = require('firebase-admin');
 const fetch: (any) => Promise<any> = require('node-fetch');
 
-// Get cached data if it exists and is valid, otherwise fetch new data
-async function getCacheData() {
-  const cacheDuration = 7 * 24 * 60 * 60 * 1000; // 1 week in milliseconds
-  let cacheData;
+async function fetchDataServer(db: Firestore): Promise<() => Promise<any>> {
+  const cacheRef = doc(collection(db, 'nytData'));
+  const cacheData = (await getDoc(cacheRef)).data().data;
+  const now = Date.now();
 
-  // Initialize Firebase Admin SDK
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault()
-  });
+  // Get cached data if it exists and is valid, otherwise fetch new data
+  async function getCacheData() {
+    const cacheDuration = 7 * 24 * 60 * 60 * 1000; // 1 week in milliseconds
 
-  // Check if cache data exists in Cloud Firestore
-  const db = admin.firestore();
-  const cacheRef = db.collection('cache').doc('nytData');
-  const cacheDoc = await cacheRef.get();
-  if (cacheDoc.exists) {
-    cacheData = cacheDoc.data();
-    const now = Date.now();
-
-    // Check if cache data is still valid
+    // Check if cache data exists in Cloud Firestore  
     if (now - cacheData.timestamp.toMillis() < cacheDuration) {
       // Return cached data
       return cacheData.data;
     }
+
+    // If no valid cache data is found, return null
+    return null;
+  }
+  
+  // Save data to cache
+  async function saveCacheData(data) {
+    await updateDoc(cacheRef, {
+      timestamp: now,
+      data: data
+    });
   }
 
-  // If no valid cache data is found, return null
-  return null;
-}
+  return fetchData(getCacheData, saveCacheData, fetch);
+} 
 
-// Save data to cache
-async function saveCacheData(data) {
-  const db = admin.firestore();
-  const cacheRef = db.collection('cache').doc('nytData');
-  await cacheRef.set({
-    timestamp: admin.firestore.Timestamp.now(),
-    data: data
-  });
-}
+export default fetchDataServer;
 
-export default fetchData(getCacheData, saveCacheData, fetch);

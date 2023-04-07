@@ -6,7 +6,7 @@ import Category from 'components/category/Category';
 
 describe("Category component", () => {
   it('renders categories', async () => {
-    const categories = (await DataObject()).getCategories();
+    const categories = (await DataObject().then(createDataObject => createDataObject())).getCategories();
 
     for (let i = 0; i < categories.length; i++) {
       render(
