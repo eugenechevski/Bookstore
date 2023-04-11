@@ -1,47 +1,69 @@
-export default function Book(title: string, authorName: string, categoryName: string, coverUrl: string, rank: number, description: string): Book {
-    const formattedTitle = title.toLowerCase().split(' ').join('-');
-    const formattedCategoryName = categoryName.toLowerCase().split(' ').join('-');
+/**
+ * A factory function that returns a book object.
+ * It uses the data from the book object in the database to create an interface for the book.
+ * 
+ * @param title - The title of the book
+ * @param authorName - The name of the author
+ * @param categoryName - The name of the category
+ * @param coverUrl - The url of the cover image
+ * @param rank - The rank of the book
+ * @param description - The synopsis of the book
+ * @returns - A book object
+ */
+export default function Book(
+  title: string,
+  authorName: string,
+  categoryName: string,
+  coverUrl: string,
+  rank: number,
+  description: string
+): Book {
+  // Private variables
+  const formattedTitle = title.toLowerCase().split(" ").join("-");
+  const formattedCategoryName = categoryName.toLowerCase().split(" ").join("-");
 
-    function getTitle(): string {
-      return title;
-    }
+  // Public methods
 
-    function getFormattedTitle(): string {
-      return formattedTitle;
-    }
+  function getTitle(): string {
+    return title;
+  }
 
-    function getCategoryName(): string {
-      return categoryName;
-    }
+  function getFormattedTitle(): string {
+    return formattedTitle;
+  }
 
-    function getFormattedCategoryName(): string {
-      return formattedCategoryName;
-    }
+  function getCategoryName(): string {
+    return categoryName;
+  }
 
-    function getAuthorName(): string {
-      return authorName;  
-    }
+  function getFormattedCategoryName(): string {
+    return formattedCategoryName;
+  }
 
-    function getCoverUrl(): string {
-      return coverUrl;
-    }
+  function getAuthorName(): string {
+    return authorName;
+  }
 
-    function getRank(): number {
-      return rank;
-    }
+  function getCoverUrl(): string {
+    return coverUrl;
+  }
 
-    function getSynopsis(): string {
-      return description;
-    }
+  function getRank(): number {
+    return rank;
+  }
 
-    return {
-        getTitle,
-        getFormattedTitle,
-        getFormattedCategoryName,
-        getCategoryName,
-        getAuthorName,
-        getCoverUrl,
-        getRank,
-        getSynopsis,
-    }
+  function getSynopsis(): string {
+    return description;
+  }
+
+  return {
+    getTitle,
+    getFormattedTitle,
+    getFormattedCategoryName,
+    getCategoryName,
+    getAuthorName,
+    getCoverUrl,
+    getRank,
+    getSynopsis,
+  };
 }

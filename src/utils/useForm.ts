@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-const useForm = (initialState: any, validate: (values: any) => any, doStuffOnceValid: () => any): {
+const useForm = (initialState: any, validate: (any) => Promise<any>, doStuffOnceValid: () => any): {
   values: any,
   errors: any,
   handleChange: (e: any) => void,
@@ -22,11 +22,11 @@ const useForm = (initialState: any, validate: (values: any) => any, doStuffOnceV
     };
     
     // Define a function that handles the form submit event
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
       // Prevent default browser behavior
       event.preventDefault();
       // Validate the state values using the validate function
-      const validationErrors = validate(values);
+      const validationErrors = await validate(values);
       // Set the state errors with the validation errors
       setErrors(validationErrors);
 

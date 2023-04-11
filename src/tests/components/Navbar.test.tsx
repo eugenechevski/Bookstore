@@ -48,7 +48,7 @@ describe("NavBar component", () => {
   it("displays the wishlish item", () => {
     userEvent.click(screen.getByTestId('tools-toggle'));
     userEvent.click(screen.getByTestId("wishlist-toggle"));
-    expect(screen.getAllByText("1984").length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Harry Potter\d/).length).toBe(10);
   });
 
   it("displays the cart button", () => {
@@ -65,7 +65,7 @@ describe("NavBar component", () => {
   it("displays the cart item", () => {
     userEvent.click(screen.getByTestId('tools-toggle'));
     userEvent.click(screen.getByTestId("cart-toggle"));
-    expect(screen.getAllByText("1984").length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Harry Potter\d/).length).toBe(10);
   });
 
   it("displays the user toggle", () => {
@@ -75,7 +75,7 @@ describe("NavBar component", () => {
 
   it("displays the user name", () => {
     userEvent.click(screen.getByTestId('tools-toggle'));
-    expect(screen.getByText("Guest")).toBeInTheDocument();
+    expect(screen.getByText("John Doe")).toBeInTheDocument();
   });
 
   it("displays the login/logout button", () => {

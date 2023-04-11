@@ -1,21 +1,17 @@
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
-import Book from 'scripts/Book';
-import CheckoutForm from 'components/forms/CheckoutForm';
-import User from 'scripts/User';
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
+import CheckoutForm from "components/forms/CheckoutForm";
+import { dummyUser } from "utils/constants";
 
 describe("CheckoutForm component", () => {
   beforeEach(() => {
     render(
-      <MemoryRouter initialEntries={['/checkout']}>
-        <CheckoutForm testUser={
-          User('John Doe', 'pass123', 'example@email.com', [],
-                                                           [1, 2, 3, 4, 5].map(i => Book('Harry Potter' + i, 'K. Rowling', 'Fantasy', '', 1, i, '')), true)
-        }></CheckoutForm>
+      <MemoryRouter>
+        <CheckoutForm testUser={dummyUser}></CheckoutForm>
       </MemoryRouter>
-    )
+    );
   });
 
   it("displays the checkout button", () => {

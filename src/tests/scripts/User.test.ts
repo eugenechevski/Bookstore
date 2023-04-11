@@ -1,80 +1,51 @@
-import Book from 'scripts/Book';
-import User from 'scripts/User';
+import { dummyUser } from "utils/constants";
 
-describe('User factory', () => {
-  const testUser = User('John Doe', 'password123', 'john@example.com', [], [], true);
-
-  it('returns the proper name', () => {
-    expect(testUser.getName()).toBe('John Doe');
+describe("User factory", () => {
+  it("returns the proper name", () => {
+    expect(dummyUser.getName()).toBe("John Doe");
   });
 
-  it('returns the proper email', () => {
-    expect(testUser.getEmail()).toBe('john@example.com');
+  it("returns the proper email", () => {
+    expect(dummyUser.getEmail()).toBe("john@example.com");
+  });
+
+  
+  it("returns empty cart", () => {
+    dummyUser.emptyCart();
+    expect(dummyUser.getCart().length).toEqual(0);
   });
   
-  it('returns the proper password', () => {
-    expect(testUser.getPassword()).toBe('password123');
-  });
-
-  it('returns empty wishlist', () => {
-    expect(testUser.getWishlist().length).toEqual(0);
-  });
-
-  it('return empty cart', () => {
-    expect(testUser.getCart().length).toEqual(0);
-  });
-
-  it('returns a book from the cart', () => {
-    testUser.addToCart(Book('1984', 'Georg  Orwell', 'Fiction', '', 1, 1, ''));
-    expect(testUser.getBookFromCart('1984').getTitle()).toBe('1984');
-  });
-
-  it('sets a new name', () => {
-    testUser.setName('Jane Doe');
-    expect(testUser.getName()).toBe('Jane Doe');
-  });
-
-  it('sets a new password', () => {
-    testUser.setPassword('password12345');
-    expect(testUser.getPassword()).toBe('password12345');
-  });
-
-  it('sets a new email', () => {
-    testUser.setEmail('test@example.com');
-    expect(testUser.getEmail()).toBe('test@example.com');
-  });
-
-  it('adds an item to a wishlist', () => {
-    testUser.addToWishList(Book('Harry Potter', 'K. Rowling', 'Fantasy', '', 1, 1, ''));
-    expect(testUser.getWishlist().length).toEqual(1);
-  });
-
-  it('adds an item to a cart', () => {
-    testUser.addToCart(Book('Harry Potter', 'K.Rowling', 'Fantasy', '', 1, 1, ''));
-    expect(testUser.getCart().length).toEqual(2);
-  });
-
-  it('removes an item from a wishlist', () => {
-    testUser.removeFromWishlist('Harry Potter');
-    expect(testUser.getWishlist().length).toEqual(0);
-  });
-
-  it('removes an item from a cart', () => {
-    testUser.removeFromCart('Harry Potter');
-    expect(testUser.getCart().length).toEqual(1);
+  it("adds an item to a cart", () => {
+    dummyUser.addToCart("Harry Potter1");
+    expect(dummyUser.getCart().length).toEqual(1);
   });
   
-  it('returns the user sign-in status', () => {
-    expect(testUser.isSignedIn()).toBeTruthy()
+  it("returns a book from the cart", () => {
+    expect(dummyUser.getBookFromCart("Harry Potter1").getTitle()).toBe("Harry Potter1");
   });
 
-  it('sign-outs the user', () => {
-    testUser.signOut();
-    expect(testUser.isSignedIn()).toBeFalsy();
+  it("removes an item from a cart", () => {
+    dummyUser.removeFromCart("Harry Potter1");
+    expect(dummyUser.getCart().length).toEqual(0);
+  });
+  
+  it("returns empty wishlist", () => {
+    dummyUser.emptyWishlist();
+    expect(dummyUser.getWishlist().length).toEqual(0);
   });
 
-  it('signs in the user', () => {
-    testUser.signIn();
-    expect(testUser.isSignedIn()).toBeTruthy();
+  it("adds an item to a wishlist", () => {
+    dummyUser.addToWishList("Harry Potter1");
+    expect(dummyUser.getWishlist().length).toEqual(1);
   });
+
+  it("returns a book from the wishlist", () => {
+    expect(dummyUser.getBookFromWishlist("Harry Potter1").getTitle()).toBe("Harry Potter1");
+  });
+  
+  it("removes an item from a wishlist", () => {
+    dummyUser.removeFromWishlist("Harry Potter1");
+    expect(dummyUser.getWishlist().length).toEqual(0);
+  });
+
 });

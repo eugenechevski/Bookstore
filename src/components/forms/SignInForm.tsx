@@ -2,101 +2,159 @@ import Page from "components/general/Page";
 import useForm from "utils/useForm";
 import { useNavigate } from "react-router-dom";
 import { emailRegex, passwordRegex } from "utils/constants";
-
-const validate = (values: {
-  email: string,
-  password: string
-}): {
-  email?: string,
-  password?: string
-} => {
-  let errors: {
-    email?: string,
-    password?: string
-  } = {};
-
-  if (!emailRegex.test(values.email)) {
-    errors.email = "Invalid email address";
-  }
-
-  if (!passwordRegex.test(values.password)) {
-    errors.password = "Invalid password";
-  }
-
-  return errors;
-};
+import { DataContext } from "components/App";
+import { useContext } from "react";
+import User from "scripts/User";
 
 const SignInForm = () => {
-    const navigate = useNavigate();
-    const afterValidation = () => {
-      // Do the database matching here
-      navigate("/after-sign-in");
-    };
-    const { handleChange, handleSubmit, values, errors } = useForm({
-      email: '',
-      password: ''
-    }, validate, afterValidation);
+  const navigate = useNavigate();
+  const afterValidation = () => {
+    navigate("/after-sign-in");
+  };
 
-    return (
-        <Page content={
-            <div className="p-6 
+  const { signIn, setUser, bookMap } = useContext(DataContext);
+  const validate = async (values: { email: string; password: string }) => {
+    let errors: {
+      email?: string;
+      password?: string;
+      authentification?: string;
+    } = {};
+
+    // Check if the email and password are valid
+    if (!emailRegex.test(values.email)) {
+      errors.email = "Invalid email address";
+    }
+
+    // Check if the password is valid
+    if (!passwordRegex.test(values.password)) {
+      errors.password = "Invalid password";
+    }
+
+    // If there are no errors, check if the user exists in the database
+    if (Object.keys(errors).length === 0) {
+      let result =
+        Object.keys(signIn).length > 0 &&
+        (await (
+          signIn as (
+            email: string,
+            password: string
+          ) => Promise<UserData | { errorMessage: string }>
+        )(values.email, values.password));
+
+      // If the user exists, set the user
+      if (Object.hasOwn(result, "errorMessage")) {
+        errors.authentification = (
+          result as { errorMessage: string }
+        ).errorMessage;
+      } else {
+        result = result as UserData;
+
+        setUser(User(result, bookMap));
+      }
+    }
+
+    return errors;
+  };
+
+  const { handleChange, handleSubmit, values, errors } = useForm(
+    {
+      email: "",
+      password: "",
+    },
+    validate,
+    afterValidation
+  );
+
+  return (
+    <Page
+      content={
+        <div
+          className="p-6 
                             w-3/4 
                             bg-base-100 
                             rounded-xl 
-                            sm:w-1/4">
-                <form onSubmit={handleSubmit}
-                      className="form-control
+                            sm:w-1/4"
+        >
+          <form
+            onSubmit={handleSubmit}
+            className="form-control
                                  text-sm
                                  w-full
                                  h-full
-                                 justify-center">
-                    {/** Email */}
-                    <div className="flex
-                                    flex-col">
-                        <label htmlFor="email"
-                               className="label 
-                                          font-bold">E-mail</label>
-                        <input id="email"
-                               onChange={handleChange}
-                               name="email"
-                               value={values.email}
-                               placeholder="john.doe@example.com"
-                               type="text" 
-                               className="input-sm
+                                 justify-center"
+          >
+            {/** Email */}
+            <div
+              className="flex
+                                    flex-col"
+            >
+              <label
+                htmlFor="email"
+                className="label 
+                                          font-bold"
+              >
+                E-mail
+              </label>
+              <input
+                id="email"
+                onChange={handleChange}
+                name="email"
+                value={values.email}
+                placeholder="john.doe@example.com"
+                type="text"
+                className="input-sm
                                           rounded-lg
-                                          input-bordered" />
-                        {errors.email && <p>{errors.email}</p>}
-                    </div>
+                                          input-bordered"
+              />
+              {errors.email && <p>{errors.email}</p>}
+            </div>
 
-                    {/** Password */}
-                    <div className="flex
-                                    flex-col">
-                        <label htmlFor="password"
-                               className="label 
-                                          font-bold">Password</label>
-                        <input id="password"
-                               onChange={handleChange}
-                               value={values.password}
-                               name="password"
-                               placeholder="password"
-                               type="password" 
-                               className="input-sm
+            {/** Password */}
+            <div
+              className="flex
+                                    flex-col"
+            >
+              <label
+                htmlFor="password"
+                className="label 
+                                          font-bold"
+              >
+                Password
+              </label>
+              <input
+                id="password"
+                onChange={handleChange}
+                value={values.password}
+                name="password"
+                placeholder="password"
+                type="password"
+                className="input-sm
                                           rounded-lg
-                                          input-bordered" />
-                        {errors.password && <p>{errors.password}</p>}
-                    </div>
-                    
-                    {/** Submit */}
-                    <button type="submit" className="btn-primary 
+                                          input-bordered"
+              />
+              {errors.password && <p>{errors.password}</p>}
+            </div>
+
+            {errors.authentification && (errors.authentification as string)}
+
+            {/** Submit */}
+            <button
+              type="submit"
+              className="btn-primary 
                                                      rounded-full 
                                                      w-1/2 
                                                      self-center 
                                                      mt-6
-                                                     text-center">Sign-in</button>
-                </form>
-            </div>
-        } blank={true}></Page>
-    )
+                                                     text-center"
+            >
+              Sign-in
+            </button>
+          </form>
+        </div>
+      }
+      blank={true}
+    ></Page>
+  );
 };
 
 export default SignInForm;

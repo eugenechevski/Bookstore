@@ -8,14 +8,14 @@
  */
 export default function User(user: UserData, bookMap: BookMap): User {
   // Private variables
-  const cartMap: {
+  let cartMap: {
     [title: string]: {
       book: Book;
       timestamp: number;
       quantity: number;
     };
   } = {};
-  const wishlistMap: {
+  let wishlistMap: {
     [title: string]: {
       book: Book;
       timestamp: number;
@@ -24,15 +24,19 @@ export default function User(user: UserData, bookMap: BookMap): User {
 
   // Create a map of books in the cart
   Object.keys(user.cart).forEach((cartItem) => {
-    cartMap[cartItem].book = bookMap[cartItem];
-    cartMap[cartItem].timestamp = user.cart[cartItem].timestamp;
-    cartMap[cartItem].quantity = user.cart[cartItem].quantity;
+    cartMap[cartItem] = {
+      book: bookMap[cartItem], 
+      quantity: user.cart[cartItem].quantity,
+      timestamp: user.cart[cartItem].timestamp,
+    };
   });
 
   // Create a map of books in the wishlist
   Object.keys(user.wishlist).forEach((wishlistItem) => {
-    wishlistMap[wishlistItem].book = bookMap[wishlistItem];
-    wishlistMap[wishlistItem].timestamp = user.wishlist[wishlistItem].timestamp;
+    wishlistMap[wishlistItem] = {
+      book: bookMap[wishlistItem],
+      timestamp: user.wishlist[wishlistItem].timestamp,
+    };
   });
 
   // Public methods
@@ -57,8 +61,12 @@ export default function User(user: UserData, bookMap: BookMap): User {
       .map((book) => book.book);
   }
 
-  function getBookFromCart(bookTitle: string): Book {
+  function getBookFromCart(bookTitle: string): Book | undefined {
     return cartMap[bookTitle].book;
+  }
+
+  function getBookFromWishlist(bookTitle: string): Book | undefined {
+    return wishlistMap[bookTitle].book;
   }
 
   function getQuantity(bookTitle: string): number {
@@ -93,11 +101,11 @@ export default function User(user: UserData, bookMap: BookMap): User {
   }
 
   function emptyCart(): void {
-    Object.assign(cartMap, {});
+    cartMap = {};
   }
 
   function emptyWishlist(): void {
-    Object.assign(wishlistMap, {});
+    wishlistMap = {};
   }
 
   return {
@@ -106,6 +114,7 @@ export default function User(user: UserData, bookMap: BookMap): User {
     getWishlist,
     getCart,
     getBookFromCart,
+    getBookFromWishlist,
     getQuantity,
     updateQuantity,
     addToWishList,

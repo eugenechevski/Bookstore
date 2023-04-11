@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 
 const BookCard = ({ book }: { book: Book }) => {
-    return (
-        <div className="carousel-item 
+
+  return (
+    <div
+      className="carousel-item 
                         flex 
                         flex-col 
                         items-center 
@@ -10,18 +12,24 @@ const BookCard = ({ book }: { book: Book }) => {
                         gap-6
                         w-full
                         mr-1
-                        sm:w-1/5">
-            <Link to={`/categories/${book.getFormattedCategoryName()}/${book.getFormattedTitle()}`}>
-                <div data-testid={book.getTitle() + ' cover'}
-                     style={{ backgroundImage: `url(${book.getCoverUrl()})` }}
-                     className="w-52
+                        sm:w-1/5"
+    >
+      <Link
+        to={`/categories/${book?.getFormattedCategoryName()}/${book?.getFormattedTitle()}`}
+      >
+        <div
+          data-testid={book?.getTitle() + " cover"}
+          style={{ backgroundImage: `url(${book?.getCoverUrl()})` }}
+          className="w-52
                                 h-72
                                 relative 
                                 sm:shadow-2xl 
                                 sm:drop-shadow-2xl
                                 cursor-pointer
-                                bg-contain">
-                    <div className="absolute 
+                                bg-contain"
+        >
+          <div
+            className="absolute 
                                     top-0 
                                     left-0 
                                     translate-x-3 
@@ -30,18 +38,25 @@ const BookCard = ({ book }: { book: Book }) => {
                                     bg-primary 
                                     p-2 
                                     rounded-xl 
-                                    shadow-lg">{book.getRank()}</div>
-                </div>
-            </Link>
-            <div className="h-12
+                                    shadow-lg"
+          >
+            {book?.getRank()}
+          </div>
+        </div>
+      </Link>
+      <div
+        className="h-12
                             text-center 
                             text-secondary-content 
                             font-bold 
                             text-shadow-lg 
                             drop-shadow-lg 
-                            text-2xl">{book.getTitle()}</div>
-        </div>
-    )
+                            text-2xl"
+      >
+        {book?.getTitle()}
+      </div>
+    </div>
+  );
 };
 
 export default BookCard;

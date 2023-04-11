@@ -51,6 +51,7 @@ declare type User = {
   getName: () => string,
   getEmail: () => string,
   getBookFromCart: (bookTitle: string) => Book,
+  getBookFromWishlist: (bookTitle: string) => Book,
   getCart: () => Book[],
   getWishlist: () => Book[],
   getQuantity: (bookTitle: string) => number,

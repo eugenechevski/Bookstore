@@ -1,4 +1,4 @@
-const CheckoutBook = ({ book }: { book: Book }) => {
+const CheckoutBook = ({ book, quantity }: { book: Book, quantity: number }) => {
     return (
         <div className="flex
                         justify-center
@@ -29,7 +29,7 @@ const CheckoutBook = ({ book }: { book: Book }) => {
                             items-center 
                             w-1/3">
                 <div>Q-ty</div>
-                <div>{book.getQuantity()}x</div>
+                <div>{quantity}x</div>
             </div>
         </div>
     )

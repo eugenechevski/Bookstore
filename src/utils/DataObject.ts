@@ -38,7 +38,6 @@ async function DataObject(db?: Firestore): Promise<() => Promise<DataObject>> {
             list.list_name,
             book.book_image,
             book.rank,
-            0,
             book.description
           )
         )

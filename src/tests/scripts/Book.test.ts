@@ -1,37 +1,31 @@
-import Book from 'scripts/Book';
+import { mockBook } from "utils/constants";
 
 describe('Book factory', () => {
-  const testBook = Book('1984', 'George Orwell', 'Fiction', 'cover', 1, 1, 'synopsis');
-
   it('returns the title', () => {
-    expect(testBook.getTitle()).toBe('1984');
+    expect(mockBook.getTitle()).toBe('Harry Potter');
   });
 
   it('return the book\' category name', () => {
-    expect(testBook.getCategoryName()).toBe('Fiction');
+    expect(mockBook.getCategoryName()).toBe('Fantasy');
   });
 
   it('return the formatted title', () => {
-    expect(testBook.getFormattedTitle()).toBe(testBook.getTitle().toLowerCase().split(' ').join('-'));
+    expect(mockBook.getFormattedTitle()).toBe(mockBook.getTitle().toLowerCase().split(' ').join('-'));
   });
 
   it('return the author', () => {
-    expect(testBook.getAuthorName()).toBe('George Orwell');
+    expect(mockBook.getAuthorName()).toBe('K. Rowling');
   });
 
   it('return the cover', () => {
-    expect(testBook.getCoverUrl().length).toBeGreaterThan(0);
+    expect(mockBook.getCoverUrl().length).toBe(0);
   });
 
   it('returns the rank', () => {
-    expect(testBook.getRank()).toBe(1);
-  });
-
-  it('returns the quantity', () => {
-    expect(testBook.getQuantity()).toBe(1);
+    expect(mockBook.getRank()).toBe(1);
   });
 
   it('return the synopsis', () => {
-    expect(testBook.getSynopsis()).toBe('synopsis');
+    expect(mockBook.getSynopsis()).toBe('');
   });
 });
