@@ -1,4 +1,4 @@
-export default function Book(title: string, authorName: string, categoryName: string, coverUrl: string, rank: number, quanity: number, description: string): Book {
+export default function Book(title: string, authorName: string, categoryName: string, coverUrl: string, rank: number, description: string): Book {
     const formattedTitle = title.toLowerCase().split(' ').join('-');
     const formattedCategoryName = categoryName.toLowerCase().split(' ').join('-');
 
@@ -26,20 +26,12 @@ export default function Book(title: string, authorName: string, categoryName: st
       return coverUrl;
     }
 
-    function getQuantity(): number {
-      return quanity;
-    }
-
     function getRank(): number {
       return rank;
     }
 
     function getSynopsis(): string {
       return description;
-    }
-
-    function updateQuantity(newQuantity: number) {
-        quanity = newQuantity;
     }
 
     return {
@@ -51,7 +43,5 @@ export default function Book(title: string, authorName: string, categoryName: st
         getCoverUrl,
         getRank,
         getSynopsis,
-        getQuantity,
-        updateQuantity,
     }
 }

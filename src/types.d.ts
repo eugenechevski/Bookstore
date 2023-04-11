@@ -4,11 +4,9 @@ declare type Book = {
   getCategoryName: () => string,
   getFormattedCategoryName: () => string,
   getAuthorName: () => string,
-  getQuantity: () => number,
   getCoverUrl: () => string,
   getRank: () => number,
   getSynopsis: () => string,
-  updateQuantity: (newQuantity: number) => void
 };
 
 declare type Category = {
@@ -16,26 +14,6 @@ declare type Category = {
  getFormattedName: () => string,
  getBooks: () => Book[],
 };
-
-declare type User = {
-  getName: () => string,
-  getPassword: () => string,
-  getEmail: () => string,
-  getWishlist: () => Book[],
-  getBookFromCart: (bookTitle: string) => Book,
-  getCart: () => Book[],
-  setName(newName: string): void,
-  setPassword: (newPassword: string) => void,
-  setEmail: (newEmail: string) => void,
-  addToWishList: (book: Book) => void,
-  addToCart: (book: Book) => void,
-  removeFromCart: (bookTitle: string) => void,
-  removeFromWishlist: (bookTitle: string) => void,
-  isSignedIn: () => boolean,
-  signIn: () => void,
-  signOut: () => void
-  emptyCart: () => void,
-}
 
 declare type CategoryMap = { [categoryName: string]: Category }
 
@@ -47,3 +25,40 @@ declare type DataObject = {
   getBookMap: () => BookMap,
   getBooks: () => Book[]
 };
+
+declare type UserWishList = {
+  [title?: string]: {
+    timestamp: number
+  };
+}
+
+declare type UserCart = {
+  [title?: string]: {
+    quantity: number,
+    timestamp: number
+  };
+}
+
+declare type UserData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  wishlist: UserWishList;
+  cart: UserCart;
+}
+
+declare type User = {
+  getName: () => string,
+  getEmail: () => string,
+  getBookFromCart: (bookTitle: string) => Book,
+  getCart: () => Book[],
+  getWishlist: () => Book[],
+  getQuantity: (bookTitle: string) => number,
+  updateQuantity: (bookTitle: string, quantity: number) => void,
+  addToWishList: (bookTitle: string) => void,
+  addToCart: (bookTitle: string) => void,
+  removeFromCart: (bookTitle: string) => void,
+  removeFromWishlist: (bookTitle: string) => void,
+  emptyCart: () => void,
+  emptyWishlist: () => void
+}
