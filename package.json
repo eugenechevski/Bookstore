@@ -1,6 +1,6 @@
 {
-  "name": "shopping-cart",
-  "homepage": "https://eugenechevski.github.io/shopping-cart",
+  "name": "bookstore",
+  "homepage": "https://bookstore-f3276.web.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
