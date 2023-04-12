@@ -1,10 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import { dummyUser } from "utils/constants";
 import DataObject from "utils/DataObject";
-import authService from "utils/authService";
 import RouteSwitch from "./RouteSwitch";
 import "styles/App.css";
 import "tw-elements";
+import console from "console-browserify";
+import { getAuth } from "firebase/auth";
 
 // Data
 const DataContext = createContext(
@@ -14,20 +15,8 @@ const DataContext = createContext(
     categoryMap: CategoryMap | {};
     books: Book[] | [];
     bookMap: BookMap | {};
-    signUp:
-      | ((
-          email: string,
-          password: string,
-          firstName: string,
-          lastName: string
-        ) => Promise<UserData | { errorMessage: string }>)
-      | {};
-    signIn:
-      | ((
-          email: string,
-          password: string
-        ) => Promise<UserData | { errorMessage: string }>)
-      | {};
+    signUp: SignUp | {};
+    signIn: SignIn | {};
     setUser: React.Dispatch<React.SetStateAction<User>>;
   }
 );
@@ -39,34 +28,18 @@ function App() {
   const [categoryMap, setCategoryMap] = useState({} as CategoryMap | {});
   const [books, setBooks] = useState([] as Book[] | []);
   const [bookMap, setBookMap] = useState({} as BookMap | {});
-  const [signUp, setSignUp] = useState(
-    {} as
-      | ((
-          email: string,
-          password: string,
-          firstName: string,
-          lastName: string
-        ) => Promise<UserData | { errorMessage: string }>)
-      | {}
-  );
-  const [signIn, setSignIn] = useState(
-    {} as
-      | ((
-          email: string,
-          password: string
-        ) => Promise<UserData | { errorMessage: string }>)
-      | {}
-  );
+  const [signUp, setSignUp] = useState({} as SignUp | {});
+  const [signIn, setSignIn] = useState({} as SignIn | {});
 
   // Load the data
   useEffect(() => {
     import("utils/initFirebase")
       .then(async ({ app, db }) => {
         const createDataObject = await DataObject(db);
-        const { signIn, signUp } = await authService(app);
+        const { signIn, signUp } = await import('utils/authService');
 
-        setSignIn(signIn);
-        setSignUp(signUp);
+        setSignIn(() => signIn.bind(this, db, getAuth(app)));
+        setSignUp(() => signUp.bind(this, db, getAuth(app)));
 
         return createDataObject;
       })

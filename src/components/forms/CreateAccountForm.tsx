@@ -62,14 +62,12 @@ const CreateAccountForm = () => {
 
     // Sign up the user if there are no errors
     if (Object.keys(errors).length === 0) {
-      let result =
-        Object.keys(signUp).length > 0 &&
-        (await (
-          signUp as (
-            email: string,
-            password: string
-          ) => Promise<UserData | { errorMessage: string }>
-        )(values.email, values.password));
+      let result = await (signUp as SignUp)(
+        values.firstName,
+        values.lastName,
+        values.email,
+        values.password
+      );
 
       // If there is an error, set the error message
       // Otherwise, set the user

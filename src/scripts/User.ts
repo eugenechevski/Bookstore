@@ -24,19 +24,23 @@ export default function User(user: UserData, bookMap: BookMap): User {
 
   // Create a map of books in the cart
   Object.keys(user.cart).forEach((cartItem) => {
-    cartMap[cartItem] = {
-      book: bookMap[cartItem], 
-      quantity: user.cart[cartItem].quantity,
-      timestamp: user.cart[cartItem].timestamp,
-    };
+    if (cartItem in bookMap) {
+      cartMap[cartItem] = {
+        book: bookMap[cartItem], 
+        quantity: user.cart[cartItem].quantity,
+        timestamp: user.cart[cartItem].timestamp,
+      };
+    }
   });
 
   // Create a map of books in the wishlist
   Object.keys(user.wishlist).forEach((wishlistItem) => {
-    wishlistMap[wishlistItem] = {
-      book: bookMap[wishlistItem],
-      timestamp: user.wishlist[wishlistItem].timestamp,
-    };
+    if (wishlistItem in bookMap) {
+      wishlistMap[wishlistItem] = {
+        book: bookMap[wishlistItem],
+        timestamp: user.wishlist[wishlistItem].timestamp,
+      };
+    }
   });
 
   // Public methods

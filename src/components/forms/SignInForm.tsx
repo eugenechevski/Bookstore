@@ -5,6 +5,7 @@ import { emailRegex, passwordRegex } from "utils/constants";
 import { DataContext } from "components/App";
 import { useContext } from "react";
 import User from "scripts/User";
+import console from "console-browserify";
 
 const SignInForm = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const SignInForm = () => {
   };
 
   const { signIn, setUser, bookMap } = useContext(DataContext);
+
   const validate = async (values: { email: string; password: string }) => {
     let errors: {
       email?: string;
@@ -32,9 +34,7 @@ const SignInForm = () => {
 
     // If there are no errors, check if the user exists in the database
     if (Object.keys(errors).length === 0) {
-      let result =
-        Object.keys(signIn).length > 0 &&
-        (await (
+      let result = (await (
           signIn as (
             email: string,
             password: string
