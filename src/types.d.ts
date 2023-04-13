@@ -68,9 +68,36 @@ declare type SignIn = (
   email: string,
   password: string
 ) => Promise<UserData | { errorMessage: string }>;
+
 declare type SignUp = (
   firstName: string,
   lastName: string,
   email: string,
   password: string,
 ) => Promise<UserData | { errorMessage: string }>;
+
+type ListData = {
+  list_name: string;
+  books: {
+    title: string;
+    author: string;
+    book_image: string;
+    rank: number;
+    description: string;
+    buy_links: {
+      name: string;
+      url: string;
+    }[]
+  }[]
+}
+
+type NYTData = {
+  results: {
+    lists: ListData[];
+  }
+}
+
+type CachedData = {
+  data: NYTData;
+  timestamp: number;
+}

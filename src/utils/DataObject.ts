@@ -1,17 +1,8 @@
 import Book from "scripts/Book";
 import Category from "scripts/Category";
-import { Firestore } from "firebase/firestore";
+import fetchData from "src/utils/fetchData";
 
-async function DataObject(db?: Firestore): Promise<() => Promise<DataObject>> {
-  let fetchData: () => Promise<any>;
-  if (window === undefined) {
-    fetchData = await import("src/utils/fetchDataServer")
-      .then((imp) => imp.default(db))
-      .then((res) => res);
-  } else {
-    fetchData = (await import("src/utils/fetchDataClient")).default;
-  }
-
+async function DataObject(): Promise<() => Promise<DataObject>> {
   /**
    * Fetches and generates the initial data
    */
@@ -26,7 +17,7 @@ async function DataObject(db?: Firestore): Promise<() => Promise<DataObject>> {
    * Generates categories based on the given lists
    * @param lists An array of lists obtained from the API response
    */
-  function generateCategories(lists: any[]): Category[] {
+  function generateCategories(lists: ListData[]): Category[] {
     const categories = [];
     for (const list of lists) {
       const category = Category(
