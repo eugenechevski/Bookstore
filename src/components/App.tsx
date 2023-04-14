@@ -4,7 +4,6 @@ import DataObject from "utils/DataObject";
 import RouteSwitch from "./RouteSwitch";
 import "styles/App.css";
 import "tw-elements";
-import { getAuth } from "firebase/auth";
 
 // Data
 const DataContext = createContext(
@@ -33,12 +32,12 @@ function App() {
   // Load the data
   useEffect(() => {
     import("utils/initFirebase")
-      .then(async ({ app, db }) => {
+      .then(async ({ auth, db }) => {
         const createDataObject = await DataObject();
         const { signIn, signUp } = await import('utils/authService');
 
-        setSignIn(() => signIn.bind(this, db, getAuth(app)));
-        setSignUp(() => signUp.bind(this, db, getAuth(app)));
+        setSignIn(() => signIn.bind(this, db, auth));
+        setSignUp(() => signUp.bind(this, db, auth));
 
         return createDataObject;
       })
