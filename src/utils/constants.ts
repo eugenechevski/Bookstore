@@ -1,14 +1,7 @@
 import User from "scripts/User";
 import Book from "scripts/Book";
 
-const mockBook = Book(
-  `Harry Potter`,
-  "K. Rowling",
-  "Fantasy",
-  "",
-  1,
-  ""
-);
+const mockBook = Book(`Harry Potter`, "K. Rowling", "Fantasy", "", 1, "");
 
 // Mock the book map
 const mockBookMap: BookMap = {};
@@ -47,6 +40,18 @@ const dummyUser = User(
   mockBookMap
 );
 
+// Guest user
+const guestUser = User(
+  {
+    firstName: "Guest",
+    lastName: "User",
+    email: "",
+    wishlist: {},
+    cart: {},
+  },
+  {}
+);
+
 // Regex for email
 const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 
@@ -54,4 +59,4 @@ const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 const passwordRegex =
   /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$^#!%*()+-?&])[a-zA-Z\d@$()+-^#!%*?&]{8,}/;
 
-export { dummyUser, mockBookMap, mockBook, emailRegex, passwordRegex };
+export { dummyUser, guestUser, mockBookMap, mockBook, emailRegex, passwordRegex };

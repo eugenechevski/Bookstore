@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { dummyUser } from "utils/constants";
+import { guestUser } from "utils/constants";
 import DataObject from "utils/DataObject";
 import RouteSwitch from "./RouteSwitch";
 import "styles/App.css";
@@ -21,7 +21,7 @@ const DataContext = createContext(
 );
 
 function App() {
-  const [user, setUser] = useState(dummyUser);
+  const [user, setUser] = useState(guestUser);
   const [data, setData] = useState({} as DataObject | {});
   const [categories, setCategories] = useState([] as Category[] | []);
   const [categoryMap, setCategoryMap] = useState({} as CategoryMap | {});
