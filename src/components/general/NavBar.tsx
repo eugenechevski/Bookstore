@@ -82,7 +82,7 @@ const NavBar = ({ testUser }: { testUser?: User }) => {
                                 sm:block 
                                 sm:text-2xl"
         >
-          Garden of Books.
+          Bookstore.
         </Link>
       </div>
       {/* Navbar center */}

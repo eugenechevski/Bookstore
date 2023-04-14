@@ -12,7 +12,7 @@ const HelloPage = () => {
             <div className='text-2xl 
                             text-secondary-content 
                             mb-5 
-                            sm:text-5xl'>Welcome to Garden of Books</div>
+                            sm:text-5xl'>Welcome to Bookstore</div>
             <Link className='btn 
                              btn-primary 
                              rounded-full 
