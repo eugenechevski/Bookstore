@@ -28,7 +28,8 @@ const OffCanvas = ({
 
   return (
     <COffcanvas
-      className="scrollbar
+      className="z-50
+                 scrollbar
                  overflow-scroll
                  h-[89%] 
                  w-full
