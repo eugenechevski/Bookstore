@@ -1,12 +1,17 @@
 import IconButton from "components/general/IconButton";
 import TextButton from "components/general/TextButton";
 import uniqid from "uniqid";
-import User from "scripts/User";
 import { Link } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import { DataContext } from "src/components/App";
 
-const NavBar = ({ testUser }: { testUser?: User }) => {
+const NavBar = ({
+  testUser,
+  toggleOffcanvas,
+}: {
+  testUser?: User;
+  toggleOffcanvas: () => void;
+}) => {
   const textBtnClasses = "bg-transparent " + "hover:bg-primary-focus";
 
   const { user } = useContext(DataContext);
@@ -34,6 +39,11 @@ const NavBar = ({ testUser }: { testUser?: User }) => {
     // TODO
   };
 
+  const toggleOffcanvasAndIcon = () => {
+    toggleOffcanvas();
+    setOffCanvasToggleIcon(offCanvasToggleIcon === "bars" ? "xmark" : "bars");
+  };
+
   return (
     <div
       className="navbar 
@@ -54,24 +64,12 @@ const NavBar = ({ testUser }: { testUser?: User }) => {
                             sm:w-1/4"
       >
         {/* Hamburger */}
-        <a
-          onClick={() =>
-            setOffCanvasToggleIcon(
-              offCanvasToggleIcon === "bars" ? "xmark" : "bars"
-            )
-          }
-          data-bs-toggle="offcanvas"
-          data-testid="hamburger"
-          href={"#offcanvas"}
-          role="button"
-          aria-controls="offcanvas"
-        >
-          <IconButton
-            onClickListener={() => null}
-            classes={""}
-            iconName={offCanvasToggleIcon}
-          ></IconButton>
-        </a>
+        <IconButton
+          onClickListener={toggleOffcanvasAndIcon}
+          classes={""}
+          iconName={offCanvasToggleIcon}
+        ></IconButton>
+
         {/* Title */}
         <Link
           to={"/home"}

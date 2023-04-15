@@ -1,25 +1,27 @@
-import { cleanup, render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
-import OffCanvas from 'components/general/OffCanvas';
-import DataObject from 'utils/DataObject';
+import { cleanup, render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
+import Page from "components/general/Page";
+import DataObject from "utils/DataObject";
 
 describe("OffCanvas component", () => {
   let categories: Category[];
 
   beforeAll(async () => {
-    categories = (await DataObject().then(createDataObject => createDataObject())).getCategories();
+    categories = (
+      await DataObject().then((createDataObject) => createDataObject())
+    ).getCategories();
   });
 
   beforeEach(async () => {
     cleanup();
     render(
       <MemoryRouter>
-        <OffCanvas testCategories={categories}></OffCanvas>
+        <Page content={<></>} blank={false} testCategories={categories}></Page>
       </MemoryRouter>
-    )
-  })
+    );
+  });
 
   it("renders category links", () => {
     for (let i = 0; i < categories.length; i++) {
@@ -38,5 +40,5 @@ describe("OffCanvas component", () => {
 
       expect(redirect).toHaveBeenCalled();
     }
-  })
+  });
 });

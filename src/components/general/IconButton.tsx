@@ -23,7 +23,7 @@ const possibleIcons = {
 
 const IconButton = ({ iconName, classes, onClickListener }) => {
     return (
-        <div onChange={() => onClickListener()} 
+        <div onClick={onClickListener} 
              className={`${classes}
                          btn 
                          bg-transparent 
