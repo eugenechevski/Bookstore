@@ -6,7 +6,7 @@ import Page from "components/general/Page";
 import DataObject from "utils/DataObject";
 
 describe("OffCanvas component", () => {
-  let categories: Category[];
+  let categories: ICategory[];
 
   beforeAll(async () => {
     categories = (

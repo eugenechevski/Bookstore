@@ -1,4 +1,4 @@
-const CheckoutBook = ({ book, quantity }: { book: Book, quantity: number }) => {
+const CheckoutBook = ({ book, quantity }: { book: IBook, quantity: number }) => {
     return (
         <div className="flex
                         justify-center

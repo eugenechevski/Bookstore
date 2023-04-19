@@ -5,7 +5,7 @@ import DataObject from "utils/DataObject";
 import Home from "components/home/Home";
 
 describe("Home component", () => {
-  let categories: Category[];
+  let categories: ICategory[];
 
   beforeAll(async () => {
     categories = (

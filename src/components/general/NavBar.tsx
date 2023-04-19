@@ -9,14 +9,14 @@ const NavBar = ({
   testUser,
   toggleOffcanvas,
 }: {
-  testUser?: User;
+  testUser?: IUser;
   toggleOffcanvas: () => void;
 }) => {
   const textBtnClasses = "bg-transparent " + "hover:bg-primary-focus";
 
   const { user } = useContext(DataContext);
-  const [stateUser, setUser] = useState<User>(
-    testUser ? testUser : (user as User)
+  const [stateUser, setUser] = useState<IUser>(
+    testUser ? testUser : (user as IUser)
   );
   const [offCanvasToggleIcon, setOffCanvasToggleIcon] = useState("bars");
   const [navbarToolsIcon, setNavbarToolsIcon] = useState("ellipsis");
@@ -29,7 +29,7 @@ const NavBar = ({
   useEffect(() => {
     // test if the user object is defined
     if (user && Object.keys(user).length > 0) {
-      setUser(user as User);
+      setUser(user as IUser);
     } else if (testUser) {
       setUser(testUser);
     }

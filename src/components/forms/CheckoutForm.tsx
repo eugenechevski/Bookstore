@@ -4,16 +4,15 @@ import uniqid from "uniqid";
 import { Link } from "react-router-dom";
 import { DataContext } from "components/App";
 import { useContext, useEffect, useState } from "react";
-import Book from "scripts/Book";
 
-const CheckoutForm = ({ testUser }: { testUser?: User }) => {
+const CheckoutForm = ({ testUser }: { testUser?: IUser }) => {
   const dataUser = useContext(DataContext).user;
   const user = testUser !== undefined ? testUser : dataUser;
-  const [cartItems, setCartItems] = useState<Book[]>([]);
+  const [cartItems, setCartItems] = useState<IBook[]>([]);
 
   useEffect(() => {
     if (Object.keys(user).length > 0) {
-      setCartItems((user as User).getCart());
+      setCartItems((user as IUser).getCart());
     }
   }, [user]);
 
@@ -45,11 +44,11 @@ const CheckoutForm = ({ testUser }: { testUser?: User }) => {
                                     sm:h-[540px]
                                     overflow-y-scroll"
             >
-              {cartItems.map((book: Book) => (
+              {cartItems.map((book: IBook) => (
                 <CheckoutBook
                   key={uniqid()}
                   book={book}
-                  quantity={(user as User).getQuantity(book.getTitle())}
+                  quantity={(user as IUser).getQuantity(book.getTitle())}
                 />
               ))}
             </div>

@@ -5,18 +5,18 @@ import { DataContext } from "components/App";
 import uniqid from "uniqid";
 import BookEntry from "./BookEntry"
 
-const Category = ({ testCategory }: { testCategory?: Category } ) => {
+const Category = ({ testCategory }: { testCategory?: ICategory } ) => {
     const {categoryFormattedName} = useParams();
     const {categoryMap} = useContext(DataContext);
     const [categoryName, setCategoryName] = useState<string>("");
-    const [categoryBooks, setCategoryBooks] = useState<Book[]>([]);
+    const [categoryBooks, setCategoryBooks] = useState<IBook[]>([]);
 
     // Load the category data
     useEffect(() => {
         if (categoryMap && Object.keys(categoryMap).length > 0) {
             const category = categoryMap[categoryFormattedName];
-            setCategoryName((category as Category).getName());
-            setCategoryBooks((category as Category).getBooks());
+            setCategoryName((category as ICategory).getName());
+            setCategoryBooks((category as ICategory).getBooks());
         } else if (testCategory) {
             setCategoryName(testCategory.getName());
             setCategoryBooks(testCategory.getBooks());

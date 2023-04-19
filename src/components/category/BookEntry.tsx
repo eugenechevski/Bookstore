@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const BookEntry = ({ book }: { book: Book }) => {
+const BookEntry = ({ book }: { book: IBook }) => {
     return (
         <div className="flex 
                         items-center 

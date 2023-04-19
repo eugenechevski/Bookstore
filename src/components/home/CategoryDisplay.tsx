@@ -1,7 +1,7 @@
 import BookCard from "./BookCard";
 import uniqid from "uniqid";
 
-const CategoryDisplay = ({ category }: { category: Category }) => {
+const CategoryDisplay = ({ category }: { category: ICategory }) => {
     return (
         <div className="p-6
                         gap-12 

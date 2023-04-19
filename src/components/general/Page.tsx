@@ -10,8 +10,8 @@ const Page = ({
 }: {
   content: any;
   blank: boolean;
-  testUser?: User;
-  testCategories?: Category[];
+  testUser?: IUser;
+  testCategories?: ICategory[];
 }) => {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const toggleOffcanvas = () => {

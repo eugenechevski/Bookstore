@@ -7,7 +7,7 @@ import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import DataObject from 'utils/DataObject';
 import userEvent from '@testing-library/user-event';
-import Book from 'components/book/Book';
+import BookComponent from 'components/book/BookComponent';
 
 describe("Book component", () => {
   it('renders individual book profiles', async () => {
@@ -16,7 +16,7 @@ describe("Book component", () => {
     
     render(
       <MemoryRouter>
-        <Book testBook={books[0]}/>
+        <BookComponent testBook={books[0]}/>
       </MemoryRouter>
     )
 
@@ -35,7 +35,7 @@ describe("Book component", () => {
 
       render(
         <MemoryRouter>
-          <Book testBook={books[i]}/>
+          <BookComponent testBook={books[i]}/>
         </MemoryRouter>
       )
 

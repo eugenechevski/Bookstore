@@ -1,12 +1,12 @@
-import User from "scripts/User";
-import Book from "scripts/Book";
+import User from "classes/User";
+import Book from "classes/Book";
 
-const mockBook = Book(`Harry Potter`, "K. Rowling", "Fantasy", "", 1, "");
+const mockBook = new Book(`Harry Potter`, "K. Rowling", "Fantasy", "", 1, "");
 
 // Mock the book map
 const mockBookMap: BookMap = {};
 for (let i = 1; i <= 5; i++) {
-  mockBookMap[`Harry Potter${i}`] = Book(
+  mockBookMap[`Harry Potter${i}`] = new Book(
     `Harry Potter${i}`,
     "K. Rowling",
     "Fantasy",
@@ -29,7 +29,7 @@ for (let i = 1; i <= 5; i++) {
 }
 
 // Mock the user
-const dummyUser = User(
+const dummyUser = new User(
   {
     firstName: "John",
     lastName: "Doe",
@@ -41,7 +41,7 @@ const dummyUser = User(
 );
 
 // Guest user
-const guestUser = User(
+const guestUser = new User(
   {
     firstName: "Guest",
     lastName: "User",

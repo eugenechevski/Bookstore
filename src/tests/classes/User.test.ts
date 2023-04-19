@@ -35,7 +35,7 @@ describe("User factory", () => {
   });
 
   it("adds an item to a wishlist", () => {
-    dummyUser.addToWishList("Harry Potter1");
+    dummyUser.addToWishlist("Harry Potter1");
     expect(dummyUser.getWishlist().length).toEqual(1);
   });
 

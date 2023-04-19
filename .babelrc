@@ -6,7 +6,7 @@
             "alias": {
                 "components": "src/components",
                 "styles": "src/styles",
-                "scripts": "src/scripts",
+                "classes": "src/classes",
                 "utils": "src/utils",
             }
         }]

@@ -8,23 +8,23 @@ import "tw-elements";
 // Data
 const DataContext = createContext(
   {} as {
-    user: User | {};
-    categories: Category[] | [];
+    user: IUser | {};
+    categories: ICategory[] | [];
     categoryMap: CategoryMap | {};
-    books: Book[] | [];
+    books: IBook[] | [];
     bookMap: BookMap | {};
     signUp: SignUp | {};
     signIn: SignIn | {};
-    setUser: React.Dispatch<React.SetStateAction<User>>;
+    setUser: React.Dispatch<React.SetStateAction<IUser>>;
   }
 );
 
 function App() {
   const [user, setUser] = useState(guestUser);
   const [data, setData] = useState({} as DataObject | {});
-  const [categories, setCategories] = useState([] as Category[] | []);
+  const [categories, setCategories] = useState([] as ICategory[] | []);
   const [categoryMap, setCategoryMap] = useState({} as CategoryMap | {});
-  const [books, setBooks] = useState([] as Book[] | []);
+  const [books, setBooks] = useState([] as IBook[] | []);
   const [bookMap, setBookMap] = useState({} as BookMap | {});
   const [signUp, setSignUp] = useState({} as SignUp | {});
   const [signIn, setSignIn] = useState({} as SignIn | {});

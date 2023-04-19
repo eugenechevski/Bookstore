@@ -2,7 +2,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import DataObject from 'utils/DataObject';
-import Category from 'components/category/Category';
+import CategoryComponent from 'components/category/CategoryComponent';
 
 describe("Category component", () => {
   it('renders categories', async () => {
@@ -11,7 +11,7 @@ describe("Category component", () => {
     for (let i = 0; i < categories.length; i++) {
       render(
         <MemoryRouter>
-          <Category testCategory={categories[i]}/>
+          <CategoryComponent testCategory={categories[i]}/>
         </MemoryRouter>
       );
 

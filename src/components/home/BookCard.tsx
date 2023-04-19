@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
-const BookCard = ({ book }: { book: Book }) => {
-
+const BookCard = ({ book }: { book: IBook }) => {
   return (
     <div
       className="carousel-item 
@@ -30,15 +29,15 @@ const BookCard = ({ book }: { book: Book }) => {
         >
           <div
             className="absolute 
-                                    top-0 
-                                    left-0 
-                                    translate-x-3 
-                                    translate-y-3 
-                                    text-base-100 
-                                    bg-primary 
-                                    p-2 
-                                    rounded-xl 
-                                    shadow-lg"
+                       top-0 
+                       left-0 
+                       translate-x-3 
+                       translate-y-3 
+                       text-base-100 
+                       bg-primary 
+                       p-2 
+                       rounded-xl 
+                       shadow-lg"
           >
             {book?.getRank()}
           </div>

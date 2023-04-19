@@ -4,7 +4,7 @@ import useForm from "utils/useForm";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { DataContext } from "components/App";
-import User from "scripts/User";
+import User from "classes/User";
 
 const CreateAccountForm = () => {
   const navigate = useNavigate();
@@ -78,7 +78,7 @@ const CreateAccountForm = () => {
       } else {
         result = result as UserData;
 
-        setUser(User(result, bookMap));
+        setUser(new User(result, bookMap));
       }
     }
 

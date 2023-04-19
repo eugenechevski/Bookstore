@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "src/components/home/Home";
-import Book from "src/components/book/Book";
-import Category from "src/components/category/Category";
+import BookComponent from "src/components/book/BookComponent";
+import CategoryComponent from "src/components/category/CategoryComponent";
 import AfterCheckout from "src/components/forms/AfterCheckout";
 import AfterCreation from "src/components/forms/AfterCreation";
 import CheckoutForm from "src/components/forms/CheckoutForm";
@@ -15,8 +15,8 @@ const RouteSwitch = () => {
         <Routes>
             <Route path="/" element={<LandingPage></LandingPage>}/>
             <Route path="/home" element={<Home/>}></Route>
-            <Route path="/categories/:categoryFormattedName/:bookTitle" element={<Book/>}></Route>
-            <Route path="/categories/:categoryFormattedName" element={<Category/>}></Route>
+            <Route path="/categories/:categoryFormattedName/:bookTitle" element={<BookComponent/>}></Route>
+            <Route path="/categories/:categoryFormattedName" element={<CategoryComponent/>}></Route>
             <Route path="/checkout" element={<CheckoutForm/>}></Route>
             <Route path="/create-account" element={<CreateAccountForm/>}></Route>
             <Route path="/sign-in" element={<SignInForm/>}></Route>

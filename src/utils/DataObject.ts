@@ -1,5 +1,5 @@
-import Book from "scripts/Book";
-import Category from "scripts/Category";
+import Book from "classes/Book";
+import Category from "classes/Category";
 import fetchData from "src/utils/fetchData";
 
 async function DataObject(): Promise<() => Promise<DataObject>> {
@@ -20,10 +20,10 @@ async function DataObject(): Promise<() => Promise<DataObject>> {
   function generateCategories(lists: ListData[]): Category[] {
     const categories = [];
     for (const list of lists) {
-      const category = Category(
+      const category = new Category(
         list.list_name,
         list.books.map((book) =>
-          Book(
+          new Book(
             book.title,
             book.author,
             list.list_name,

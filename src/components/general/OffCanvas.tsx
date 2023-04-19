@@ -9,12 +9,12 @@ const OffCanvas = ({
   showOffcanvas,
   toggleOffcanvas,
 }: {
-  testCategories?: Category[];
+  testCategories?: ICategory[];
   showOffcanvas: boolean;
   toggleOffcanvas: () => void;
 }) => {
   const { categories } = useContext(DataContext);
-  const [stateCategories, setStateCategories] = useState<Category[]>(
+  const [stateCategories, setStateCategories] = useState<ICategory[]>(
     testCategories ? testCategories : categories
   );
 

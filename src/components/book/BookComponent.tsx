@@ -5,10 +5,10 @@ import { useParams } from "react-router-dom";
 import BookDescription from "./BookDescription";
 import Providers from "./Providers";
 
-const Book = ({ testBook }: { testBook?: Book }) => {
+const BookPage = ({ testBook }: { testBook?: IBook }) => {
     const { bookTitle } = useParams();
     const {bookMap} = useContext(DataContext);
-    const [book, setBook] = useState<Book | {}>(testBook && testBook || {});
+    const [book, setBook] = useState<IBook | {}>(testBook && testBook || {});
 
     // Load the book data
     useEffect(() => {
@@ -36,4 +36,4 @@ const Book = ({ testBook }: { testBook?: Book }) => {
     );
 };
 
-export default Book;
+export default BookPage;

@@ -4,9 +4,9 @@ import { DataContext } from "components/App";
 import { useContext, useEffect, useState } from "react";
 import uniqid from "uniqid";
 
-const Home = ({ testCategories }: { testCategories?: Category[] }) => {
+const Home = ({ testCategories }: { testCategories?: ICategory[] }) => {
   const { categories } = useContext(DataContext);
-  const [stateCategories, setCategories] = useState<Category[]>(
+  const [stateCategories, setCategories] = useState<ICategory[]>(
     testCategories ? testCategories : categories
   );
 
@@ -30,7 +30,7 @@ const Home = ({ testCategories }: { testCategories?: Category[] }) => {
                             overflow-scroll
                             scrollbar"
         >
-          {stateCategories?.map((category: Category) => (
+          {stateCategories?.map((category: ICategory) => (
             <CategoryDisplay
               key={uniqid()}
               category={category}

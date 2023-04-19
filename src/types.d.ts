@@ -1,29 +1,47 @@
-declare type Book = {
-  getTitle: () => string;
-  getFormattedTitle: () => string;
-  getCategoryName: () => string;
-  getFormattedCategoryName: () => string;
-  getAuthorName: () => string;
-  getCoverUrl: () => string;
-  getRank: () => number;
-  getSynopsis: () => string;
+// Interface for the IBook class
+declare interface IBook {
+  getTitle(): string;
+  getFormattedTitle(): string;
+  getCategoryName(): string;
+  getFormattedCategoryName(): string;
+  getAuthorName(): string;
+  getCoverUrl(): string;
+  getRank(): number;
+  getSynopsis(): string;
+}
+
+declare interface IUser {
+  getName: () => string;
+  getEmail: () => string;
+  getBookFromCart: (bookTitle: string) => IBook;
+  getBookFromWishlist: (bookTitle: string) => IBook;
+  getCart: () => IBook[];
+  getWishlist: () => IBook[];
+  getQuantity: (bookTitle: string) => number;
+  updateQuantity: (bookTitle: string, quantity: number) => void;
+  addToWishlist: (bookTitle: string) => void;
+  addToCart: (bookTitle: string) => void;
+  removeFromCart: (bookTitle: string) => void;
+  removeFromWishlist: (bookTitle: string) => void;
+  emptyCart: () => void;
+  emptyWishlist: () => void;
 };
 
-declare type Category = {
+declare interface ICategory {
   getName: () => string;
   getFormattedName: () => string;
-  getBooks: () => Book[];
+  getBooks: () => IBook[];
 };
 
-declare type CategoryMap = { [categoryName: string]: Category };
+declare type CategoryMap = { [categoryName: string]: ICategory };
 
-declare type BookMap = { [bookName: string]: Book };
+declare type BookMap = { [bookName: string]: IBook };
 
 declare type DataObject = {
-  getCategories: () => Category[];
+  getCategories: () => ICategory[];
   getCategoryMap: () => CategoryMap;
   getBookMap: () => BookMap;
-  getBooks: () => Book[];
+  getBooks: () => IBook[];
 };
 
 declare type UserWishList = {
@@ -47,22 +65,6 @@ declare type UserData = {
   cart: UserCart;
 };
 
-declare type User = {
-  getName: () => string;
-  getEmail: () => string;
-  getBookFromCart: (bookTitle: string) => Book;
-  getBookFromWishlist: (bookTitle: string) => Book;
-  getCart: () => Book[];
-  getWishlist: () => Book[];
-  getQuantity: (bookTitle: string) => number;
-  updateQuantity: (bookTitle: string, quantity: number) => void;
-  addToWishList: (bookTitle: string) => void;
-  addToCart: (bookTitle: string) => void;
-  removeFromCart: (bookTitle: string) => void;
-  removeFromWishlist: (bookTitle: string) => void;
-  emptyCart: () => void;
-  emptyWishlist: () => void;
-};
 
 declare type SignIn = (
   email: string,
@@ -76,19 +78,21 @@ declare type SignUp = (
   password: string,
 ) => Promise<UserData | { errorMessage: string }>;
 
-type ListData = {
+declare type BookData = {
+  title: string;
+  author: string;
+  book_image: string;
+  rank: number;
+  description: string;
+  buy_links: {
+    name: string;
+    url: string;
+  }
+}
+
+declare type ListData = {
   list_name: string;
-  books: {
-    title: string;
-    author: string;
-    book_image: string;
-    rank: number;
-    description: string;
-    buy_links: {
-      name: string;
-      url: string;
-    }[]
-  }[]
+  books: BookData[]
 }
 
 type NYTData = {

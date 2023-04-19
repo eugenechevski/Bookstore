@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { emailRegex, passwordRegex } from "utils/constants";
 import { DataContext } from "components/App";
 import { useContext } from "react";
-import User from "scripts/User";
-import console from "console-browserify";
+import User from "classes/User";
 
 const SignInForm = () => {
   const navigate = useNavigate();
@@ -49,7 +48,7 @@ const SignInForm = () => {
       } else {
         result = result as UserData;
 
-        setUser(User(result, bookMap));
+        setUser(new User(result, bookMap));
       }
     }
 
