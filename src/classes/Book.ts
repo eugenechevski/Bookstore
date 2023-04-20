@@ -23,6 +23,7 @@ export default class Book implements IBook{
     private rank: number,
     private description: string
   ) {
+    this.title = title.toLowerCase().split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
     this.formattedTitle = title.toLowerCase().split(" ").join("-");
     this.formattedCategoryName = categoryName.toLowerCase().split(" ").join("-");
   }

@@ -2,7 +2,14 @@ import { createContext, useEffect, useState } from "react";
 import { guestUser } from "utils/constants";
 import DataObject from "utils/DataObject";
 import RouteSwitch from "./RouteSwitch";
+
 import "styles/App.css";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 import "tw-elements";
 
 // Data
