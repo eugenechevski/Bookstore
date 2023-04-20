@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import uniqid from "uniqid";
 import { DataContext } from "components/App";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { COffcanvas, COffcanvasBody } from "@coreui/bootstrap-react";
 
 const OffCanvas = ({
@@ -9,9 +9,9 @@ const OffCanvas = ({
   showOffcanvas,
   toggleOffcanvas,
 }: {
-  testCategories?: ICategory[];
   showOffcanvas: boolean;
   toggleOffcanvas: () => void;
+  testCategories?: ICategory[];
 }) => {
   const { categories } = useContext(DataContext);
   const [stateCategories, setStateCategories] = useState<ICategory[]>(
@@ -28,12 +28,16 @@ const OffCanvas = ({
 
   return (
     <COffcanvas
-      className="z-50
+      className="fixed
+                 border
+                 border-primary
+                 z-50
                  scrollbar
-                 overflow-scroll
-                 h-[89%] 
-                 w-full
-                 flex flex-col 
+                 overflow-scroll 
+                 w-[360px]
+                 h-[560px]
+                 flex 
+                 flex-col 
                  bg-base-100 
                  invisible 
                  bg-clip-padding 
@@ -41,13 +45,12 @@ const OffCanvas = ({
                  outline-none 
                  transition 
                  duration-500 
-                 ease-in 
+                 ease-out
                  text-base-content 
-                 border-none 
                  rounded-lg 
-                 fixed 
                  bottom-6 
-                 left-2
+                 sm:left-2
+                 sm:h-[840px]
                  sm:w-1/4"
       backdrop={true}
       placement="start"

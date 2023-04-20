@@ -15,12 +15,12 @@ const CategoryDisplay = ({ category }: { category: ICategory }) => {
     >
       <div
         className="text-xl 
-                            text-secondary-content 
-                            font-bold 
-                            text-shadow-lg 
-                            drop-shadow-lg 
-                            w-full 
-                            sm:text-2xl"
+                   text-secondary-content 
+                   font-bold 
+                   text-shadow-lg 
+                   drop-shadow-lg 
+                   w-full 
+                   sm:text-2xl"
       >
         {category.getName()}
       </div>

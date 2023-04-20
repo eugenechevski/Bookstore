@@ -2,7 +2,7 @@ import IconButton from "components/general/IconButton";
 import TextButton from "components/general/TextButton";
 import uniqid from "uniqid";
 import { Link } from "react-router-dom";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { DataContext } from "src/components/App";
 
 const NavBar = ({
@@ -46,22 +46,23 @@ const NavBar = ({
 
   return (
     <div
-      className="navbar 
-                        fixed 
-                        h-12 
-                        bg-primary 
-                        text-base-100 
-                        rounded-xl 
-                        shadow-lg
-                        z-50
-                        w-[99%]
-                        mt-2"
+      className="navbar  
+                 h-12
+                 w-[360px]
+                 fixed 
+                 bg-primary 
+                 text-base-100 
+                 rounded-xl 
+                 shadow-lg
+                 z-50
+                 sm:w-[99%]
+                 mt-2"
     >
       {/* Navbar start */}
       <div
         className="navbar-start 
-                            w-1/6 
-                            sm:w-1/4"
+                   w-1/6 
+                   sm:w-1/4"
       >
         {/* Hamburger */}
         <IconButton

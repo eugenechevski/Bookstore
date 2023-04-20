@@ -20,13 +20,13 @@ const Page = ({
 
   return (
     <div
-      className="flex 
-                        flex-col
-                        items-center
-                        bg-secondary
-                        relative
-                        overflow-scroll
-                        scrollbar"
+      className="flex
+                 flex-col
+                 items-center
+                 bg-secondary
+                 relative
+                 overflow-scroll
+                 scrollbar"
     >
       {!blank && (
         <>
@@ -43,13 +43,13 @@ const Page = ({
       )}
       <div
         className="min-h-screen
-                            max-h-max
-                            w-screen
-                            flex
-                            justify-center
-                            items-center
-                            overflow-scroll
-                            scrollbar"
+                   max-h-max
+                   w-screen
+                   flex
+                   justify-center
+                   items-center
+                   overflow-scroll
+                   scrollbar"
       >
         {content}
       </div>
