@@ -28,7 +28,7 @@ const Category = ({ testCategory }: { testCategory?: ICategory } ) => {
             <div className="flex 
                             flex-col 
                             items-center 
-                            gap-12 
+                            gap-12
                             mt-28
                             text-secondary-content 
                             sm:mt-36 
@@ -40,7 +40,9 @@ const Category = ({ testCategory }: { testCategory?: ICategory } ) => {
                 {/* Cateogry content */}
                 <div className="flex 
                                 flex-col 
-                                gap-12">
+                                gap-6
+                                mb-28
+                                sm:mb-36">
                     {categoryBooks?.map(book => <BookEntry key={uniqid()} 
                                                           book={book}/>)}
                 </div>

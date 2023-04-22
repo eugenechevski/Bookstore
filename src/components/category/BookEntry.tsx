@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ImageComponent from "components/general/ImageComponent";
 
 const BookEntry = ({ book }: { book: IBook }) => {
     return (
@@ -29,26 +30,26 @@ const BookEntry = ({ book }: { book: IBook }) => {
                                 shadow-lg
                                 drop-shadow-lg"># {book.getRank()}</div>
                 <Link to={`/categories/${book.getFormattedCategoryName()}/${book.getFormattedTitle()}`}>
-                    <div className="w-52
-                                    mr-12
-                                    drop-shadow-lg 
-                                    shadow-lg
-                                    sm:w-32 
-                                    sm:mr-0">
-                        <img src={book.getCoverUrl()} alt={`${book.getTitle()} cover`} />
-                    </div>
+                    <ImageComponent src={book.getCoverUrl()}
+                                    alt={book.getTitle() + " cover"}
+                                    classes="w-52
+                                             h-72
+                                             mr-12
+                                             drop-shadow-lg 
+                                             shadow-lg
+                                             sm:w-32 
+                                             sm:h-48
+                                             sm:mr-0"/>
                 </Link>
             </div>
             <div data-testid="synopsis"
-                 className="h-1/6 
-                            w-3/4 
+                 className="w-3/4 
                             text-justify 
                             whitespace-normal 
                             overflow-hidden 
                             text-shadow-lg
                             drop-shadow-lg
-                            sm:text-start 
-                            sm:h-3/4">{book.getSynopsis()}</div>
+                            sm:text-start">{book.getSynopsis()}</div>
         </div>
     );
 };
