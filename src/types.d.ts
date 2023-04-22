@@ -8,6 +8,7 @@ declare interface IBook {
   getCoverUrl(): string;
   getRank(): number;
   getSynopsis(): string;
+  getBuyLinks(): { name: string; url: string; }[] | undefined;
 }
 
 declare interface IUser {
@@ -87,7 +88,7 @@ declare type BookData = {
   buy_links: {
     name: string;
     url: string;
-  }
+  }[]
 }
 
 declare type ListData = {

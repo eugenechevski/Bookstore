@@ -14,6 +14,7 @@ export default class Book implements IBook{
    * @param coverUrl - The URL of the cover image
    * @param rank - The rank of the book
    * @param description - The synopsis of the book
+   * @param buyLinks - The buy links of the book
    */
   constructor(
     private title: string,
@@ -21,11 +22,25 @@ export default class Book implements IBook{
     private categoryName: string,
     private coverUrl: string,
     private rank: number,
-    private description: string
+    private description: string,
+    private buyLinks?: { name: string, url: string }[]
   ) {
     this.title = title.toLowerCase().split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
     this.formattedTitle = title.toLowerCase().split(" ").join("-");
     this.formattedCategoryName = categoryName.toLowerCase().split(" ").join("-");
+
+    // Only include Amazon, Barnes and Noble, and Apple Books
+    if (buyLinks) {
+      this.buyLinks = [];
+
+      for (const link of buyLinks) {
+        if (link.name === 'Amazon' || 
+            link.name === 'Barnes and Noble' ||
+            link.name === 'Apple Books') {
+              this.buyLinks.push(link);
+            }
+      }
+    }
   }
 
   /**
@@ -98,5 +113,15 @@ export default class Book implements IBook{
    */
   getSynopsis(): string {
     return this.description;
+  }
+
+  /**
+   * Gets the buy links of the book.
+   * 
+   * @returns - The buy links of the book
+  */
+
+  getBuyLinks(): { name: string; url: string; }[] | undefined {
+    return this.buyLinks;
   }
 }

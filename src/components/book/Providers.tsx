@@ -1,6 +1,11 @@
 import TextButton from "components/general/TextButton";
+import uniqid from "uniqid";
 
-const Providers = () => {
+const Providers = ({
+  buyLinks,
+}: {
+  buyLinks: { name: string; url: string }[];
+}) => {
   const btnClasses =
     "btn-sm " +
     "w-1/3 " +
@@ -9,6 +14,10 @@ const Providers = () => {
     "rounded-full " +
     "shadow-lg " +
     "sm:btn-md";
+
+  const navigate = (url: string) => {
+    window.location.href = url;
+  };
 
   return (
     <div
@@ -35,21 +44,14 @@ const Providers = () => {
                             gap-4
                             sm:gap-12"
       >
-        <TextButton
-          onClickListener={() => null}
-          textContent={"Amazon"}
-          classes={btnClasses}
-        ></TextButton>
-        <TextButton
-          onClickListener={() => null}
-          textContent={"Apple Books"}
-          classes={btnClasses}
-        ></TextButton>
-        <TextButton
-          onClickListener={() => null}
-          textContent={"Barnes and Noble"}
-          classes={btnClasses}
-        ></TextButton>
+        {buyLinks.map(({ name, url }) => (
+          <TextButton
+            key={uniqid()}
+            onClickListener={navigate.bind(null, url)}
+            textContent={name}
+            classes={btnClasses}
+          />
+        ))}
       </div>
     </div>
   );

@@ -29,7 +29,8 @@ async function DataObject(): Promise<() => Promise<DataObject>> {
             list.list_name,
             book.book_image,
             book.rank,
-            book.description
+            book.description,
+            book.buy_links
           )
         )
       );

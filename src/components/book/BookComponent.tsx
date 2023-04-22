@@ -9,11 +9,13 @@ const BookPage = ({ testBook }: { testBook?: IBook }) => {
     const { bookTitle } = useParams();
     const {bookMap} = useContext(DataContext);
     const [book, setBook] = useState<IBook | {}>(testBook && testBook || {});
+    const [buyLinks, setBuyLinks] = useState<{name: string; url: string}[]>([]);
 
     // Load the book data
     useEffect(() => {
         if (bookMap && Object.keys(bookMap).length > 0) {
             setBook(bookMap[bookTitle]);
+            setBuyLinks((bookMap[bookTitle] as IBook).getBuyLinks());
         }
     }, [bookMap]);
 
@@ -30,7 +32,7 @@ const BookPage = ({ testBook }: { testBook?: IBook }) => {
                             sm:mt-0
                             sm:gap-12">
                 <BookDescription book={book}></BookDescription>
-                <Providers></Providers>
+                <Providers buyLinks={buyLinks}></Providers>
             </div>
         )} blank={false}></Page>
     );
