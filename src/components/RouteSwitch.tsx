@@ -9,6 +9,7 @@ import CreateAccountForm from "src/components/forms/CreateAccountForm";
 import SignInForm from "src/components/forms/SignInForm";
 import LandingPage from "./landing-page/LandingPage";
 import AfterSignIn from "./forms/AfterSignIn";
+import SignOutForm from "./forms/SignOutForm";
 
 const RouteSwitch = () => {
     return (
@@ -20,6 +21,7 @@ const RouteSwitch = () => {
             <Route path="/checkout" element={<CheckoutForm/>}></Route>
             <Route path="/create-account" element={<CreateAccountForm/>}></Route>
             <Route path="/sign-in" element={<SignInForm/>}></Route>
+            <Route path="/sign-out" element={<SignOutForm/>}></Route>
             <Route path="/after-checkout" element={<AfterCheckout/>}></Route>
             <Route path="/after-sign-in" element={<AfterSignIn/>}></Route>
             <Route path="/after-creation" element={<AfterCreation/>}></Route>

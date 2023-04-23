@@ -1,7 +1,7 @@
 import IconButton from "components/general/IconButton";
 import TextButton from "components/general/TextButton";
 import uniqid from "uniqid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import { DataContext } from "src/components/App";
 import BookTrie from "classes/BookTrie";
@@ -15,6 +15,7 @@ const NavBar = ({
 }) => {
   const textBtnClasses = "bg-transparent " + "hover:bg-primary-focus";
 
+  const navigate = useNavigate();
   const { user, books } = useContext(DataContext);
   const [stateUser, setUser] = useState<IUser>(
     testUser ? testUser : (user as IUser)
@@ -22,7 +23,7 @@ const NavBar = ({
   const [offCanvasToggleIcon, setOffCanvasToggleIcon] = useState("bars");
   const [navbarToolsIcon, setNavbarToolsIcon] = useState("ellipsis");
   const [loginButtonIcon, setLoginButtonIcon] = useState(
-    stateUser?.getName() === "Guest" ? "sign-in" : "sign-out"
+    stateUser?.getName() === "Guest User" ? "sign-in" : "sign-out"
   );
   const [bookSearchTrie, setBookSearchTrie] = useState<BookTrie>(null);
   const [searchResult, setSearchResult] = useState<IBook[]>([]);
@@ -44,8 +45,21 @@ const NavBar = ({
     }
   }, [books]);
 
+  // Update the login button icon
+  useEffect(() => {
+    if (stateUser?.getName() === "Guest User") {
+      setLoginButtonIcon("sign-in");
+    } else {
+      setLoginButtonIcon("sign-out");
+    }
+  }, [stateUser])
+
   const toggleLoginButton = () => {
-    // TODO
+    if (stateUser?.getName() === "Guest User") {
+      navigate("/sign-in");
+    } else {
+      navigate("/sign-out");
+    }
   };
 
   const toggleOffcanvasAndIcon = () => {
@@ -332,9 +346,9 @@ const NavBar = ({
               </div>
             </div>
             {/* Sign-in/sign-out button */}
-            <div onClick={() => toggleLoginButton()} data-testid="sign-toggle">
+            <div data-testid="sign-toggle">
               <IconButton
-                onClickListener={() => null}
+                onClickListener={toggleLoginButton}
                 classes={""}
                 iconName={loginButtonIcon}
               ></IconButton>
