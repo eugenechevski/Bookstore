@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { connectAuthEmulator, getAuth } from "firebase/auth";
+import { connectAuthEmulator, getAuth, setPersistence, browserLocalPersistence } from "firebase/auth";
 import {
   getFirestore,
   connectFirestoreEmulator,
@@ -19,6 +19,9 @@ const app = initializeApp({
 });
 const db = getFirestore(app);
 const auth = getAuth(app);
+
+// Set persistence to local storage
+setPersistence(auth, browserLocalPersistence);
 
 if (location.hostname === "localhost") {
   connectFirestoreEmulator(db, "localhost", 8080);

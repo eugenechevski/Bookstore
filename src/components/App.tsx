@@ -1,8 +1,17 @@
+// React Imports
 import { createContext, useEffect, useState } from "react";
+
+// Utilities
 import { guestUser } from "utils/constants";
 import DataObject from "utils/DataObject";
+
+// Classes
+import User from "classes/User";
+
+// Components
 import RouteSwitch from "./RouteSwitch";
 
+// Styles
 import "styles/App.css";
 
 // Import Swiper styles
@@ -11,6 +20,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import "tw-elements";
+
+// other
+import console from "console-browserify";
 
 // Data
 const DataContext = createContext(
@@ -22,6 +34,7 @@ const DataContext = createContext(
     bookMap: BookMap | {};
     signUp: SignUp | {};
     signIn: SignIn | {};
+    signOut: SignOut | {};
     setUser: React.Dispatch<React.SetStateAction<IUser>>;
   }
 );
@@ -35,16 +48,18 @@ function App() {
   const [bookMap, setBookMap] = useState({} as BookMap | {});
   const [signUp, setSignUp] = useState({} as SignUp | {});
   const [signIn, setSignIn] = useState({} as SignIn | {});
+  const [signOut, setSignOut] = useState({} as SignOut | {});
 
   // Load the data
   useEffect(() => {
     import("utils/initFirebase")
       .then(async ({ auth, db }) => {
         const createDataObject = await DataObject();
-        const { signIn, signUp } = await import('utils/authService');
+        const { signIn, signUp, signOut } = await import("utils/authService");
 
         setSignIn(() => signIn.bind(this, db, auth));
         setSignUp(() => signUp.bind(this, db, auth));
+        setSignOut(() => signOut.bind(this, auth));
 
         return createDataObject;
       })
@@ -65,6 +80,22 @@ function App() {
     }
   }, [data]);
 
+  // Check if the user is logged in
+  useEffect(() => {
+    if (Object.keys(data).length > 0) {
+      setTimeout(() => {
+        // Check if there is a user logged in already
+        (signIn as SignIn)().then((result) => {
+          if (!Object.hasOwn(result, "errorMessage")) {
+            setUser(new User(result as UserData, bookMap));
+          } else {
+            console.log((result as { errorMessage: string }).errorMessage);
+          }
+        });
+      }, 250);
+    }
+  }, [signIn, data, bookMap]);
+
   return (
     <DataContext.Provider
       value={{
@@ -75,6 +106,7 @@ function App() {
         bookMap,
         signIn,
         signUp,
+        signOut,
         setUser,
       }}
     >

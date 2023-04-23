@@ -13,18 +13,8 @@ const signUp = async (
   firstName: string,
   lastName: string,
   email: string,
-  password: string,
+  password: string
 ): Promise<UserData | { errorMessage: string }> => {
-  // Validate the input
-  if (
-    typeof email !== "string" ||
-    typeof password !== "string" ||
-    email.length === 0 ||
-    password.length === 0
-  ) {
-    return { errorMessage: "Wrong input." };
-  }
-
   try {
     // Create a new user with the specified email and password
     const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -57,23 +47,25 @@ const signUp = async (
 const signIn = async (
   db: Firestore,
   auth: Auth,
-  email: string,
-  password: string
+  email?: string,
+  password?: string
 ): Promise<UserData | { errorMessage: string }> => {
-  // Validate the input
-  if (
-    typeof email !== "string" ||
-    typeof password !== "string" ||
-    email.length === 0 ||
-    password.length === 0
-  ) {
-    return { errorMessage: "Wrong input." };
-  }
-
   try {
+    let result;
+
     // Sign in with the specified email and password
-    const result = await signInWithEmailAndPassword(auth, email, password);
-    const userId = result.user.uid;
+    if (email && password) {
+      result = (await signInWithEmailAndPassword(auth, email, password)).user;
+    } else {
+      // Sign in with the current user
+      result = auth.currentUser;
+    }
+
+    if (!result) {
+      throw new Error("User is not signed in.");
+    }
+
+    const userId = result.uid;
 
     // Get the user data from Firestore
     const usersDocRef = doc(db, "users/" + userId);
@@ -97,8 +89,19 @@ const signIn = async (
     // Handle errors that occur during sign in
     console.error("Sign in error:", error.code, error.message);
 
-    return { errorMessage: "Couldn't find the user." };
+    return { errorMessage: error.message };
   }
 };
 
-export { signIn, signUp };
+// Sign out the current user
+const signOut = async (auth: Auth): Promise<void> => {
+  try {
+    // Sign out the current user
+    await auth.signOut();
+  } catch (error) {
+    // Handle errors that occur during sign out
+    console.error("Sign out error:", error.code, error.message);
+  }
+};
+
+export { signIn, signUp, signOut };

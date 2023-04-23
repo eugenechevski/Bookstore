@@ -70,9 +70,11 @@ declare type UserData = {
 };
 
 declare type SignIn = (
-  email: string,
-  password: string
+  email?: string,
+  password?: string
 ) => Promise<UserData | { errorMessage: string }>;
+
+declare type SignOut = () => Promise<void>;
 
 declare type SignUp = (
   firstName: string,

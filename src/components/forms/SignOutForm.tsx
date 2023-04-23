@@ -1,18 +1,22 @@
 import Page from "components/general/Page";
-import { useNavigate } from "react-router-dom";
 import { DataContext } from "components/App";
-import { useContext } from "react";
-import { guestUser } from "utils/constants";
 import TextButton from "components/general/TextButton";
+
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+
+import { guestUser } from "utils/constants";
+
 
 
 const SignOutForm = () => {
   const buttonClasses = 'bg-primary hover:bg-primary-focus';
 
   const navigate = useNavigate(); 
-  const { setUser } = useContext(DataContext);
+  const { setUser, signOut } = useContext(DataContext);
 
   const signOutConfirmed = () => {
+    (signOut as SignOut)();
     setUser(guestUser);
     navigate("/home");
   };
