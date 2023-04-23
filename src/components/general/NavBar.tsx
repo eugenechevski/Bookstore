@@ -2,8 +2,9 @@ import IconButton from "components/general/IconButton";
 import TextButton from "components/general/TextButton";
 import uniqid from "uniqid";
 import { Link } from "react-router-dom";
-import { useState, useContext, useEffect, useRef } from "react";
+import { useState, useContext, useEffect } from "react";
 import { DataContext } from "src/components/App";
+import BookTrie from "classes/BookTrie";
 
 const NavBar = ({
   testUser,
@@ -14,16 +15,17 @@ const NavBar = ({
 }) => {
   const textBtnClasses = "bg-transparent " + "hover:bg-primary-focus";
 
-  const { user } = useContext(DataContext);
+  const { user, books } = useContext(DataContext);
   const [stateUser, setUser] = useState<IUser>(
     testUser ? testUser : (user as IUser)
   );
   const [offCanvasToggleIcon, setOffCanvasToggleIcon] = useState("bars");
   const [navbarToolsIcon, setNavbarToolsIcon] = useState("ellipsis");
-  const [searchTerm, setSearchTerm] = useState("");
   const [loginButtonIcon, setLoginButtonIcon] = useState(
     stateUser?.getName() === "Guest" ? "sign-in" : "sign-out"
   );
+  const [bookSearchTrie, setBookSearchTrie] = useState<BookTrie>(null);
+  const [searchResult, setSearchResult] = useState<IBook[]>([]);
 
   // Load the user data
   useEffect(() => {
@@ -35,6 +37,13 @@ const NavBar = ({
     }
   }, [user, testUser]);
 
+  // Load the book data
+  useEffect(() => {
+    if (books && books.length > 0) {
+      setBookSearchTrie(new BookTrie(books));
+    }
+  }, [books]);
+
   const toggleLoginButton = () => {
     // TODO
   };
@@ -42,6 +51,13 @@ const NavBar = ({
   const toggleOffcanvasAndIcon = () => {
     toggleOffcanvas();
     setOffCanvasToggleIcon(offCanvasToggleIcon === "bars" ? "xmark" : "bars");
+  };
+
+  const searchBook = (searchTerm: string) => {
+    if (searchTerm.length > 0) {
+      const result = bookSearchTrie.search(searchTerm);
+      setSearchResult([...result.values()]);
+    }
   };
 
   return (
@@ -98,7 +114,7 @@ const NavBar = ({
                                 peer/search"
         >
           <input
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => searchBook(e.target.value)}
             type="text"
             className="dropdown-toggle 
                                                                                                   input 
@@ -123,32 +139,34 @@ const NavBar = ({
           ></IconButton>
         </div>
         {/* Search results */}
-        {searchTerm.length > 0 && (
+        {searchResult.length > 0 && (
           <div
             className="absolute 
-                                    dropdown 
-                                    dropdown-open 
-                                    mt-16 
-                                    w-1/2 
-                                    sm:mt-20 
-                                    sm:w-1/3"
+                       dropdown 
+                       dropdown-open 
+                       mt-16
+                       w-1/2 
+                       sm:mt-12 
+                       sm:w-1/3"
           >
             <ul
               tabIndex={0}
               className="dropdown-content 
-                                                    menu 
-                                                    p-2 
-                                                    bg-primary 
-                                                    w-full 
-                                                    rounded-xl 
-                                                    shadow-md"
+                                                      menu 
+                                                      p-2 
+                                                      bg-primary 
+                                                      w-full 
+                                                      rounded-xl 
+                                                      shadow-md"
             >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Item 2</a>
-              </li>
+              {searchResult.map((book) => (
+                <Link
+                  to={`/categories/${book.getFormattedCategoryName()}/${book.getFormattedTitle()}`}
+                  key={uniqid()}
+                >
+                  <li className="menu-item">{book.getTitle()}</li>
+                </Link>
+              ))}
             </ul>
           </div>
         )}

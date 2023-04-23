@@ -1,4 +1,3 @@
-// Interface for the IBook class
 declare interface IBook {
   getTitle(): string;
   getFormattedTitle(): string;
@@ -8,7 +7,7 @@ declare interface IBook {
   getCoverUrl(): string;
   getRank(): number;
   getSynopsis(): string;
-  getBuyLinks(): { name: string; url: string; }[] | undefined;
+  getBuyLinks(): { name: string; url: string }[] | undefined;
 }
 
 declare interface IUser {
@@ -26,13 +25,17 @@ declare interface IUser {
   removeFromWishlist: (bookTitle: string) => void;
   emptyCart: () => void;
   emptyWishlist: () => void;
-};
+}
 
 declare interface ICategory {
   getName: () => string;
   getFormattedName: () => string;
   getBooks: () => IBook[];
-};
+}
+
+declare interface IBookTrie {
+  search: (query: string) => Set<IBook>;
+}
 
 declare type CategoryMap = { [categoryName: string]: ICategory };
 
@@ -66,7 +69,6 @@ declare type UserData = {
   cart: UserCart;
 };
 
-
 declare type SignIn = (
   email: string,
   password: string
@@ -76,7 +78,7 @@ declare type SignUp = (
   firstName: string,
   lastName: string,
   email: string,
-  password: string,
+  password: string
 ) => Promise<UserData | { errorMessage: string }>;
 
 declare type BookData = {
@@ -88,21 +90,21 @@ declare type BookData = {
   buy_links: {
     name: string;
     url: string;
-  }[]
-}
+  }[];
+};
 
 declare type ListData = {
   list_name: string;
-  books: BookData[]
-}
+  books: BookData[];
+};
 
 type NYTData = {
   results: {
     lists: ListData[];
-  }
-}
+  };
+};
 
 type CachedData = {
   data: NYTData;
   timestamp: number;
-}
+};
