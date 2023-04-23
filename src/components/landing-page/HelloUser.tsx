@@ -11,7 +11,9 @@ const HelloUser = ({ userName }: { userName: string }) => {
                     gap-12
                     justify-center
                     items-center">
-        <div className="text-5xl
+        <div className="text-center
+                        text-3xl
+                        sm:text-5xl
                         text-secondary-content">
             Welcome back, {userName}.
         </div>
