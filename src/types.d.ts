@@ -25,6 +25,7 @@ declare interface IUser {
   removeFromWishlist: (bookTitle: string) => void;
   emptyCart: () => void;
   emptyWishlist: () => void;
+  setDatabaseUpdaters: (databaseUpdater: DatabaseUpdater) => void;
 }
 
 declare interface ICategory {
@@ -100,13 +101,18 @@ declare type ListData = {
   books: BookData[];
 };
 
-type NYTData = {
+declare type NYTData = {
   results: {
     lists: ListData[];
   };
 };
 
-type CachedData = {
+declare type CachedData = {
   data: NYTData;
   timestamp: number;
+};
+
+declare type DatabaseUpdater = {
+  updateCart: (cart: UserCart) => Promise<void>;
+  updateWishlist: (wishlist: UserWishList) => Promise<void>;
 };

@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react";
 // Utilities
 import { guestUser } from "utils/constants";
 import DataObject from "utils/DataObject";
+import databaseUpdater from "utils/databaseUpdater";
 
 // Classes
 import User from "classes/User";
@@ -42,6 +43,7 @@ const DataContext = createContext(
 function App() {
   const [user, setUser] = useState(guestUser);
   const [data, setData] = useState({} as DataObject | {});
+  const [dbUpdater, setDBUpdater] = useState({} as DatabaseUpdater | {});
   const [categories, setCategories] = useState([] as ICategory[] | []);
   const [categoryMap, setCategoryMap] = useState({} as CategoryMap | {});
   const [books, setBooks] = useState([] as IBook[] | []);
@@ -60,6 +62,7 @@ function App() {
         setSignIn(() => signIn.bind(this, db, auth));
         setSignUp(() => signUp.bind(this, db, auth));
         setSignOut(() => signOut.bind(this, auth));
+        setDBUpdater(databaseUpdater(db, auth))
 
         return createDataObject;
       })
@@ -95,6 +98,19 @@ function App() {
       }, 250);
     }
   }, [signIn, data, bookMap]);
+
+  // Update the user's database updater
+  useEffect(() => {
+    if (Object.keys(dbUpdater).length === 0) {
+      return;
+    }
+
+    if (!user.getName().startsWith("Guest")) {
+      user.setDatabaseUpdaters(dbUpdater as DatabaseUpdater)
+    } else {
+      user.setDatabaseUpdaters(null);
+    }
+  }, [dbUpdater, user]);
 
   return (
     <DataContext.Provider
