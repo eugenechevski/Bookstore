@@ -97,44 +97,44 @@ export default class User implements IUser {
   }
 
   /**
-   * Gets the book from the user's cart by title.
+   * Gets the book from the user's cart by formatted title.
    *
-   * @param bookTitle - The title of the book.
+   * @param formattedTitle - The formatted title of the book.
    * @returns - The book from the user's cart.
    */
-  getBookFromCart(bookTitle: string): IBook | undefined {
-    return this.cartMap[bookTitle]?.book;
+  getBookFromCart(formattedTitle: string): IBook | undefined {
+    return this.cartMap[formattedTitle]?.book;
   }
 
   /**
-   * Gets the book from the user's wishlist by title.
+   * Gets the book from the user's wishlist by formatted title.
    *
-   * @param bookTitle - The title of the book.
+   * @param formattedTitle - The formatted title of the book.
    * @returns - The book from the user's wishlist.
    */
-  getBookFromWishlist(bookTitle: string): IBook | undefined {
-    return this.wishlistMap[bookTitle]?.book;
+  getBookFromWishlist(formattedTitle: string): IBook | undefined {
+    return this.wishlistMap[formattedTitle]?.book;
   }
 
   /**
    * Gets the quantity of a book in the user's cart.
    *
-   * @param bookTitle - The title of the book.
+   * @param formattedTitle - The title of the book.
    * @returns - The quantity of the book in the user's cart.
    */
-  getQuantity(bookTitle: string): number {
-    return this.cartMap[bookTitle]?.quantity || 0;
+  getQuantity(formattedTitle: string): number {
+    return this.cartMap[formattedTitle]?.quantity || 0;
   }
 
   /**
    * Updates the quantity of a book in the user's cart.
    *
-   * @param bookTitle - The title of the book.
+   * @param formattedTitle - The formatted title of the book.
    * @param quantity - The new quantity of the book in the user's cart.
    */
-  updateQuantity(bookTitle: string, quantity: number): void {
-    this.cartMap[bookTitle].quantity = quantity;
-    this.dbCart[bookTitle].quantity = quantity;
+  updateQuantity(formattedTitle: string, quantity: number): void {
+    this.cartMap[formattedTitle].quantity = quantity;
+    this.dbCart[formattedTitle].quantity = quantity;
 
     if (this.updateCart) {
       this.updateCart(this.dbCart);
@@ -144,14 +144,14 @@ export default class User implements IUser {
   /**
    * Adds a book to the user's wishlist.
    *
-   * @param bookTitle - The title of the book.
+   * @param formattedTitle - The formatted title of the book.
    */
-  addToWishlist(bookTitle: string): void {
-    this.wishlistMap[bookTitle] = {
-      book: this.bookMap[bookTitle],
+  addToWishlist(formattedTitle: string): void {
+    this.wishlistMap[formattedTitle] = {
+      book: this.bookMap[formattedTitle],
       timestamp: Date.now(),
     };
-    this.dbWishlist[bookTitle] = {
+    this.dbWishlist[formattedTitle] = {
       timestamp: Date.now(),
     };
 
@@ -163,15 +163,15 @@ export default class User implements IUser {
   /**
    * Adds a book to the user's cart.
    *
-   * @param bookTitle - The title of the book.
+   * @param formattedTitle - The formatted title of the book.
    */
-  addToCart(bookTitle: string): void {
-    this.cartMap[bookTitle] = {
-      book: this.bookMap[bookTitle],
+  addToCart(formattedTitle: string): void {
+    this.cartMap[formattedTitle] = {
+      book: this.bookMap[formattedTitle],
       timestamp: Date.now(),
       quantity: 1,
     };
-    this.dbCart[bookTitle] = {
+    this.dbCart[formattedTitle] = {
       timestamp: Date.now(),
       quantity: 1,
     };
@@ -184,11 +184,11 @@ export default class User implements IUser {
   /**
    * Removes a book from the user's cart.
    *
-   * @param bookTitle - The title of the book.
+   * @param formattedTitle - The formatted title of the book.
    */
-  removeFromCart(bookTitle: string): void {
-    delete this.cartMap[bookTitle];
-    delete this.dbCart[bookTitle];
+  removeFromCart(formattedTitle: string): void {
+    delete this.cartMap[formattedTitle];
+    delete this.dbCart[formattedTitle];
 
     if (this.updateCart) {
       this.updateCart(this.dbCart);
@@ -198,11 +198,11 @@ export default class User implements IUser {
   /**
    * Removes a book from the user's wishlist.
    *
-   * @param bookTitle - The title of the book.
+   * @param formattedTitle - The formatted title of the book.
    */
-  removeFromWishlist(bookTitle: string): void {
-    delete this.wishlistMap[bookTitle];
-    delete this.dbWishlist[bookTitle];
+  removeFromWishlist(formattedTitle: string): void {
+    delete this.wishlistMap[formattedTitle];
+    delete this.dbWishlist[formattedTitle];
 
     if (this.updateWishlist) {
       this.updateWishlist(this.dbWishlist);

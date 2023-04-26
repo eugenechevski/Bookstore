@@ -13,16 +13,16 @@ declare interface IBook {
 declare interface IUser {
   getName: () => string;
   getEmail: () => string;
-  getBookFromCart: (bookTitle: string) => IBook;
-  getBookFromWishlist: (bookTitle: string) => IBook;
+  getBookFromCart: (formattedTitle: string) => IBook;
+  getBookFromWishlist: (formattedTitle: string) => IBook;
   getCart: () => IBook[];
   getWishlist: () => IBook[];
-  getQuantity: (bookTitle: string) => number;
-  updateQuantity: (bookTitle: string, quantity: number) => void;
-  addToWishlist: (bookTitle: string) => void;
-  addToCart: (bookTitle: string) => void;
-  removeFromCart: (bookTitle: string) => void;
-  removeFromWishlist: (bookTitle: string) => void;
+  getQuantity: (formattedTitle: string) => number;
+  updateQuantity: (formattedTitle: string, quantity: number) => void;
+  addToWishlist: (formattedTitle: string) => void;
+  addToCart: (formattedTitle: string) => void;
+  removeFromCart: (formattedTitle: string) => void;
+  removeFromWishlist: (formattedTitle: string) => void;
   emptyCart: () => void;
   emptyWishlist: () => void;
   setDatabaseUpdaters: (databaseUpdater: DatabaseUpdater) => void;
