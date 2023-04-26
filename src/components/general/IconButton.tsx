@@ -8,6 +8,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const possibleIcons = {
   'bars': faBars,
@@ -19,6 +20,7 @@ const possibleIcons = {
   'cart': faShoppingCart,
   'xmark': faXmark,
   'ellipsis': faEllipsis,
+  'check': faCheck
 }
 
 const IconButton = ({ iconName, classes, onClickListener }) => {

@@ -1,33 +1,75 @@
-import TextButton from "components/general/TextButton";
 import IconButton from "components/general/IconButton";
 import { useEffect, useState } from "react";
 import ImageComponent from "components/general/ImageComponent";
 
-const BookDescription = ({ book }: { book: IBook | {} }) => {
+const BookDescription = ({
+  book,
+  user,
+}: {
+  book: IBook | {};
+  user?: IUser | {};
+}) => {
+  const iconButtonCLasses = "text-secondary-content ";
+
   const [coverUrl, setCoverUrl] = useState("");
   const [bookTitle, setTitle] = useState("");
+  const [formattedTitle, setFormattedTitle] = useState("");
   const [bookAuthor, setAuthor] = useState("");
   const [bookSynopsis, setSynopsis] = useState("");
+
+  const [isInCart, setIsInCart] = useState(false);
+  const [isInWishlist, setIsInWishlist] = useState(false);
 
   // Load the book data
   useEffect(() => {
     if (Object.keys(book).length > 0) {
       setCoverUrl((book as IBook).getCoverUrl());
       setTitle((book as IBook).getTitle());
+      setFormattedTitle((book as IBook).getFormattedTitle());
       setAuthor((book as IBook).getAuthorName());
       setSynopsis((book as IBook).getSynopsis());
     }
   }, [book]);
 
-  const textButtonClasses =
-    "btn-accent " +
-    "btn-sm " +
-    "rounded-full " +
-    "shadow-lg " +
-    "text-xs " +
-    "w-1/2 " +
-    "hover:bg-accent-focus";
-  const iconButtonCLasses = "text-secondary-content ";
+  // Determine the initial state of the buttons
+  useEffect(() => {
+    if (Object.keys(user).length > 0) {
+      setIsInCart(
+        (user as IUser).getBookFromCart(formattedTitle) !== undefined
+      );
+      setIsInWishlist(
+        (user as IUser).getBookFromWishlist(formattedTitle) !== undefined
+      );
+    }
+  }, [user, formattedTitle]);
+
+  const toggleCartButton = () => {
+    if (Object.keys(user).length === 0) {
+      return;
+    }
+
+    if (isInCart) {
+      (user as IUser).removeFromCart(formattedTitle);
+    } else {
+      (user as IUser).addToCart(formattedTitle);
+    }
+
+    setIsInCart(!isInCart);
+  };
+
+  const toggleWishlistButton = () => {
+    if (Object.keys(user).length === 0) {
+      return;
+    }
+
+    if (isInWishlist) {
+      (user as IUser).removeFromWishlist(formattedTitle);
+    } else {
+      (user as IUser).addToWishlist(formattedTitle);
+    }
+
+    setIsInWishlist(!isInWishlist);
+  };
 
   return (
     <div
@@ -64,39 +106,23 @@ const BookDescription = ({ book }: { book: IBook | {} }) => {
         <div
           data-testid="add-buttons"
           className="flex
-                     flex-row 
                      items-center 
                      justify-center 
-                     gap-3 
-                     sm:flex-col"
+                     gap-3"
         >
-          {window.screen.width > 640 ? (
-            <>
-              <TextButton
-                onClickListener={() => null}
-                textContent={"Add to Cart"}
-                classes={textButtonClasses}
-              ></TextButton>
-              <TextButton
-                onClickListener={() => null}
-                textContent={"Add to Wishlist"}
-                classes={textButtonClasses}
-              ></TextButton>
-            </>
-          ) : (
-            <>
-              <IconButton
-                onClickListener={() => null}
-                classes={iconButtonCLasses}
-                iconName={"cart"}
-              ></IconButton>
-              <IconButton
-                onClickListener={() => null}
-                classes={iconButtonCLasses}
-                iconName={"heart"}
-              ></IconButton>
-            </>
-          )}
+          {/* Add to cart button */}
+          <IconButton
+            onClickListener={toggleCartButton}
+            classes={iconButtonCLasses}
+            iconName={isInCart ? "check" : "cart"}
+          />
+
+          {/* Add to wishlist button */}
+          <IconButton
+            onClickListener={toggleWishlistButton}
+            classes={iconButtonCLasses}
+            iconName={isInWishlist ? "check" : "heart"}
+          />
         </div>
       </div>
       {/* Title, author, and synopsis */}
