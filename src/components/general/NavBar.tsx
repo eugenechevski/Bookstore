@@ -52,7 +52,7 @@ const NavBar = ({
     } else {
       setLoginButtonIcon("sign-out");
     }
-  }, [stateUser])
+  }, [stateUser]);
 
   const toggleLoginButton = () => {
     if (stateUser?.getName() === "Guest User") {
@@ -270,6 +270,14 @@ const NavBar = ({
                     to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}
                   >
                     {item.getTitle()}
+                    <IconButton
+                      iconName={"close"}
+                      classes={"ml-16"}
+                      onClickListener={(user as IUser).removeFromWishlist.bind(
+                        user,
+                        item.getFormattedTitle()
+                      )}
+                    />
                   </Link>
                 ))}
               </ul>
@@ -314,6 +322,14 @@ const NavBar = ({
                     to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}
                   >
                     {item.getTitle()}
+                    <IconButton
+                      iconName={"close"}
+                      classes={"ml-16"}
+                      onClickListener={(user as IUser).removeFromCart.bind(
+                        user,
+                        item.getFormattedTitle()
+                      )}
+                    />
                   </Link>
                 ))}
               </ul>
