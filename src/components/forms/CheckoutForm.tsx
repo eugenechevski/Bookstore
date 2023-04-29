@@ -6,15 +6,17 @@ import { DataContext } from "components/App";
 import { useContext, useEffect, useState } from "react";
 
 const CheckoutForm = ({ testUser }: { testUser?: IUser }) => {
-  const dataUser = useContext(DataContext).user;
-  const user = testUser !== undefined ? testUser : dataUser;
-  const [cartItems, setCartItems] = useState<IBook[]>([]);
+  const { user, userCart } = useContext(DataContext);
+  const stateUser = testUser !== undefined ? testUser : user;
+  const [cartItems, setCartItems] = useState<IBook[]>(
+    testUser !== undefined ? (stateUser as IUser).getCart() : userCart
+  );
 
   useEffect(() => {
-    if (Object.keys(user).length > 0) {
-      setCartItems((user as IUser).getCart());
+    if (userCart !== undefined) {
+      setCartItems(userCart);
     }
-  }, [user]);
+  }, [userCart]);
 
   return (
     <Page
@@ -44,11 +46,13 @@ const CheckoutForm = ({ testUser }: { testUser?: IUser }) => {
                                     sm:h-[540px]
                                     overflow-y-scroll"
             >
-              {cartItems.map((book: IBook) => (
+              {cartItems?.map((book: IBook) => (
                 <CheckoutBook
                   key={uniqid()}
                   book={book}
-                  quantity={(user as IUser).getQuantity(book.getTitle())}
+                  quantity={(user as IUser).getQuantity(
+                    book.getFormattedTitle()
+                  )}
                 />
               ))}
             </div>

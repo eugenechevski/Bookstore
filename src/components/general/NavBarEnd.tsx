@@ -40,10 +40,7 @@ const NavBarEnd = () => {
                   sm:flex-row 
                   ${
                     navbarToolsIcon === "xmark"
-                      ? "mt-5 " +
-                        "translate-y-28 " +
-                        "p-2 " +
-                        "shadow-md"
+                      ? "mt-5 " + "translate-y-28 " + "p-2 " + "shadow-md"
                       : ""
                   }`}
     >
@@ -64,6 +61,7 @@ const NavBarEnd = () => {
           ></IconButton>
         </div>
       )}
+
       {/* Tools elememts*/}
       {(window.screen.width > 640 || navbarToolsIcon === "xmark") && (
         <>
@@ -89,53 +87,68 @@ const NavBarEnd = () => {
               )}
             </label>
 
-            <ul
-              data-testid={"wishlist-dropdown"}
-              tabIndex={0}
+            {/* Wishlist dropdown content */}
+            <div
               className="dropdown-content
-                         menu
-                         p-2 
-                         gap-1
+                         flex
+                         flex-col
+                         items-center
                          shadow 
+                         drop-shadow-lg
                          bg-primary
                          rounded-box
-                         text-sm
                          border
-                         border-secondary
-                         max-h-96
-                         scrollbar
-                         overflow-scroll"
+                         border-secondary"
             >
-              {(userWishlist as IBook[]).map((item) => (
-                <Link
-                  key={uniqid()}
-                  to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}
-                  className="flex"
-                >
-                  <div
-                    className="flex
+              <ul
+                data-testid={"wishlist-dropdown"}
+                tabIndex={0}
+                className="menu
+                           menu-compact
+                           sm:menu-normal
+                           p-2 
+                           gap-1
+                           text-sm
+                           max-h-96
+                           overflow-x-scroll
+                           scrollbar"
+              >
+                {(userWishlist as IBook[])?.map((item) => (
+                  <div className="flex" key={uniqid()}>
+                    <Link
+                      to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}
+                      className="flex
                                justify-start
                                items-center
                                w-48
                                h-12
-                               overflow-scroll
-                               scrollbar
+                               overflow-hidden
                                p-3
                                border
                                border-primary-focus
                                rounded-md
                                hover:bg-primary-focus"
-                  >
-                    {item.getTitle()}
+                    >
+                      {item.getTitle()}
+                    </Link>
+                    <IconButton
+                      iconName={"close"}
+                      classes={"ml-2"}
+                      onClickListener={removeBookFromWishlist.bind(null, item)}
+                    />
                   </div>
-                  <IconButton
-                    iconName={"close"}
-                    classes={"ml-2"}
-                    onClickListener={removeBookFromWishlist.bind(null, item)}
-                  />
-                </Link>
-              ))}
+                ))}
               </ul>
+
+              {/** Add All To Cart button */}
+              { userWishlist?.length > 0 && 
+                <TextButton
+                  textContent={"Add All To Cart"}
+                  classes={"btn-sm btn-primary mb-2"}
+                  onClickListener={() => null}
+                />
+              }
+            </div>
           </div>
 
           {/* Cart dropdown */}
@@ -160,54 +173,70 @@ const NavBarEnd = () => {
               )}
             </label>
 
-            <ul
-              data-testid={"cart-dropdown"}
-              tabIndex={0}
+            {/* Cart dropdown content */}
+            <div
               className="dropdown-content
-                         menu
-                         p-2 
-                         gap-1
-                         shadow 
-                         drop-shadow-lg
-                         bg-primary
-                         rounded-box
-                         text-sm
-                         border
-                         border-secondary
-                         max-h-96
-                         scrollbar
-                         overflow-scroll"
+                            flex
+                            flex-col
+                            items-center
+                            shadow 
+                            drop-shadow-lg
+                            bg-primary
+                            rounded-box
+                            border
+                            border-secondary"
             >
-              {(userCart as IBook[]).map((item) => (
-                <Link
-                  key={uniqid()}
-                  to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}
-                  className="flex"
-                >
-                  <div
-                    className="flex
-                               justify-start
-                               items-center
-                               w-48
-                               h-12
-                               overflow-scroll
-                               scrollbar
-                               p-3
-                               border
-                               border-primary-focus
-                               rounded-md
-                               hover:bg-primary-focus"
-                  >
-                    {item.getTitle()}
+              <ul
+                data-testid={"cart-dropdown"}
+                tabIndex={0}
+                className="menu
+                           menu-compact
+                           sm:menu-normal
+                           p-2 
+                           gap-1
+                           text-sm
+                           max-h-96
+                           overflow-x-scroll
+                           scrollbar"
+              >
+                {(userCart as IBook[]).map((item) => (
+                  <div className="flex" key={uniqid()}>
+                    <Link
+                      to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}
+                      className="flex
+                                justify-start
+                                items-center
+                                w-48
+                                h-12
+                                overflow-hidden
+                                p-3
+                                border
+                                border-primary-focus
+                                rounded-md
+                                hover:bg-primary-focus"
+                    >
+                      {item.getTitle()}
+                    </Link>
+                    <IconButton
+                      iconName={"close"}
+                      classes={"ml-2"}
+                      onClickListener={removeBookFromCart.bind(null, item)}
+                    />
                   </div>
-                  <IconButton
-                    iconName={"close"}
-                    classes={"ml-2"}
-                    onClickListener={removeBookFromCart.bind(null, item)}
+                ))}
+              </ul>
+
+              {/** Checkout button */}
+              {userCart?.length > 0 && (
+                <Link to={"/checkout"}>
+                  <TextButton
+                    textContent={"Checkout"}
+                    classes={"btn-sm btn-primary mb-2"}
+                    onClickListener={() => null}
                   />
                 </Link>
-              ))}
-              </ul>
+              )}
+            </div>
           </div>
 
           {/* User information dropdown */}

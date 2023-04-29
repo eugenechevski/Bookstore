@@ -39,15 +39,11 @@ module.exports = {
           width: '10px',
         },
         '.scrollbar::-webkit-scrollbar-thumb': {
-          backgroundColor: '#5c7f67',
-          borderRadius: '100vh',
-        },
-        '.scrollbar::-webkit-scrollbar-thumb:hover': {
-          backgroundColor: '#5c7f67',
+          backgroundColor: '#24331A',
           borderRadius: '100vh',
         },
         '.scrollbar::-webkit-scrollbar-track-piece': {
-          backgroundColor: '#ecf4e7',
+          backgroundColor: '#5C7F67',
         },
       });
     }),
