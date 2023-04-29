@@ -30,7 +30,7 @@ const Category = ({ testCategory }: { testCategory?: ICategory } ) => {
                             items-center 
                             gap-12
                             mt-28
-                            text-secondary-content 
+                            text-secondary-content
                             sm:mt-36 
                             sm:w-3/4">
                 {/* Category name */}

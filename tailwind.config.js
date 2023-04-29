@@ -43,7 +43,7 @@ module.exports = {
           borderRadius: '100vh',
         },
         '.scrollbar::-webkit-scrollbar-track-piece': {
-          backgroundColor: '#5C7F67',
+          display: 'none',
         },
       });
     }),

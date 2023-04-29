@@ -25,8 +25,7 @@ const Page = ({
                  items-center
                  bg-secondary
                  relative
-                 overflow-scroll
-                 scrollbar"
+                 overflow-hidden"
     >
       {!blank && (
         <>
@@ -48,8 +47,7 @@ const Page = ({
                    flex
                    justify-center
                    items-center
-                   overflow-scroll
-                   scrollbar"
+                   overflow-hidden"
       >
         {content}
       </div>
