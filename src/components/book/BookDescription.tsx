@@ -4,12 +4,17 @@ import ImageComponent from "components/general/ImageComponent";
 
 const BookDescription = ({
   book,
-  user,
+  userData,
 }: {
   book: IBook | {};
-  user?: IUser | {};
+  userData?: {
+    user: IUser | {};
+    setUserCart: React.Dispatch<React.SetStateAction<IBook[]>>;
+    setUserWishlist: React.Dispatch<React.SetStateAction<IBook[]>>;
+  };
 }) => {
   const iconButtonCLasses = "text-secondary-content ";
+  const { user, setUserCart, setUserWishlist } = userData;
 
   const [coverUrl, setCoverUrl] = useState("");
   const [bookTitle, setTitle] = useState("");
@@ -55,6 +60,7 @@ const BookDescription = ({
     }
 
     setIsInCart(!isInCart);
+    setUserCart((user as IUser).getCart());
   };
 
   const toggleWishlistButton = () => {
@@ -69,6 +75,7 @@ const BookDescription = ({
     }
 
     setIsInWishlist(!isInWishlist);
+    setUserWishlist((user as IUser).getWishlist());
   };
 
   return (

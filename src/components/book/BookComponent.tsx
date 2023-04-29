@@ -8,11 +8,17 @@ import Providers from "./Providers";
 const BookPage = ({ testBook }: { testBook?: IBook }) => {
   const { bookTitle } = useParams();
 
-  const { bookMap, user } = useContext(DataContext);
-  
+  const {
+    bookMap,
+    user,
+
+    setUserCart,
+    setUserWishlist,
+  } = useContext(DataContext);
+
   const [book, setBook] = useState<IBook | {}>((testBook && testBook) || {});
   const [buyLinks, setBuyLinks] = useState<{ name: string; url: string }[]>([]);
-  
+
   // Load the book data
   useEffect(() => {
     if (bookMap && Object.keys(bookMap).length > 0) {
@@ -38,7 +44,11 @@ const BookPage = ({ testBook }: { testBook?: IBook }) => {
         >
           <BookDescription
             book={book}
-            user={user}
+            userData={{
+              user,
+              setUserCart,
+              setUserWishlist,
+            }}
           ></BookDescription>
           <Providers buyLinks={buyLinks}></Providers>
         </div>

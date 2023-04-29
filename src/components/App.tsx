@@ -20,10 +20,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import "tw-elements";
-
 // other
 import console from "console-browserify";
+import "tw-elements";
+
 
 // Data
 const DataContext = createContext(
@@ -37,6 +37,10 @@ const DataContext = createContext(
     signIn: SignIn | {};
     signOut: SignOut | {};
     setUser: React.Dispatch<React.SetStateAction<IUser>>;
+    userCart: IBook[] | [];
+    userWishlist: IBook[] | [];
+    setUserCart: React.Dispatch<React.SetStateAction<IBook[]>>;
+    setUserWishlist: React.Dispatch<React.SetStateAction<IBook[]>>;
   }
 );
 
@@ -51,6 +55,8 @@ function App() {
   const [signUp, setSignUp] = useState({} as SignUp | {});
   const [signIn, setSignIn] = useState({} as SignIn | {});
   const [signOut, setSignOut] = useState({} as SignOut | {});
+  const [userCart, setUserCart] = useState([] as IBook[] | []);
+  const [userWishlist, setUserWishlist] = useState([] as IBook[] | []);
 
   // Load the data
   useEffect(() => {
@@ -99,7 +105,7 @@ function App() {
     }
   }, [signIn, data, bookMap]);
 
-  // Update the user's database updater
+  // Update the user object
   useEffect(() => {
     if (Object.keys(dbUpdater).length === 0) {
       return;
@@ -110,8 +116,11 @@ function App() {
     } else {
       user.setDatabaseUpdaters(null);
     }
+    
+    setUserCart(user.getCart());
+    setUserWishlist(user.getWishlist());
   }, [dbUpdater, user]);
-
+  
   return (
     <DataContext.Provider
       value={{
@@ -124,6 +133,10 @@ function App() {
         signUp,
         signOut,
         setUser,
+        userCart,
+        userWishlist,
+        setUserCart,
+        setUserWishlist,
       }}
     >
       <RouteSwitch></RouteSwitch>
