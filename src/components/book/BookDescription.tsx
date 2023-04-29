@@ -9,12 +9,15 @@ const BookDescription = ({
   book: IBook | {};
   userData?: {
     user: IUser | {};
+    userCart: IBook[];
+    userWishlist: IBook[];
     setUserCart: React.Dispatch<React.SetStateAction<IBook[]>>;
     setUserWishlist: React.Dispatch<React.SetStateAction<IBook[]>>;
   };
 }) => {
   const iconButtonCLasses = "text-secondary-content ";
-  const { user, setUserCart, setUserWishlist } = userData;
+  const { user, setUserCart, setUserWishlist, userCart, userWishlist } =
+    userData;
 
   const [coverUrl, setCoverUrl] = useState("");
   const [bookTitle, setTitle] = useState("");
@@ -47,6 +50,27 @@ const BookDescription = ({
       );
     }
   }, [user, formattedTitle]);
+
+  // Update the state of the buttons when the state of the cart changes
+  useEffect(() => {
+    if (Object.keys(user).length === 0) {
+      return;
+    }
+
+    setIsInCart((user as IUser).getBookFromCart(formattedTitle) !== undefined);
+  }, [userCart]);
+
+  // Update the state of the buttons when the state of the wishlist changes
+  useEffect(() => {
+    if (Object.keys(user).length === 0) {
+      return;
+    }
+
+    setIsInWishlist(
+      (user as IUser).getBookFromWishlist(formattedTitle) !== undefined
+    );
+  }, [userWishlist]);
+  
 
   const toggleCartButton = () => {
     if (Object.keys(user).length === 0) {

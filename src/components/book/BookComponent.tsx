@@ -11,7 +11,8 @@ const BookPage = ({ testBook }: { testBook?: IBook }) => {
   const {
     bookMap,
     user,
-
+    userCart,
+    userWishlist,
     setUserCart,
     setUserWishlist,
   } = useContext(DataContext);
@@ -46,6 +47,8 @@ const BookPage = ({ testBook }: { testBook?: IBook }) => {
             book={book}
             userData={{
               user,
+              userCart,
+              userWishlist,
               setUserCart,
               setUserWishlist,
             }}
