@@ -6,7 +6,7 @@ import { DataContext } from "components/App";
 import { useContext, useEffect, useState } from "react";
 
 const CheckoutForm = ({ testUser }: { testUser?: IUser }) => {
-  const { user, userCart } = useContext(DataContext);
+  const { user, userCart, setUserCart } = useContext(DataContext);
   const stateUser = testUser !== undefined ? testUser : user;
   const [cartItems, setCartItems] = useState<IBook[]>(
     testUser !== undefined ? (stateUser as IUser).getCart() : userCart
@@ -39,12 +39,12 @@ const CheckoutForm = ({ testUser }: { testUser?: IUser }) => {
             {/* Items */}
             <div
               className="flex
-                                    flex-col
-                                    gap-6
-                                    scrollbar
-                                    h-[444px]
-                                    sm:h-[540px]
-                                    overflow-y-scroll"
+                         flex-col
+                         gap-6
+                         scrollbar
+                         max-h-[444px]
+                         sm:max-h-[540px]
+                         overflow-y-scroll"
             >
               {cartItems?.map((book: IBook) => (
                 <CheckoutBook
@@ -53,12 +53,17 @@ const CheckoutForm = ({ testUser }: { testUser?: IUser }) => {
                   quantity={(user as IUser).getQuantity(
                     book.getFormattedTitle()
                   )}
+                  updateQuantity={(user as IUser)?.updateQuantity.bind(
+                    user,
+                    book?.getFormattedTitle()
+                  )}
+                  updateUserCart={() => setUserCart((user as IUser).getCart())}
                 />
               ))}
             </div>
             {/* Checkout button */}
             <Link
-              to={"/after-checkout"}
+              to={cartItems.length > 0 ? "/after-checkout" : "/home"}
               className="btn-primary 
                                                             rounded-full 
                                                             w-1/2 

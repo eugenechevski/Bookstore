@@ -10,6 +10,8 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 const possibleIcons = {
   'bars': faBars,
@@ -22,7 +24,9 @@ const possibleIcons = {
   'xmark': faXmark,
   'ellipsis': faEllipsis,
   'check': faCheck,
-  'close': faClose
+  'close': faClose,
+  'arrow-up': faArrowUp,
+  'arrow-down': faArrowDown
 }
 
 const IconButton = ({ iconName, classes, onClickListener }) => {

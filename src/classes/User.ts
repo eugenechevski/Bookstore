@@ -133,8 +133,18 @@ export default class User implements IUser {
    * @param quantity - The new quantity of the book in the user's cart.
    */
   updateQuantity(formattedTitle: string, quantity: number): void {
-    this.cartMap[formattedTitle].quantity = quantity;
-    this.dbCart[formattedTitle].quantity = quantity;
+    if (!(formattedTitle in this.cartMap)) {
+      return;
+    }
+
+    if (quantity === 0) {
+      delete this.cartMap[formattedTitle];
+      delete this.dbCart[formattedTitle];
+    } else {
+      this.cartMap[formattedTitle].quantity = quantity;
+      this.dbCart[formattedTitle].quantity = quantity;
+    }
+
 
     if (this.updateCart) {
       this.updateCart(this.dbCart);
