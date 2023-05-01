@@ -220,6 +220,19 @@ export default class User implements IUser {
   }
 
   /**
+   * Adds all books in the user's wishlist to the user's cart.
+   */
+  addAllToCart(): void {
+    // Add all books in the user's wishlist to the user's cart.
+    Object.keys(this.wishlistMap).forEach((formattedTitle) => {
+      this.addToCart(formattedTitle);
+    });
+
+    // Empty the user's wishlist.
+    this.emptyWishlist();
+  }
+
+  /**
    * Empties the user's cart.
    */
   emptyCart(): void {

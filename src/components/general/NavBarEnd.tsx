@@ -20,6 +20,7 @@ const NavBarEnd = () => {
     stateUser,
     toggleLoginButton,
     loginButtonIcon,
+    handleAddAllToCart,
   } = useContext(NavBarContext);
 
   return (
@@ -116,7 +117,7 @@ const NavBarEnd = () => {
                 {(userWishlist as IBook[])?.map((item) => (
                   <div className="flex" key={uniqid()}>
                     <Link
-                      to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}
+                      to={`/categories/${item?.getFormattedCategoryName()}/${item?.getFormattedTitle()}`}
                       className="flex
                                justify-start
                                items-center
@@ -129,7 +130,7 @@ const NavBarEnd = () => {
                                rounded-md
                                hover:bg-primary-focus"
                     >
-                      {item.getTitle()}
+                      {item?.getTitle()}
                     </Link>
                     <IconButton
                       iconName={"close"}
@@ -141,13 +142,13 @@ const NavBarEnd = () => {
               </ul>
 
               {/** Add All To Cart button */}
-              { userWishlist?.length > 0 && 
+              {userWishlist?.length > 0 && (
                 <TextButton
                   textContent={"Add All To Cart"}
                   classes={"btn-sm btn-primary mb-2"}
-                  onClickListener={() => null}
+                  onClickListener={handleAddAllToCart}
                 />
-              }
+              )}
             </div>
           </div>
 
@@ -199,10 +200,10 @@ const NavBarEnd = () => {
                            overflow-x-scroll
                            scrollbar"
               >
-                {(userCart as IBook[]).map((item) => (
+                {(userCart as IBook[])?.map((item) => (
                   <div className="flex" key={uniqid()}>
                     <Link
-                      to={`/categories/${item.getFormattedCategoryName()}/${item.getFormattedTitle()}`}
+                      to={`/categories/${item?.getFormattedCategoryName()}/${item?.getFormattedTitle()}`}
                       className="flex
                                 justify-start
                                 items-center
@@ -215,7 +216,7 @@ const NavBarEnd = () => {
                                 rounded-md
                                 hover:bg-primary-focus"
                     >
-                      {item.getTitle()}
+                      {item?.getTitle()}
                     </Link>
                     <IconButton
                       iconName={"close"}

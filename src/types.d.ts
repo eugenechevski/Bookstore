@@ -25,6 +25,7 @@ declare interface IUser {
   removeFromWishlist: (formattedTitle: string) => void;
   emptyCart: () => void;
   emptyWishlist: () => void;
+  addAllToCart: () => void;
   setDatabaseUpdaters: (databaseUpdater: DatabaseUpdater) => void;
 }
 

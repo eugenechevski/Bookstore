@@ -26,6 +26,7 @@ const NavBarContext = createContext(
     removeBookFromWishlist: (book: IBook) => void;
     toggleOffcanvasAndIcon: () => void;
     toggleLoginButton: () => void;
+    handleAddAllToCart: () => void;
   }
 );
 
@@ -110,6 +111,12 @@ const NavBar = ({
     setUserCart((user as IUser).getCart());
   };
 
+  const handleAddAllToCart = () => {
+    (user as IUser).addAllToCart();
+    setUserCart((user as IUser).getCart());
+    setUserWishlist((user as IUser).getWishlist());
+  };
+
   return (
     <NavBarContext.Provider value={{
       textBtnClasses,
@@ -127,6 +134,7 @@ const NavBar = ({
       removeBookFromWishlist,
       toggleOffcanvasAndIcon,
       toggleLoginButton,
+      handleAddAllToCart,
     }}
     > <div
         className="navbar  
