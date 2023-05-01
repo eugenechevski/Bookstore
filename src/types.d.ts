@@ -27,6 +27,7 @@ declare interface IUser {
   emptyWishlist: () => void;
   addAllToCart: () => void;
   setDatabaseUpdaters: (databaseUpdater: DatabaseUpdater) => void;
+  setBookMap: (bookMap: BookMap) => void;
 }
 
 declare interface ICategory {

@@ -105,7 +105,7 @@ function App() {
     }
   }, [signIn, data, bookMap]);
 
-  // Update the user object
+  // Update the user's database updaters
   useEffect(() => {
     if (Object.keys(dbUpdater).length === 0) {
       return;
@@ -120,6 +120,13 @@ function App() {
     setUserCart(user.getCart());
     setUserWishlist(user.getWishlist());
   }, [dbUpdater, user]);
+
+  // Update the user's book map if the user is Guest
+  useEffect(() => {
+    if (user.getName().startsWith("Guest")) {
+      user.setBookMap(bookMap);
+    }
+  }, [bookMap, user]);
   
   return (
     <DataContext.Provider

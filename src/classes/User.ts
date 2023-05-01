@@ -268,4 +268,11 @@ export default class User implements IUser {
       this.updateWishlist = updateWishlist;
     }
   }
+
+  /**
+   * Sets the book map.
+   */
+  setBookMap(bookMap: BookMap): void {
+    this.bookMap = bookMap;
+  }
 }
