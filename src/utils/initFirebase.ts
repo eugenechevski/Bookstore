@@ -7,6 +7,12 @@ import {
   connectFirestoreEmulator,
 } from "firebase/firestore";
 
+import console from 'console-browserify';
+
+require('dotenv');
+
+console.log(process.env.FIREBASE_API_KEY);
+
 const app = initializeApp({
     apiKey: process.env.FIREBASE_API_KEY,
     authDomain: process.env.FIREBASE_AUTH_DOMAIN,
