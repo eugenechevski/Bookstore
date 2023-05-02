@@ -1,12 +1,28 @@
 import uniqid from "uniqid";
-import IconButton from "./IconButton";
 import { NavBarContext } from "./NavBar";
 
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+
+import IconButton from "./IconButton";
 
 const NavBarCenter = () => {
   const { searchBook, searchResult } = useContext(NavBarContext);
+  const [searchText, setSearchText] = useState<string>("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+    searchBook(e.target.value);
+  };
+
+  const handleClearSearch = () => {
+    // clear the search result
+    setSearchText("");
+    searchBook("");
+
+    // clear the search input
+    document.querySelector<HTMLInputElement>(".form-control input").value = "";
+  };
 
   return (
     <div
@@ -22,62 +38,59 @@ const NavBarCenter = () => {
                                 peer/search"
       >
         <input
-          onChange={(e) => searchBook(e.target.value)}
+          onChange={handleChange}
           type="text"
           className="dropdown-toggle 
-                                                                                                  input 
-                                                                                                  rounded-none 
-                                                                                                  border-0 
-                                                                                                  border-b-2 
-                                                                                                  border-b-base-100 
-                                                                                                  bg-transparent 
-                                                                                                  focus:outline-none"
+                     input 
+                     rounded-none 
+                     border-0 
+                     border-b-2 
+                     border-b-base-100 
+                     bg-transparent 
+                     focus:outline-none"
         />
       </div>
-      {/* Search icon */}
-      <div
-        className="hidden 
-                                sm:block"
-        data-testid="search-button"
-      >
+
+      {/* Clear search button */}
+      {searchText.length > 0 && (
         <IconButton
-          onClickListener={() => null}
+          iconName={"close"}
+          onClickListener={handleClearSearch}
           classes={""}
-          iconName={"search"}
-        ></IconButton>
-      </div>
+        />
+      )}
+
       {/* Search results */}
-      {searchResult.length > 0 && (
-        <div
-          className="absolute 
-                       dropdown 
-                       dropdown-open 
-                       mt-16
-                       w-1/2 
-                       sm:mt-12 
-                       sm:w-1/3"
-        >
-          <ul
-            tabIndex={0}
-            className="dropdown-content 
+      <div
+        className={`absolute
+                   dropdown
+                   dropdown-open
+                   mt-16
+                   w-1/2 
+                   sm:mt-12 
+                   sm:w-1/3
+                   ${searchText.length > 0 ? "block" : "hidden"}`}
+      >
+        <ul
+          tabIndex={0}
+          className="dropdown-content 
                                                       menu 
                                                       p-2 
                                                       bg-primary 
                                                       w-full 
                                                       rounded-xl 
                                                       shadow-md"
-          >
-            {searchResult.map((book) => (
-              <Link
-                to={`/categories/${book.getFormattedCategoryName()}/${book.getFormattedTitle()}`}
-                key={uniqid()}
-              >
-                <li className="menu-item">{book.getTitle()}</li>
-              </Link>
-            ))}
-          </ul>
-        </div>
-      )}
+        >
+          {searchResult.map((book) => (
+            <Link
+              to={`/categories/${book.getFormattedCategoryName()}/${book.getFormattedTitle()}`}
+              key={uniqid()}
+            >
+              <li className="menu-item">{book.getTitle()}</li>
+            </Link>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
