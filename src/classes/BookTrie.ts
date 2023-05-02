@@ -52,6 +52,16 @@ export default class BookTrie implements IBookTrie {
     }
 
     // Return the books stored in the final node
-    return currentNode.books;
+    // return only unique books
+    const uniqueBookNames = new Set<string>();
+    const uniqueBooks = new Set<IBook>();
+    for (const book of currentNode.books) {
+      if (!uniqueBookNames.has(book.getTitle())) {
+        uniqueBookNames.add(book.getTitle());
+        uniqueBooks.add(book);
+      }
+    }
+
+    return uniqueBooks;
   }
 }
