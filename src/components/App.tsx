@@ -101,7 +101,7 @@ function App() {
             console.log((result as { errorMessage: string }).errorMessage);
           }
         });
-      }, 250);
+      }, 500);
     }
   }, [signIn, data, bookMap]);
 
