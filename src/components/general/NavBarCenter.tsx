@@ -33,9 +33,10 @@ const NavBarCenter = () => {
       {/* Search input */}
       <div
         className="form-control 
-                                w-full 
-                                mr-2 
-                                peer/search"
+                   w-full 
+                   mr-2 
+                   peer/search
+                   relative"
       >
         <input
           onChange={handleChange}
@@ -56,7 +57,7 @@ const NavBarCenter = () => {
         <IconButton
           iconName={"close"}
           onClickListener={handleClearSearch}
-          classes={""}
+          classes={"absolute right-16 sm:relative sm:right-0"}
         />
       )}
 
