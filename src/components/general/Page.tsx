@@ -1,6 +1,7 @@
 import NavBar from "src/components/general/NavBar";
 import OffCanvas from "src/components/general/OffCanvas";
 import { useState } from "react";
+import { useSpring, animated } from "react-spring";
 
 const Page = ({
   content,
@@ -18,8 +19,11 @@ const Page = ({
     setShowOffcanvas(!showOffcanvas);
   };
 
+  const props = useSpring({ from: { opacity: 0 }, to: { opacity: 1 }, config: { duration: 750 } });
+
   return (
-    <div
+    <animated.div
+      style={props}
       className="flex
                  flex-col
                  items-center
@@ -51,7 +55,7 @@ const Page = ({
       >
         {content}
       </div>
-    </div>
+    </animated.div>
   );
 };
 
