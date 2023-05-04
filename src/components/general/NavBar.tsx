@@ -27,6 +27,7 @@ const NavBarContext = createContext(
     toggleOffcanvasAndIcon: () => void;
     toggleLoginButton: () => void;
     handleAddAllToCart: () => void;
+    handleCheckout: () => void;
   }
 );
 
@@ -117,6 +118,10 @@ const NavBar = ({
     setUserWishlist((user as IUser).getWishlist());
   };
 
+  const handleCheckout = () => {
+    navigate("/checkout");
+  }
+
   return (
     <NavBarContext.Provider value={{
       textBtnClasses,
@@ -135,6 +140,7 @@ const NavBar = ({
       toggleOffcanvasAndIcon,
       toggleLoginButton,
       handleAddAllToCart,
+      handleCheckout
     }}
     > <div
         className="navbar  

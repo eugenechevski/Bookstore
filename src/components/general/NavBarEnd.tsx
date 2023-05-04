@@ -4,7 +4,7 @@ import TextButton from "components/general/TextButton";
 import uniqid from "uniqid";
 
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState} from "react";
 
 import { NavBarContext } from "./NavBar";
 
@@ -21,7 +21,24 @@ const NavBarEnd = () => {
     toggleLoginButton,
     loginButtonIcon,
     handleAddAllToCart,
+    handleCheckout,
   } = useContext(NavBarContext);
+
+  const [wishlistOpen, setWishlistOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [userOpen, setUserOpen] = useState(false);
+
+  const toggleWishlist = () => {
+    setWishlistOpen(!wishlistOpen);
+  };
+
+  const toggleCart = () => {
+    setCartOpen(!cartOpen);
+  };
+
+  const toggleUser = () => {
+    setUserOpen(!userOpen);
+  };
 
   return (
     <div
@@ -68,11 +85,16 @@ const NavBarEnd = () => {
         <>
           {/* Wishlist dropdown */}
           <div
-            className="dropdown 
-                       dropdown-left 
-                       sm:dropdown-bottom"
+            className={`dropdown
+                       ${wishlistOpen ? "dropdown-open" : ""}
+                       dropdown-left
+                       sm:dropdown-bottom`}
           >
-            <label data-testid={"wishlist-toggle"} tabIndex={0}>
+            <label
+              onClick={toggleWishlist}
+              data-testid={"wishlist-toggle"}
+              tabIndex={0}
+            >
               {window.screen.width > 640 ? (
                 <TextButton
                   onClickListener={() => null}
@@ -154,11 +176,13 @@ const NavBarEnd = () => {
 
           {/* Cart dropdown */}
           <div
-            className="dropdown 
-                       dropdown-left 
-                       sm:dropdown-bottom"
+            className={`dropdown ${cartOpen ? "dropdown-open" : ""} dropdown-left sm:dropdown-bottom`}
           >
-            <label data-testid={"cart-toggle"} tabIndex={0}>
+            <label
+              onClick={toggleCart}
+              data-testid={"cart-toggle"}
+              tabIndex={0}
+            >
               {window.screen.width > 640 ? (
                 <TextButton
                   onClickListener={() => null}
@@ -177,15 +201,15 @@ const NavBarEnd = () => {
             {/* Cart dropdown content */}
             <div
               className="dropdown-content
-                            flex
-                            flex-col
-                            items-center
-                            shadow 
-                            drop-shadow-lg
-                            bg-primary
-                            rounded-box
-                            border
-                            border-secondary"
+                         flex
+                         flex-col
+                         items-center
+                         shadow 
+                         drop-shadow-lg
+                         bg-primary
+                         rounded-box
+                         border
+                         border-secondary"
             >
               <ul
                 data-testid={"cart-dropdown"}
@@ -229,25 +253,28 @@ const NavBarEnd = () => {
 
               {/** Checkout button */}
               {userCart?.length > 0 && (
-                <Link to={"/checkout"}>
-                  <TextButton
-                    textContent={"Checkout"}
-                    classes={"btn-sm btn-primary mb-2"}
-                    onClickListener={() => null}
-                  />
-                </Link>
+                <TextButton
+                  textContent={"Checkout"}
+                  classes={"btn-sm btn-primary mb-2"}
+                  onClickListener={handleCheckout}
+                />
               )}
             </div>
           </div>
 
           {/* User information dropdown */}
           <div
-            className="dropdown 
-                                        dropdown-left 
-                                        sm:dropdown-bottom"
+            className={`dropdown 
+                        ${userOpen ? "dropdown-open" : ""}
+                        dropdown-left 
+                        sm:dropdown-bottom`}
           >
             {/* User information toggle */}
-            <label data-testid={"user-toggle"} tabIndex={0}>
+            <label
+              onClick={toggleUser}
+              data-testid={"user-toggle"}
+              tabIndex={0}
+            >
               <IconButton
                 onClickListener={() => null}
                 classes={""}
