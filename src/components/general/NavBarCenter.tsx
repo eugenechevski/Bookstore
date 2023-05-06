@@ -1,11 +1,16 @@
-import uniqid from "uniqid";
-import { NavBarContext } from "./NavBar";
+// Components
+import { NavBarContext } from "components/general/NavBar";
+import IconButton from "components/general/IconButton";
 
+// React stuff
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 
-import IconButton from "./IconButton";
+import uniqid from "uniqid";
 
+/**
+ * A center part of the navbar.
+ */
 const NavBarCenter = () => {
   const { searchBook, searchResult } = useContext(NavBarContext);
   const [searchText, setSearchText] = useState<string>("");
@@ -26,28 +31,28 @@ const NavBarCenter = () => {
 
   return (
     <div
-      className="navbar-center 
-                            w-2/3 
-                            sm:w-1/2"
+      className="navbar-center
+                 w-2/3
+                 sm:w-1/2"
     >
       {/* Search input */}
       <div
-        className="form-control 
-                   w-full 
-                   mr-2 
+        className="form-control
+                   w-full
+                   mr-2
                    peer/search
                    relative"
       >
         <input
           onChange={handleChange}
           type="text"
-          className="dropdown-toggle 
-                     input 
-                     rounded-none 
-                     border-0 
-                     border-b-2 
-                     border-b-base-100 
-                     bg-transparent 
+          className="dropdown-toggle
+                     input
+                     rounded-none
+                     border-0
+                     border-b-2
+                     border-b-base-100
+                     bg-transparent
                      focus:outline-none"
         />
       </div>
@@ -67,27 +72,27 @@ const NavBarCenter = () => {
                    dropdown
                    dropdown-open
                    mt-16
-                   w-1/2 
-                   sm:mt-12 
+                   w-1/2
+                   sm:mt-12
                    sm:w-1/3
                    ${searchText.length > 0 ? "block" : "hidden"}`}
       >
         <ul
           tabIndex={0}
-          className="dropdown-content 
-                                                      menu 
-                                                      p-2 
-                                                      bg-primary 
-                                                      w-full 
-                                                      rounded-xl 
-                                                      shadow-md"
+          className="dropdown-content
+                     menu
+                     p-2
+                     bg-primary
+                     w-full
+                     rounded-xl
+                     shadow-md"
         >
           {searchResult.map((book) => (
             <Link
-              to={`/categories/${book.getFormattedCategoryName()}/${book.getFormattedTitle()}`}
+              to={`/categories/${book?.getFormattedCategoryName()}/${book?.getFormattedTitle()}`}
               key={uniqid()}
             >
-              <li className="menu-item">{book.getTitle()}</li>
+              <li className="menu-item">{book?.getTitle()}</li>
             </Link>
           ))}
         </ul>

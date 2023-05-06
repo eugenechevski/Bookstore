@@ -1,9 +1,12 @@
+import CategoryDisplay from "components/home/CategoryDisplay";
 import { Swiper, SwiperSlide } from "swiper/react";
 import uniqid from "uniqid";
-import CategoryDisplay from "./CategoryDisplay";
 
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 
+/**
+ * Displays a swiper of categories.
+ */
 const CategorySwiper = ({
   stateCategories,
 }: {
@@ -18,8 +21,8 @@ const CategorySwiper = ({
       keyboard={true}
       modules={[Navigation, Pagination, Mousewheel, Keyboard]}
       className="mt-20
-          sm:mt-12
-          sm:p-12"
+                 sm:mt-12
+                 sm:p-12"
     >
       {stateCategories?.map((category: ICategory) => (
         <SwiperSlide key={uniqid()}>

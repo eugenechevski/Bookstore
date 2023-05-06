@@ -1,8 +1,14 @@
+// Components
 import Page from "components/general/Page";
 import { DataContext } from "components/App";
-import { useContext, useEffect, useState } from "react";
 import CategorySwiper from "./CategorySwiper";
 
+// react stuff
+import { useContext, useEffect, useState } from "react";
+
+/**
+ * High level component for the home page.
+ */
 const Home = ({ testCategories }: { testCategories?: ICategory[] }) => {
   const { categories } = useContext(DataContext);
   const [stateCategories, setCategories] = useState<ICategory[]>(

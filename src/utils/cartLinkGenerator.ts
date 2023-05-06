@@ -11,8 +11,8 @@ function generateAddToCartLink(books: IBook[], user: IUser): string {
   const asins: string[] = [];
   let link = "https://www.amazon.com/gp/aws/cart/add.html?";
 
-  books.forEach((book) => {
-    book.getBuyLinks().forEach(({name, url}) => {
+  books?.forEach((book) => {
+    book?.getBuyLinks().forEach(({name, url}) => {
         if (name === "Amazon") {
             const asin = extractASINFromAmazonURL(url);
             if (asin) {

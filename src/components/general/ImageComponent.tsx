@@ -2,7 +2,7 @@ const ImageComponent = ({
   src,
   alt,
   classes,
-  content
+  content,
 }: {
   src: string;
   alt: string;

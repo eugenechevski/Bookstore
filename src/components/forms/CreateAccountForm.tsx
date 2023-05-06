@@ -1,18 +1,31 @@
-import Page from "components/general/Page";
-import { emailRegex, passwordRegex } from "utils/constants";
-import useForm from "utils/useForm";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { DataContext } from "components/App";
+// classes
 import User from "classes/User";
 
+// components
+import Page from "components/general/Page";
+import { DataContext } from "components/App";
+
+// utilities
+import { emailRegex, passwordRegex } from "utils/constants";
+import useForm from "utils/useForm";
+
+// react stuff
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+
+/**
+ * A form that allows the user to create an account.
+ */
 const CreateAccountForm = () => {
   const navigate = useNavigate();
   const doStuffOnceValid = () => {
     navigate("/after-creation");
   };
 
+  // Context
   const { signUp, setUser, bookMap } = useContext(DataContext);
+
+  // Validation function
   const validate = async (values: {
     firstName: string;
     lastName: string;
@@ -29,21 +42,21 @@ const CreateAccountForm = () => {
       confirmPassword?: string;
       authentification?: string;
     } = {};
-
+    
     const firstNameRegex = /^[a-zA-Z]{3,}$/;
-
+    
     // Check if the first name is valid
     if (!firstNameRegex.test(values.firstName)) {
       errors.firstName = "First name must be at least 3 characters";
     }
 
     const lastNameRegex = firstNameRegex;
-
+    
     // Check if the last name is valid
     if (!lastNameRegex.test(values.lastName)) {
       errors.lastName = "Last name must be at least 3 characters";
     }
-
+    
     // Check if the email is valid
     if (!emailRegex.test(values.email)) {
       errors.email = "Invalid email address";
@@ -85,6 +98,7 @@ const CreateAccountForm = () => {
     return errors; // Return the error object
   };
 
+  // Form hook
   const { handleSubmit, handleChange, values, errors } = useForm(
     {
       firstName: "",
@@ -101,29 +115,29 @@ const CreateAccountForm = () => {
     <Page
       content={
         <div
-          className="p-6 
-                            w-3/4 
-                            rounded-xl 
-                            bg-base-100 
-                            sm:w-1/4"
+          className="p-6
+                     w-3/4
+                     rounded-xl
+                     bg-base-100
+                     sm:w-1/4"
         >
           <form
             onSubmit={handleSubmit}
             className="form-control
-                                 text-sm
-                                 w-full
-                                 h-full
-                                 justify-center"
+                       text-sm
+                       w-full
+                       h-full
+                       justify-center"
           >
             {/** First name */}
             <div
               className="flex
-                                    flex-col"
+                         flex-col"
             >
               <label
                 htmlFor="firstName"
                 className="label
-                                        font-bold"
+                           font-bold"
               >
                 First Name
               </label>
@@ -135,8 +149,8 @@ const CreateAccountForm = () => {
                 placeholder="John"
                 value={values.firstName}
                 className="input-sm
-                                        rounded-lg
-                                        input-bordered"
+                           rounded-lg
+                           input-bordered"
               />
               {errors.firstName && <p>{errors.firstName}</p>}
             </div>
@@ -144,12 +158,12 @@ const CreateAccountForm = () => {
             {/** Last name */}
             <div
               className="flex
-                                    flex-col"
+                         flex-col"
             >
               <label
                 htmlFor="lastName"
                 className="label
-                                           font-bold"
+                           font-bold"
               >
                 Last Name
               </label>
@@ -161,8 +175,8 @@ const CreateAccountForm = () => {
                 id="lastName"
                 type="text"
                 className="input-sm
-                                        rounded-lg
-                                        input-bordered"
+                           rounded-lg
+                           input-bordered"
               />
               {errors.lastName && <p>{errors.lastName}</p>}
             </div>
@@ -170,12 +184,12 @@ const CreateAccountForm = () => {
             {/** Email */}
             <div
               className="flex
-                                    flex-col"
+                         flex-col"
             >
               <label
                 htmlFor="email"
-                className="label 
-                                        font-bold"
+                className="label
+                           font-bold"
               >
                 E-mail
               </label>
@@ -184,11 +198,11 @@ const CreateAccountForm = () => {
                 name="email"
                 value={values.email}
                 placeholder="john.doe@example.com"
-                id="email"
                 type="text"
+                id="email"
                 className="input-sm
-                                        rounded-lg
-                                        input-bordered"
+                           rounded-lg
+                           input-bordered"
               />
               {errors.email && <p>{errors.email}</p>}
             </div>
@@ -196,12 +210,12 @@ const CreateAccountForm = () => {
             {/** Password */}
             <div
               className="flex
-                                    flex-col"
+                         flex-col"
             >
               <label
                 htmlFor="password"
                 className="label
-                                        font-bold"
+                           font-bold"
               >
                 Password
               </label>
@@ -213,8 +227,8 @@ const CreateAccountForm = () => {
                 id="password"
                 type="password"
                 className="input-sm
-                                        rounded-lg
-                                        input-bordered"
+                           rounded-lg
+                           input-bordered"
               />
               {errors.password && <p>{errors.password}</p>}
             </div>
@@ -222,12 +236,12 @@ const CreateAccountForm = () => {
             {/** Confirm password */}
             <div
               className="flex
-                                    flex-col"
+                         flex-col"
             >
               <label
                 htmlFor="confirmPassword"
                 className="label
-                                        font-bold"
+                           font-bold"
               >
                 Confirm Password
               </label>
@@ -239,8 +253,8 @@ const CreateAccountForm = () => {
                 id="confirmPassword"
                 type="password"
                 className="input-sm
-                                        rounded-lg
-                                        input-bordered"
+                           rounded-lg
+                           input-bordered"
               />
               {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
             </div>
@@ -248,12 +262,12 @@ const CreateAccountForm = () => {
             {/** Submit button */}
             <button
               type="submit"
-              className="btn-primary 
-                                                     rounded-full 
-                                                     w-1/2 
-                                                     self-center 
-                                                     mt-12
-                                                     text-center"
+              className="btn-primary
+                         rounded-full
+                         w-1/2
+                         self-center
+                         mt-12
+                         text-center"
             >
               Create
             </button>

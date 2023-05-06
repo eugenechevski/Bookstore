@@ -1,13 +1,18 @@
+// Components
 import IconButton from "components/general/IconButton";
 import TextButton from "components/general/TextButton";
+import { NavBarContext } from "components/general/NavBar";
 
+// React stuff
+import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+
+// Utilities
 import uniqid from "uniqid";
 
-import { Link } from "react-router-dom";
-import { useContext, useState} from "react";
-
-import { NavBarContext } from "./NavBar";
-
+/**
+ * A end part of the navbar.
+ */
 const NavBarEnd = () => {
   const {
     navbarToolsIcon,
@@ -24,6 +29,7 @@ const NavBarEnd = () => {
     handleCheckout,
   } = useContext(NavBarContext);
 
+  // State
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
@@ -42,20 +48,20 @@ const NavBarEnd = () => {
 
   return (
     <div
-      className={`navbar-end 
-                  flex 
-                  flex-col 
-                  bg-primary 
-                  gap-3 
-                  w-1/6 
-                  transition-all 
-                  duration-300 
-                  ease-in 
-                  rounded-xl 
+      className={`navbar-end
+                  flex
+                  flex-col
+                  bg-primary
+                  gap-3
+                  w-1/6
+                  transition-all
+                  duration-300
+                  ease-in
+                  rounded-xl
                   z-50
-                  sm:w-1/4 
-                  sm:bg-inherit 
-                  sm:flex-row 
+                  sm:w-1/4
+                  sm:bg-inherit
+                  sm:flex-row
                   ${
                     navbarToolsIcon === "xmark"
                       ? "mt-5 " + "translate-y-28 " + "p-2 " + "shadow-md"
@@ -116,7 +122,7 @@ const NavBarEnd = () => {
                          flex
                          flex-col
                          items-center
-                         shadow 
+                         shadow
                          drop-shadow-lg
                          bg-primary
                          rounded-box
@@ -129,7 +135,7 @@ const NavBarEnd = () => {
                 className="menu
                            menu-compact
                            sm:menu-normal
-                           p-2 
+                           p-2
                            gap-1
                            text-sm
                            max-h-96
@@ -141,16 +147,16 @@ const NavBarEnd = () => {
                     <Link
                       to={`/categories/${item?.getFormattedCategoryName()}/${item?.getFormattedTitle()}`}
                       className="flex
-                               justify-start
-                               items-center
-                               w-48
-                               h-12
-                               overflow-hidden
-                               p-3
-                               border
-                               border-primary-focus
-                               rounded-md
-                               hover:bg-primary-focus"
+                                 justify-start
+                                 items-center
+                                 w-48
+                                 h-12
+                                 overflow-hidden
+                                 p-3
+                                 border
+                                 border-primary-focus
+                                 rounded-md
+                                 hover:bg-primary-focus"
                     >
                       {item?.getTitle()}
                     </Link>
@@ -176,7 +182,10 @@ const NavBarEnd = () => {
 
           {/* Cart dropdown */}
           <div
-            className={`dropdown ${cartOpen ? "dropdown-open" : ""} dropdown-left sm:dropdown-bottom`}
+            className={`dropdown
+                        ${cartOpen ? "dropdown-open" : ""}
+                        dropdown-left
+                        sm:dropdown-bottom`}
           >
             <label
               onClick={toggleCart}
@@ -204,7 +213,7 @@ const NavBarEnd = () => {
                          flex
                          flex-col
                          items-center
-                         shadow 
+                         shadow
                          drop-shadow-lg
                          bg-primary
                          rounded-box
@@ -217,7 +226,7 @@ const NavBarEnd = () => {
                 className="menu
                            menu-compact
                            sm:menu-normal
-                           p-2 
+                           p-2
                            gap-1
                            text-sm
                            max-h-96
@@ -229,16 +238,16 @@ const NavBarEnd = () => {
                     <Link
                       to={`/categories/${item?.getFormattedCategoryName()}/${item?.getFormattedTitle()}`}
                       className="flex
-                                justify-start
-                                items-center
-                                w-48
-                                h-12
-                                overflow-hidden
-                                p-3
-                                border
-                                border-primary-focus
-                                rounded-md
-                                hover:bg-primary-focus"
+                                 justify-start
+                                 items-center
+                                 w-48
+                                 h-12
+                                 overflow-hidden
+                                 p-3
+                                 border
+                                 border-primary-focus
+                                 rounded-md
+                                 hover:bg-primary-focus"
                     >
                       {item?.getTitle()}
                     </Link>
@@ -284,12 +293,12 @@ const NavBarEnd = () => {
             {/* User information dropdown content */}
             <div
               tabIndex={0}
-              className="dropdown-content 
-                                                         p-2 
-                                                         shadow 
-                                                         bg-primary 
-                                                         rounded-box 
-                                                         w-52"
+              className="dropdown-content
+                         p-2
+                         shadow
+                         bg-primary
+                         rounded-box
+                         w-52"
             >
               {stateUser?.getName()}
             </div>

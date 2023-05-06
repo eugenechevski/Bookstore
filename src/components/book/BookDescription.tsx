@@ -1,7 +1,13 @@
+// Components
 import IconButton from "components/general/IconButton";
-import { useEffect, useState } from "react";
 import ImageComponent from "components/general/ImageComponent";
 
+// React stuff
+import { useEffect, useState } from "react";
+
+/**
+ *  A component for displaying a book's description.
+ */
 const BookDescription = ({
   book,
   userData,
@@ -15,16 +21,19 @@ const BookDescription = ({
     setUserWishlist: React.Dispatch<React.SetStateAction<IBook[]>>;
   };
 }) => {
+  // Constants
   const iconButtonCLasses = "text-secondary-content ";
+
+  // Context
   const { user, setUserCart, setUserWishlist, userCart, userWishlist } =
     userData;
 
+  // State
   const [coverUrl, setCoverUrl] = useState("");
   const [bookTitle, setTitle] = useState("");
   const [formattedTitle, setFormattedTitle] = useState("");
   const [bookAuthor, setAuthor] = useState("");
   const [bookSynopsis, setSynopsis] = useState("");
-
   const [isInCart, setIsInCart] = useState(false);
   const [isInWishlist, setIsInWishlist] = useState(false);
 
@@ -70,7 +79,9 @@ const BookDescription = ({
       (user as IUser).getBookFromWishlist(formattedTitle) !== undefined
     );
   }, [userWishlist]);
-  
+
+
+  // Event handlers
 
   const toggleCartButton = () => {
     if (Object.keys(user).length === 0) {

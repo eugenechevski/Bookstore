@@ -1,9 +1,15 @@
-import { Link } from "react-router-dom";
-import uniqid from "uniqid";
+// Components
 import { DataContext } from "components/App";
+
+// React stuff
+import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { COffcanvas, COffcanvasBody } from "@coreui/bootstrap-react";
 import { useSpring, animated } from "@react-spring/web";
+
+// Utilities
+import uniqid from "uniqid";
+
 
 const OffCanvas = ({
   testCategories,
@@ -55,13 +61,13 @@ const OffCanvas = ({
                    border-primary
                    scrollbar
                    overflow-scroll
-                   flex 
-                   flex-col 
-                   bg-base-100 
-                   bg-clip-padding 
+                   flex
+                   flex-col
+                   bg-base-100
+                   bg-clip-padding
                    shadow-xl
                    outline-none
-                   text-base-content 
+                   text-base-content
                    rounded-lg"
         backdrop={true}
         placement="start"

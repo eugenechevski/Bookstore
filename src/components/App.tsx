@@ -24,7 +24,6 @@ import "swiper/css/pagination";
 import console from "console-browserify";
 import "tw-elements";
 
-
 // Data
 const DataContext = createContext(
   {} as {
@@ -33,12 +32,12 @@ const DataContext = createContext(
     categoryMap: CategoryMap | {};
     books: IBook[] | [];
     bookMap: BookMap | {};
+    userCart: IBook[] | [];
+    userWishlist: IBook[] | [];
     signUp: SignUp | {};
     signIn: SignIn | {};
     signOut: SignOut | {};
     setUser: React.Dispatch<React.SetStateAction<IUser>>;
-    userCart: IBook[] | [];
-    userWishlist: IBook[] | [];
     setUserCart: React.Dispatch<React.SetStateAction<IBook[]>>;
     setUserWishlist: React.Dispatch<React.SetStateAction<IBook[]>>;
   }
@@ -68,7 +67,7 @@ function App() {
         setSignIn(() => signIn.bind(this, db, auth));
         setSignUp(() => signUp.bind(this, db, auth));
         setSignOut(() => signOut.bind(this, auth));
-        setDBUpdater(databaseUpdater(db, auth))
+        setDBUpdater(databaseUpdater(db, auth));
 
         return createDataObject;
       })
@@ -112,11 +111,11 @@ function App() {
     }
 
     if (!user.getName().startsWith("Guest")) {
-      user.setDatabaseUpdaters(dbUpdater as DatabaseUpdater)
+      user.setDatabaseUpdaters(dbUpdater as DatabaseUpdater);
     } else {
       user.setDatabaseUpdaters(null);
     }
-    
+
     setUserCart(user.getCart());
     setUserWishlist(user.getWishlist());
   }, [dbUpdater, user]);
@@ -127,7 +126,7 @@ function App() {
       user.setBookMap(bookMap);
     }
   }, [bookMap, user]);
-  
+
   return (
     <DataContext.Provider
       value={{
@@ -139,9 +138,9 @@ function App() {
         signIn,
         signUp,
         signOut,
-        setUser,
         userCart,
         userWishlist,
+        setUser,
         setUserCart,
         setUserWishlist,
       }}

@@ -6,23 +6,29 @@ const HelloUser = ({ userName }: { userName: string }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex
-                    flex-col
-                    gap-12
-                    justify-center
-                    items-center">
-        <div className="text-center
-                        text-3xl
-                        sm:text-5xl
-                        text-secondary-content">
-            Welcome back, {userName}.
-        </div>
-        <TextButton textContent={'Procceed'}
-                    classes="bg-primary
-                             hover:bg-primary-focus"
-                    onClickListener={navigate.bind(null, '/home')}/>
+    <div
+      className="flex
+                 flex-col
+                 gap-12
+                 justify-center
+                 items-center"
+    >
+      <div
+        className="text-center
+                   text-3xl
+                   sm:text-5xl
+                   text-secondary-content"
+      >
+        Welcome back, {userName}.
+      </div>
+      <TextButton
+        textContent={"Procceed"}
+        classes="bg-primary
+                 hover:bg-primary-focus"
+        onClickListener={navigate.bind(null, "/home")}
+      />
     </div>
-  )
+  );
 };
 
 export default HelloUser;

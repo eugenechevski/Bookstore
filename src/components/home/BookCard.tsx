@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import ImageComponent from "components/general/ImageComponent";
 
+/**
+ * A card that displays a book.
+ */
 const BookCard = ({ book }: { book: IBook }) => {
   return (
     <div
@@ -13,6 +16,7 @@ const BookCard = ({ book }: { book: IBook }) => {
                  mr-1
                  sm:w-1/5"
     >
+      {/** Image */}
       <Link
         to={`/categories/${book?.getFormattedCategoryName()}/${book?.getFormattedTitle()}`}
       >
@@ -21,12 +25,12 @@ const BookCard = ({ book }: { book: IBook }) => {
           alt={book?.getTitle() + " cover"}
           classes="w-52
                    h-72
-                   relative 
+                   relative
                    cursor-pointer
                    border
                    border-primary-content
                    hover:border-primary-focus
-                   sm:shadow-2xl 
+                   sm:shadow-2xl
                    sm:drop-shadow-2xl"
           content={
             <div
@@ -48,6 +52,7 @@ const BookCard = ({ book }: { book: IBook }) => {
           }
         />
       </Link>
+      {/** Title */}
       <div
         className="h-12
                    text-center 

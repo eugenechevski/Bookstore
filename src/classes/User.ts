@@ -157,6 +157,10 @@ export default class User implements IUser {
    * @param formattedTitle - The formatted title of the book.
    */
   addToWishlist(formattedTitle: string): void {
+    if (!(formattedTitle in this.bookMap)) {
+      return;
+    }
+
     this.wishlistMap[formattedTitle] = {
       book: this.bookMap[formattedTitle],
       timestamp: Date.now(),
@@ -176,6 +180,10 @@ export default class User implements IUser {
    * @param formattedTitle - The formatted title of the book.
    */
   addToCart(formattedTitle: string): void {
+    if (!(formattedTitle in this.bookMap)) {
+      return;
+    }
+
     this.cartMap[formattedTitle] = {
       book: this.bookMap[formattedTitle],
       timestamp: Date.now(),
@@ -197,6 +205,10 @@ export default class User implements IUser {
    * @param formattedTitle - The formatted title of the book.
    */
   removeFromCart(formattedTitle: string): void {
+    if (!(formattedTitle in this.cartMap)) {
+      return;
+    }
+
     delete this.cartMap[formattedTitle];
     delete this.dbCart[formattedTitle];
 
@@ -211,6 +223,10 @@ export default class User implements IUser {
    * @param formattedTitle - The formatted title of the book.
    */
   removeFromWishlist(formattedTitle: string): void {
+    if (!(formattedTitle in this.wishlistMap)) {
+      return;
+    }
+
     delete this.wishlistMap[formattedTitle];
     delete this.dbWishlist[formattedTitle];
 

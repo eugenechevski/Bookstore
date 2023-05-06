@@ -1,8 +1,12 @@
-import NavBar from "src/components/general/NavBar";
-import OffCanvas from "src/components/general/OffCanvas";
+// Components
+import NavBar from "components/general/NavBar";
+import OffCanvas from "components/general/OffCanvas";
+
+// React stuff
 import { useState } from "react";
 import { useSpring, animated } from "react-spring";
 
+// A general page component.
 const Page = ({
   content,
   blank,
@@ -14,12 +18,20 @@ const Page = ({
   testUser?: IUser;
   testCategories?: ICategory[];
 }) => {
+  // State
   const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+  // Animation for smooth transition
+  const props = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    config: { duration: 750 },
+  });
+
+  // Toggle offcanvas
   const toggleOffcanvas = () => {
     setShowOffcanvas(!showOffcanvas);
   };
-
-  const props = useSpring({ from: { opacity: 0 }, to: { opacity: 1 }, config: { duration: 750 } });
 
   return (
     <animated.div

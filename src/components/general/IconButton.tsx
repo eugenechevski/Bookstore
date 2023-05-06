@@ -13,32 +13,34 @@ import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 const possibleIcons = {
-  'bars': faBars,
-  'user': faUser,
-  'sign-out': faSignOut,
-  'sign-in': faSignIn,
-  'heart': faHeart,
-  'cart': faShoppingCart,
-  'xmark': faXmark,
-  'ellipsis': faEllipsis,
-  'check': faCheck,
-  'close': faClose,
-  'arrow-up': faArrowUp,
-  'arrow-down': faArrowDown
-}
+  bars: faBars,
+  user: faUser,
+  "sign-out": faSignOut,
+  "sign-in": faSignIn,
+  heart: faHeart,
+  cart: faShoppingCart,
+  xmark: faXmark,
+  ellipsis: faEllipsis,
+  check: faCheck,
+  close: faClose,
+  "arrow-up": faArrowUp,
+  "arrow-down": faArrowDown,
+};
 
 const IconButton = ({ iconName, classes, onClickListener }) => {
-    return (
-        <div onClick={onClickListener} 
-             className={`${classes}
-                         btn 
-                         bg-transparent 
-                         border-none 
-                         text-lg 
-                         hover:bg-primary-focus`}>
-          <FontAwesomeIcon icon={possibleIcons[iconName]}/>
-        </div>
-    )
+  return (
+    <div
+      onClick={onClickListener}
+      className={`${classes}
+                  btn
+                  bg-transparent
+                  border-none
+                  text-lg
+                  hover:bg-primary-focus`}
+    >
+      <FontAwesomeIcon icon={possibleIcons[iconName]} />
+    </div>
+  );
 };
 
 export default IconButton;

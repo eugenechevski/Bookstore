@@ -1,27 +1,30 @@
+// Components
 import { DataContext } from "components/App";
+import NavBarStart from "components/general/NavBarStart";
+import NavBarCenter from "components/general/NavBarCenter";
+import NavBarEnd from "components/general/NavBarEnd";
 
+// Classes
 import BookTrie from "classes/BookTrie";
 
+// React stuff
 import { useNavigate } from "react-router-dom";
 import { useState, useContext, useEffect, createContext } from "react";
 
-import NavBarStart from "./NavBarStart";
-import NavBarCenter from "./NavBarCenter";
-import NavBarEnd from "./NavBarEnd";
-
+// Context container
 const NavBarContext = createContext(
   {} as {
-    textBtnClasses: string;
-    offCanvasToggleIcon: string;
-    setOffCanvasToggleIcon: React.Dispatch<React.SetStateAction<string>>;
-    navbarToolsIcon: string;
-    setNavbarToolsIcon: React.Dispatch<React.SetStateAction<string>>;
-    loginButtonIcon: string;
-    searchResult: IBook[];
-    searchBook: (searchText: string) => void;
+    stateUser: IUser;
     userWishlist: [] | IBook[];
     userCart: [] | IBook[];
-    stateUser: IUser;
+    searchResult: IBook[];
+    textBtnClasses: string;
+    offCanvasToggleIcon: string;
+    navbarToolsIcon: string;
+    loginButtonIcon: string;
+    searchBook: (searchText: string) => void;
+    setOffCanvasToggleIcon: React.Dispatch<React.SetStateAction<string>>;
+    setNavbarToolsIcon: React.Dispatch<React.SetStateAction<string>>;
     removeBookFromCart: (book: IBook) => void;
     removeBookFromWishlist: (book: IBook) => void;
     toggleOffcanvasAndIcon: () => void;
@@ -31,6 +34,9 @@ const NavBarContext = createContext(
   }
 );
 
+/**
+ * A high-level component that contains the navbar.
+ */
 const NavBar = ({
   testUser,
   toggleOffcanvas,
@@ -42,9 +48,11 @@ const NavBar = ({
 
   const navigate = useNavigate();
 
+  // Context
   const { user, userCart, userWishlist, setUserCart, setUserWishlist, books } =
     useContext(DataContext);
 
+  // State
   const [stateUser, setUser] = useState<IUser>(
     testUser ? testUser : (user as IUser)
   );
@@ -124,17 +132,17 @@ const NavBar = ({
 
   return (
     <NavBarContext.Provider value={{
-      textBtnClasses,
-      offCanvasToggleIcon,
-      setOffCanvasToggleIcon,
-      navbarToolsIcon,
-      setNavbarToolsIcon,
-      loginButtonIcon,
-      searchResult,
-      searchBook,
+      stateUser,
       userWishlist,
       userCart,
-      stateUser,
+      searchResult,
+      textBtnClasses,
+      offCanvasToggleIcon,
+      navbarToolsIcon,
+      loginButtonIcon,
+      setOffCanvasToggleIcon,
+      setNavbarToolsIcon,
+      searchBook,
       removeBookFromCart,
       removeBookFromWishlist,
       toggleOffcanvasAndIcon,
@@ -143,17 +151,17 @@ const NavBar = ({
       handleCheckout
     }}
     > <div
-        className="navbar  
-                  h-12
-                  w-[360px]
-                  fixed 
-                  bg-primary 
-                  text-base-100 
-                  rounded-xl 
-                  shadow-lg
-                  z-50
-                  sm:w-[99%]
-                  mt-2"
+        className="navbar
+                   h-12
+                   w-[360px]
+                   fixed
+                   bg-primary
+                   text-base-100
+                   rounded-xl
+                   shadow-lg
+                   z-50
+                   sm:w-[99%]
+                   mt-2"
       >
         {/* Navbar start */}
         <NavBarStart/>
